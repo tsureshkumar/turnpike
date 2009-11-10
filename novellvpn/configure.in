@@ -4,6 +4,8 @@ AC_INIT(NetworkManager-novellvpn, 0.7.2, bili@novell.com, NetworkManager-novellv
 AM_INIT_AUTOMAKE([subdir-objects])
 AM_MAINTAINER_MODE
 
+AC_CONFIG_MACRO_DIR([m4])
+
 AM_CONFIG_HEADER(config.h)
 
 dnl

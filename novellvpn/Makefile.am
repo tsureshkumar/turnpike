@@ -29,3 +29,5 @@ EXTRA_DIST = $(nmvpnservice_DATA) \
 
 CLEANFILES = $(desktop_DATA) *~
 DISTCLEANFILES = intltool-extract intltool-merge intltool-update
+
+ACLOCAL_AMFLAGS = -I m4
