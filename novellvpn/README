@@ -1,0 +1,18 @@
+NovellVPN support for NetworkManager
+
+It was added by Sureshkumar T <tsureshkumar@novell.com> at Bangalore
+on 2006/06/01.
+
+Assumes that you have a running Novell VPN setup installed from official
+releases of turnpike and plugins.
+See
+http://code.google.com/p/turnpike/
+
+Assumes you have installed any of the following packages:
+	novell-ipsec-tools
+	turnpike
+	novell-nortelplugins
+	NetworkManager (http://projects.gnome.org/NetworkManager/)
+
+Code released under the GPLv2. See COPYING file in the NetworkManager
+directory.

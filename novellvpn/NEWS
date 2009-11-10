@@ -1,0 +1,8 @@
+==============================================
+NetworkManager-novellvpn 0.7.0
+==============================================
+
+This is a new major stable release of NetworkManager-novellvpn.
+It's based on NetworkManager 0.7.
+Cause the Novell Forge would be not used, so move it in this
+new repository.

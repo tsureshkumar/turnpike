@@ -1,0 +1,304 @@
+# Spanish message file for YaST2 (@memory@).
+# Copyright (C) 2005 SUSE Linux Products GmbH.
+# Copyright (C) 2002, 2003 SuSE Linux AG.
+# Copyright (C) 1999, 2000, 2001 SuSE GmbH.
+# Ibán josé García Castillo <Iban.Garcia@alufis35.uv.es>, 2000.
+# Javier Moreno <javier.moreno@alufis35.uv.es>, 2000.
+# Jordi Jaen Pallares <jordi@suse.de>, 1999, 2000, 2001.
+# Pablo Iranzo Gómez <Pablo.Iranzo@uv.es>, 2000.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YaST (@memory@)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-05-16 17:19+0200\n"
+"PO-Revision-Date: 2006-05-31 13:41\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:163
+msgid "_Secondary Password:"
+msgstr "Contraseña _secundaria:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:297
+msgid "Unable to fetch Group Password"
+msgstr "No es posible recuperar la contraseña de grupo"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:742
+msgid "_Username:"
+msgstr "_Usuario:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:744
+msgid "_Domain:"
+msgstr "_Dominio:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:751
+msgid "_Certificate Password:"
+msgstr "_Contraseña de certificado:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:756
+msgid "_Password:"
+msgstr "_Contraseña:"
+
+# include/printconf/dialogs.ycp:150
+#: ../auth-dialog/gnome-two-password-dialog.c:841
+msgid "Connect _anonymously"
+msgstr "Conectar de forma _anónima"
+
+# include/scanner/scanner_overview.ycp:85
+# include/scanner/scanner_overview.ycp:85
+# include/scanner/scanner_overview.ycp:85
+#: ../auth-dialog/gnome-two-password-dialog.c:846
+msgid "Connect as _user:"
+msgstr "Conectar como _usuario:"
+
+# include/partitioning/custom_part_dialogs.ycp:67
+# include/partitioning/custom_part_dialogs.ycp:67
+# include/partitioning/custom_part_dialogs.ycp:67 include/partitioning/custom_part_dialogs.ycp:197
+# 
+#: ../auth-dialog/gnome-two-password-dialog.c:952
+msgid "_Remember password for this session"
+msgstr "_Recordar contraseña para esta sesión"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:954
+msgid "_Save password in keyring"
+msgstr "_Guardar contraseña en Keyring"
+
+#: ../auth-dialog/main.c:172
+#, c-format
+msgid ""
+"You need to authenticate to access the Novell's  Virtual Private Network '%"
+"s'."
+msgstr "Debe autenticarse para acceder a la red privada virtual de Novell %s."
+
+#: ../auth-dialog/main.c:173
+msgid "Authenticate Novell VPN"
+msgstr "Autenticar Novell VPN"
+
+#: ../auth-dialog/main.c:180
+msgid "_Group Password:"
+msgstr "_Contraseña de grupo:"
+
+#: ../nm-novellvpn.desktop.in.h:1
+msgid "Add, Remove, and Edit VPN Connections"
+msgstr "Añadir, eliminar y editar conexiones VPN"
+
+# include/network/modem/dialogs.ycp:400
+#: ../nm-novellvpn.desktop.in.h:2
+msgid "VPN Connection Manager (NovellVPN)"
+msgstr "Gestor de conexiones VPN (NovellVPN)"
+
+# include/partitioning/raid_ui.ycp:342
+# include/partitioning/raid_ui.ycp:342
+# include/partitioning/raid_ui.ycp:342
+#: ../properties/nm-novellvpn-dialog.glade.h:1
+msgid "           "
+msgstr " "
+
+# include/partitioning/raid_ui.ycp:341
+# include/partitioning/raid_ui.ycp:341
+# include/partitioning/raid_ui.ycp:341
+#: ../properties/nm-novellvpn-dialog.glade.h:2
+msgid "                     "
+msgstr " "
+
+#: ../properties/nm-novellvpn-dialog.glade.h:3
+msgid "<b>Connection Name</b>"
+msgstr "<b>Nombre de la conexión</b>"
+
+# clients/online_update_details.ycp:113
+#: ../properties/nm-novellvpn-dialog.glade.h:4
+msgid "<b>Optional Information</b>"
+msgstr "<b>Información opcional</b>"
+
+# clients/support_question.ycp:110
+# clients/support_question.ycp:118
+# clients/support_question.ycp:121
+#: ../properties/nm-novellvpn-dialog.glade.h:5
+msgid "<b>Required Information</b>"
+msgstr "<b>Información requerida</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:6
+msgid "Authentication Type  "
+msgstr "Tipo de autenticación"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:7
+msgid "Certificate file  "
+msgstr "Archivo de certificado  "
+
+#: ../properties/nm-novellvpn-dialog.glade.h:8
+msgid "DH Group: "
+msgstr "Grupo DH: "
+
+#: ../properties/nm-novellvpn-dialog.glade.h:9
+msgid ""
+"DH1\n"
+"DH2"
+msgstr ""
+"DH1\n"
+"DH2"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:11
+msgid "Gateway  "
+msgstr "Pasarela"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:12
+msgid "Gateway Type  "
+msgstr "Tipo de gateway  "
+
+# clients/lan_dns.ycp:280
+# clients/lan_dns.ycp:269
+# include/users/ui.ycp:1021
+#: ../properties/nm-novellvpn-dialog.glade.h:13
+msgid "Group Name  "
+msgstr "Nombre de grupo"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:14
+msgid ""
+"Nortel\n"
+"Standard Gateway"
+msgstr ""
+"Nortel\n"
+"Gateway estándar"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:16
+msgid ""
+"Only use VPN connection for these addresses\n"
+"example: 172.16.0.0/16 10.11.12.0/24"
+msgstr ""
+"Sólo usar la conexión VPN para estas direcciones.\n"
+"Ejemplo: 172.16.0.0/16 10.11.12.0/24"
+
+# include/partitioning/lvm_ui_lib.ycp:558
+# include/partitioning/lvm_ui_lib.ycp:558
+# include/partitioning/lvm_ui_lib.ycp:584
+#: ../properties/nm-novellvpn-dialog.glade.h:18
+msgid "PFS Group: "
+msgstr "Grupo PFS: "
+
+#: ../properties/nm-novellvpn-dialog.glade.h:19
+msgid ""
+"Please enter the information provided by your system administrator below. Do "
+"not enter your password here as you will be prompted when connecting."
+msgstr ""
+"Introduzca a continuación la información provista por el administrador del "
+"sistema. No introduzca aquí su contraseña, ya que se le pedirá en la "
+"conexión."
+
+#
+# include/network/providers.ycp:498 include/network/providers.ycp:681
+#: ../properties/nm-novellvpn-dialog.glade.h:20
+msgid "User Name  "
+msgstr "Nombre de usuario  "
+
+#: ../properties/nm-novellvpn-dialog.glade.h:21
+msgid "X.509"
+msgstr "X.509"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:22
+msgid "XAUTH"
+msgstr "XAUTH"
+
+# clients/inst_sw_single.ycp:125
+# clients/inst_sw_single.ycp:134
+#: ../properties/nm-novellvpn-dialog.glade.h:23
+msgid ""
+"XAUTH\n"
+"X.509 Certificate\n"
+msgstr ""
+"XAUTH\n"
+"Certificado X.509\n"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:26
+msgid ""
+"_Name used to identify the connection to the private network, e.g. \"Campus "
+"VPN\" or \"Corporate Network\""
+msgstr ""
+"_Nombre utilizado para identificar la conexión a la red privada, p. ej., "
+"\"VPN del campus\" o \"Red de la empresa\""
+
+#: ../properties/nm-novellvpn-dialog.glade.h:27
+msgid ""
+"off\n"
+"1\n"
+"2"
+msgstr ""
+"apagado\n"
+"1\n"
+"2"
+
+#: ../properties/nm-novellvpn-vpnui-impl.c:67
+msgid "Select certificate to use"
+msgstr "Seleccionar certificado que usar"
+
+#: ../properties/nm-novellvpn-vpnui-impl.c:111
+msgid "Wrong certificate file format"
+msgstr "Formato de archivo de certificado erróneo"
+
+#
+# clients/printconf.ycp:156 clients/printconf_summary.ycp:36 include/printconf/dialogs.ycp:337
+#: ../properties/nm-novellvpn-vpnui-impl.c:211
+msgid "NovellVPN Client"
+msgstr "Cliente de NovellVPN"
+
+#
+# include/printconf/dialogs.ycp:1787
+#: ../properties/nm-novellvpn-vpnui-impl.c:268
+msgid "The following NovellVPN connection will be created:"
+msgstr "Se creará la siguiente conexión de NovellVPN:"
+
+#: ../properties/nm-novellvpn-vpnui-impl.c:270
+#, c-format
+msgid "Name:  %s"
+msgstr "Nombre:  %s"
+
+#: ../properties/nm-novellvpn-vpnui-impl.c:273
+msgid "The connection details can be changed using the \"Edit\" button."
+msgstr ""
+"Los detalles de la conexión se pueden cambiar mediante el botón Editar."
+
+#: ../src/nm-novellvpn-service.c:148
+msgid ""
+"The VPN login failed because the user name and password were not accepted or "
+"the certificate password was wrong."
+msgstr ""
+"Error al iniciar sesión la VPN porque no se ha aceptado el nombre de usuario "
+"y la contraseña o porque la contraseña del certificado era errónea."
+
+#: ../src/nm-novellvpn-service.c:152
+msgid "The VPN login failed because the VPN program could not be started."
+msgstr ""
+"Error al iniciar sesión la VPN porque no se ha podido iniciar el programa "
+"VPN."
+
+#: ../src/nm-novellvpn-service.c:155
+msgid ""
+"The VPN login failed because the VPN program could not connect to the VPN "
+"server."
+msgstr ""
+"Error al iniciar sesión la VPN porque el programa VPN no ha podido conectar "
+"con el servidor VPN."
+
+#: ../src/nm-novellvpn-service.c:158
+msgid ""
+"The VPN login failed because the VPN configuration options were invalid."
+msgstr ""
+"Error al iniciar sesión la VPN porque las opciones de configuración de VPN "
+"no eran válidas."
+
+#: ../src/nm-novellvpn-service.c:161
+msgid ""
+"The VPN login failed because the VPN program received an invalid "
+"configuration from the VPN server."
+msgstr ""
+"Error al iniciar sesión la VPN porque el programa VPN ha recibido una "
+"configuración no válida del servidor VPN."
+
+# clients/rc_config_step1.ycp:296
+#: ../src/nm-novellvpn-service.c:164
+msgid "VPN connection failed"
+msgstr "Error de la conexión VPN"

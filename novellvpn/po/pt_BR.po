@@ -1,0 +1,267 @@
+# Portugese (Brasilian) message file for YaST2 (@memory@).
+# Copyright (C) 2005 SUSE Linux Products GmbH.
+# Copyright (C) 2002 SuSE Linux AG.
+# Copyright (C) 1999-2000, 2001 SuSE GmbH.
+# Karl Eichwalder <ke@suse.de>, 1999.
+# Ralf Lanz <rlanz@genix.com.br>, 1999.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YaST (@memory@)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-05-16 17:19+0200\n"
+"PO-Revision-Date: 2006-05-31 14:17\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:163
+msgid "_Secondary Password:"
+msgstr "_Senha_Secundária:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:297
+msgid "Unable to fetch Group Password"
+msgstr "Não foi possível buscar a Senha do Grupo"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:742
+msgid "_Username:"
+msgstr "Nome do _Usuário:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:744
+msgid "_Domain:"
+msgstr "_Domínio:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:751
+msgid "_Certificate Password:"
+msgstr "Senha do _Certificado:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:756
+msgid "_Password:"
+msgstr "S_enha:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:841
+msgid "Connect _anonymously"
+msgstr "Conectar de modo _anônimo"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:846
+msgid "Connect as _user:"
+msgstr "Conectar como _usuário:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:952
+msgid "_Remember password for this session"
+msgstr "_Lembrar a senha desta sessão"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:954
+msgid "_Save password in keyring"
+msgstr "_Gravar senha no chaveiro"
+
+#: ../auth-dialog/main.c:172
+#, c-format
+msgid ""
+"You need to authenticate to access the Novell's  Virtual Private Network '%"
+"s'."
+msgstr ""
+"É necessária a autenticação para acessar a Virtual Private Network '%s' da "
+"Novell."
+
+#: ../auth-dialog/main.c:173
+msgid "Authenticate Novell VPN"
+msgstr "Autenticar VPN da Novell"
+
+#: ../auth-dialog/main.c:180
+msgid "_Group Password:"
+msgstr "Senha do _Grupo:"
+
+#: ../nm-novellvpn.desktop.in.h:1
+msgid "Add, Remove, and Edit VPN Connections"
+msgstr "Adicionar, Remover e Editar Conexões VPN"
+
+#: ../nm-novellvpn.desktop.in.h:2
+msgid "VPN Connection Manager (NovellVPN)"
+msgstr "Gerenciador de Conexões VPN (NovellVPN)"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:1
+msgid "           "
+msgstr " "
+
+#: ../properties/nm-novellvpn-dialog.glade.h:2
+msgid "                     "
+msgstr " "
+
+#: ../properties/nm-novellvpn-dialog.glade.h:3
+msgid "<b>Connection Name</b>"
+msgstr "<b>Nome da Conexão</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:4
+msgid "<b>Optional Information</b>"
+msgstr "<b>Informações Opcionais</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:5
+msgid "<b>Required Information</b>"
+msgstr "<b>Informações Obrigatórias</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:6
+msgid "Authentication Type  "
+msgstr "Tipo de Autenticação"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:7
+msgid "Certificate file  "
+msgstr "Arquivo do certificado  "
+
+#: ../properties/nm-novellvpn-dialog.glade.h:8
+msgid "DH Group: "
+msgstr "Groupo DH: "
+
+#: ../properties/nm-novellvpn-dialog.glade.h:9
+msgid ""
+"DH1\n"
+"DH2"
+msgstr ""
+"DH1\n"
+"DH2"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:11
+msgid "Gateway  "
+msgstr "Gateway"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:12
+msgid "Gateway Type  "
+msgstr "Tipo de Gateway  "
+
+#: ../properties/nm-novellvpn-dialog.glade.h:13
+msgid "Group Name  "
+msgstr "Nome do Grupo"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:14
+msgid ""
+"Nortel\n"
+"Standard Gateway"
+msgstr ""
+"Nortel\n"
+"Gateway Padrão"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:16
+msgid ""
+"Only use VPN connection for these addresses\n"
+"example: 172.16.0.0/16 10.11.12.0/24"
+msgstr ""
+"Usar apenas conexão VPN para estes endereços\n"
+"exemplo: 172.16.0.0/16 10.11.12.0/24"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:18
+msgid "PFS Group: "
+msgstr "Grupo PFS: "
+
+#: ../properties/nm-novellvpn-dialog.glade.h:19
+msgid ""
+"Please enter the information provided by your system administrator below. Do "
+"not enter your password here as you will be prompted when connecting."
+msgstr ""
+"Insira abaixo as informações fornecidas pelo administrador do sistema. Não "
+"insira a sua senha aqui, já que ela será solicitada quando você se conectar."
+
+#: ../properties/nm-novellvpn-dialog.glade.h:20
+msgid "User Name  "
+msgstr "Nome do Usuário  "
+
+#: ../properties/nm-novellvpn-dialog.glade.h:21
+msgid "X.509"
+msgstr "X.509"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:22
+msgid "XAUTH"
+msgstr "XAUTH"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:23
+msgid ""
+"XAUTH\n"
+"X.509 Certificate\n"
+msgstr ""
+"XAUTH\n"
+"Certificado X.509\n"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:26
+msgid ""
+"_Name used to identify the connection to the private network, e.g. \"Campus "
+"VPN\" or \"Corporate Network\""
+msgstr ""
+"_Nome usado para identificar a conexão à rede privada, ex.: \"Campus VPN\" "
+"ou \"Rede Corporativa\""
+
+#: ../properties/nm-novellvpn-dialog.glade.h:27
+msgid ""
+"off\n"
+"1\n"
+"2"
+msgstr ""
+"desligado\n"
+"1\n"
+"2"
+
+#: ../properties/nm-novellvpn-vpnui-impl.c:67
+msgid "Select certificate to use"
+msgstr "Selecione o certificado a ser usado"
+
+#: ../properties/nm-novellvpn-vpnui-impl.c:111
+msgid "Wrong certificate file format"
+msgstr "Formato errado do arquivo de certificado"
+
+#: ../properties/nm-novellvpn-vpnui-impl.c:211
+msgid "NovellVPN Client"
+msgstr "NovellVPN Client"
+
+#: ../properties/nm-novellvpn-vpnui-impl.c:268
+msgid "The following NovellVPN connection will be created:"
+msgstr "A seguinte conexão NovellVPN será criada:"
+
+#: ../properties/nm-novellvpn-vpnui-impl.c:270
+#, c-format
+msgid "Name:  %s"
+msgstr "Nome:  %s"
+
+#: ../properties/nm-novellvpn-vpnui-impl.c:273
+msgid "The connection details can be changed using the \"Edit\" button."
+msgstr "Os detalhes da conexão podem ser mudados com o botão \"Editar\"."
+
+#: ../src/nm-novellvpn-service.c:148
+msgid ""
+"The VPN login failed because the user name and password were not accepted or "
+"the certificate password was wrong."
+msgstr ""
+"Houve falha no login à VPN porque o nome de usuário e a senha não foram "
+"aceitos ou a senha do certificado estava errada."
+
+#: ../src/nm-novellvpn-service.c:152
+msgid "The VPN login failed because the VPN program could not be started."
+msgstr ""
+"Houve falha no login à VPN porque o programa VPN não pôde ser iniciado."
+
+#: ../src/nm-novellvpn-service.c:155
+msgid ""
+"The VPN login failed because the VPN program could not connect to the VPN "
+"server."
+msgstr ""
+"Houve falha no login à VPN porque o programa VPN não pôde se conectar ao "
+"servidor VPN."
+
+#: ../src/nm-novellvpn-service.c:158
+msgid ""
+"The VPN login failed because the VPN configuration options were invalid."
+msgstr ""
+"Houve falha no login à VPN porque as opções de configuração da VPN eram "
+"inválidas."
+
+#: ../src/nm-novellvpn-service.c:161
+msgid ""
+"The VPN login failed because the VPN program received an invalid "
+"configuration from the VPN server."
+msgstr ""
+"Houve falha no login à VPN porque o programa VPN recebeu uma configuração "
+"inválida do servidor VPN."
+
+#: ../src/nm-novellvpn-service.c:164
+msgid "VPN connection failed"
+msgstr "Falha na conexão à VPN"

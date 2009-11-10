@@ -1,0 +1,335 @@
+2009-11-10 Bin Li <bili@novell.com>
+	Move from novell forge svn to google svn.
+2009-06-26 Bin Li <bili@novell.com>
+	* src/nm-novellvpn-service.c:
+	Fix nm-novellvpn-service segfaults when auth-type is null(bnc#501835).
+2009-03-25 Bin Li <bili@novell.com>
+	* properties/nm-novellvpn.c:
+	* properties/nm-novellvpn-dialog.glade:
+	Add advanced dialog for optional parameters.
+2009-03-12 Bin Li <bili@novell.com>
+	* properties/import-export.c:
+	* properties/import-export.h:
+	* properties/Makefile.am:
+	* properties/nm-novellvpn.c:
+	Support the import and export features for nvpn and vpnlogin.
+2009-01-22 Bin Li <bili@novell.com>
+	* src/nm-novellvpn-service.h:
+	* src/nm-novellvpn-service.c:
+	* properties/nm-novellvpn.c:
+	* properties/nm-novellvpn-dialog.glade:
+	Support the "Disable split tunnel" features.
+2009-01-09 Bin Li <bili@novell.com>
+	* src/nm-novellvpn-service-novellvpn-helper.c:
+	Dismiss compile warning and delete unused functions.
+	* src/Makefile.am:
+	* src/nm-utils.c:
+	* src/nm-utils.h:
+	Delete the nm-utils related file, use NM's library.
+2009-01-08 Bin Li <bili@novell.com>
+	* auth-dialog/gnome-two-password-dialog.c:
+	* auth-dialog/gnome-two-password-dialog.h:
+	* auth-dialog/main.c:
+	* properties/nm-novellvpn.c:
+	* src/nm-novellvpn-service.c:
+	Dismiss unused variable.
+	* auth-dialog/profile.h:
+	Change prototype declare.
+2008-11-10 Bin Li <bili@novell.com>
+	* src/nm-novellvpn-service.c:
+	* auth-dialog/main.c:
+	Support the password for x509 certificate method.
+2008-11-07 Bin Li <bili@novell.com>
+	* src/nm-novellvpn-service-novellvpn-helper.c:
+	Support the tunnel device.
+2008-10-30 Bin Li <bili@novell.com>
+	Patch from Tambet Ingo <tambet@novell.com>
+	* src/nm-novellvpn-service-novellvpn-helper.c:
+	* src/nm-novellvpn-service.c:
+	* properties/nm-novellvpn.c:
+	Update for setting accessor changes, don't use private
+	variant any more, need NetworkManager > r4236.
+2008-10-13 Bin Li <bili@novell.com>
+	* common-gnome/keyring-helpers.c:
+	Add header file for implicit memory/string functions.
+2008-09-26 Bin Li <bili@novell.com>
+	* common-gnome/Makefile.am:
+	Don't build the so, just use static library.
+2008-09-25 Bin Li <bili@novell.com>
+	* nm-novellvpn.desktop.in:
+	Fixing the autobuild's error.
+	* nm-novellvpn-service.c:
+	* nm-novellvpn-service.h:
+	Refactoring the code for new NM and support password features.
+	* nm-novellvpn.h:
+	* nm-novellvpn-dialog.glade:
+	* Makefile.am:
+	* nm-novellvpn.c:
+	Add the password option in UI, process the password features.
+	and use new keyring interface.
+	* common-gnome/keyring-helpers.h:
+	Add header file for fixing build so warning when no this header.
+	* auth-dialog/main.c:
+	Support the uuid, and use new keyring interface.
+	* auth-dialog/gnome-two-password-dialog.c:
+	* auth-dialog/gnome-two-password-dialog.h:
+	* auth-dialog/Makefile.am:
+	* auth-dialog/profile.c:
+	* auth-dialog/profile.h:
+	Separate reading profile for getting group password in single file.
+	* common-gnome/Makefile.am:
+	* common-gnome/keyring-helpers.c:
+	* common-gnome/keyring-helpers.h:
+	* Makefile.am:
+	* configure.in:
+	Separate a new directory for keyring's management.
+2008-09-22 Bin Li <bili@novell.com>
+	* properties/nm-novellvpn.c:
+	* src/nm-novellvpn-service.c:
+	* auth-dialog/main.c:
+	Merge the NMSettingVPNProperties into NMSettingVPN for NM(r4076).
+	Change the key/value type in hashtable, not use GValue any more.
+	* src/nm-novellvpn-service-novellvpn-helper.c:
+	handle route metrics
+2008-08-01 Bin Li <bili@novell.com>
+	* properties/nm-novellvpn.c:
+	* properties/nm-novellvpn.h:
+	* properties/nm-novellvpn-dialog.glade:
+	Upload forgeting file for converting to new NM VPN UI plugin format.
+2008-07-31 Bin Li <bili@novell.com>
+	* src/nm-novellvpn-service.h:
+	* src/nm-novellvpn-service.c:
+	* properties/nm-novellvpn-dialog.glade:
+	* properties/Makefile.am:
+	Convert to new NM VPN UI plugin format, Requires a NetworkManager of
+	at least SVN revision r3761.
+	* src/Makefile.am:
+	* nm-novellvpn-service.name.in:
+	* Makefile.am:
+	Move service to $LIBEXECDIR, remove unneeded compilation flags, move
+	properties plugin to $LIBDIR/NetworkManager
+2008-06-13 Bin Li <bili@novell.com>
+	* auth-dialog/gnome-two-password-dialog.c:
+	* auth-dialog/gnome-two-password-dialog.h:
+	* auth-dialog/main.c:
+	Fix the gnome-keyring's feature, and support remembering the session and
+	forever keyring the sametime.
+2008-05-23 Bin Li <bili@novell.com>
+	* src/nm-novellvpn-service.c (real_disconnect):
+	If sending SIGTERM succeeds, add a timeout to make sure it gets killed.
+	If it fails, send SIGKILL immediately.
+2008-04-11 Bin Li <bili@novell.com>
+	* properties/nm-novellvpn-propertiesui.c:
+	* properties/nm-novellvpn-vpnui-impl.c:
+	fix strlen's parameter check, and add g_object_ref_sink after
+	load widget.
+
+2008-03-31 Bin Li <bili@novell.com>
+
+	* AUTHORS:
+	* configure.in:
+	* auth-dialog/Makefile.am:
+	* auth-dialog/gnome-two-password-dialog.c:
+	* auth-dialog/main.c:
+	* properties/nm-novellvpn-propertiesui.c:
+	* properties/nm-novellvpn-propertiesui.h:
+	* properties/nm-novellvpn-vpnui-impl.c:
+	* src/Makefile.am:
+	* src/nm-novellvpn-service-novellvpn-helper.c:
+	* src/nm-novellvpn-service.c:
+	* src/nm-novellvpn-service.h:
+	refactoring novellvpn for NM 0.7.0
+
+2008-02-05 Bin Li <bili@novell.com>
+
+	release 0.7.0 for support the NM 0.7.0
+	* properties/Makefile.am:
+	* properties/nm-novellvpn-vpnui-impl.c:
+	* properties/nm-novellvpn-propertiesui.h: 
+	* properties/nm-novellvpn-propertiesui.c: Ajust the code format and 
+	support the NM 0.7.0.
+	* properties/nm-novellvpn-dialog.glade: Add advanced dialog for 
+	additional options.
+	* src/nm-utils.h:
+	G_GNUC_PRETTY_FUNCTION is invalidate in glib.
+	* src/nm-novellvpn-service.c:
+	Change the macro define for NM 0.7.0
+	* po/*.po: Add the new po file.
+	* configure.in: support for the NM 0.7.0.
+
+2007-12-07 Bin Li <bili@novell.com>
+
+	* properties/nm-novellvpn-propertiesui.c: Groupname can be set null. 
+
+2007-11-05 Bin Li <bili@novell.com>
+
+	* src/nm-novellvpn-service.c: Wait the racoon finish start by call
+	sleep, and stop the racoon daemon when disconnect with server.
+
+2007-10-25 Bin Li <bili@novell.com>
+	* src/nm_novellvpn_racoon_launcher.sh:To conform to LSB change the
+	init script racoon as racoond
+
+2007-01-19    <tsureshkumar@blrsureshkt.blr.novell.com>
+
+	* src/Makefile.am (dist_libexec_SCRIPTS): make this script
+	distributable.
+
+2007-01-08  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* src/nm-novellvpn-service.c (nm_novellvpn_dbus_handle_start_vpn):
+	check and start racoon if it is not running.
+
+	* src/nm_novellvpn_racoon_launcher.sh: start/stop racoon if
+	running.
+
+	* src/Makefile.am (libexec_SCRIPTS): add racoon_launcher script.
+
+2006-05-09  Vinay A R <rvinay@novell.com>
+
+	* auth-dialog/main.c : Fix for empty password bug. Auth Dialog will also print 
+		the appropriate flag depending upon the no of passwords present.
+				
+	* src/nm-novellvpn-service.c :Read the flag printed from Auth Dialog and 
+		and fill null strings appropriately to the passwords.
+
+2006-05-04  Vinay A R <rvinay@novell.com>
+	
+	* auth-dialog/gnome-two-password-dialog.c : Fix for strcpy on the NULL pointer
+
+	* properties/nm-novellvpn-dialog.glade : Added the routes description to
+		check box text.
+
+	* properties/nm-novellvpn-vpnui-impl.c : Made routes and routes check box to
+		be non sensitive when nortel is selected.
+
+2006-05-04  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* auth-dialog/gnome-two-password-dialog.c
+	(gnome_two_password_dialog_finalize): dangling pointer fix.
+
+2006-04-11  Vinay A R  <rvinay@novell.com>
+
+	* auth-dialog/gnome-two-password-dialog.c : Removed warnings
+
+	* properties/nm-novellvpn-propertiesui.c : pfx file check related changes
+
+	
+	* properties/nm-novellvpn-vpnui-impl.c : Removed function 
+		'cert_file_changed' and pfx file check related changes.
+
+	* src/mtu.c : Removed some ununsed variables.
+
+2006-04-10  Vinay A R  <rvinay@novell.com>
+
+	* properties/nm-novellvpn-propertiesui.c : Associated Certificate
+		file text box with the new function 'cert_file_changed'.
+
+	* properties/nm-novellvpn-propertiesui.h : Added a function pointer
+		to struct NovellVPNPropertiesUI.
+
+	* properties/nm-novellvpn-vpnui-impl.c : New function 'cert_file_changed'
+		which checks for pfx format
+
+2006-04-07  Vinay A R  <rvinay@novell.com>
+
+	* configure.in : Added Libnl as a dependecy.
+
+	* src/Makefile.am : Added new file 'mtu.c' which gets the mtu value for a given 
+		destination address.
+
+	* src/nm-novellvpn-service-novellvpn-helper.c : Added mtu which gets the mtu 
+		and passes the value.
+
+	* src/nm-novellvpn-service.c : mtu related changes
+
+2006-04-10  Vinay A R  <rvinay@novell.com>
+
+	* auth-dialog/gnome-two-password-dialog.c :
+	  (search_in_the_directory) : Added a warning dialog if the vendor profiles
+	  were detected to be of old format
+
+2006-04-05  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* src/nm-novellvpn-service.c (nm_nvpn_watch_stderr_cb): added
+	functionality to watch the launched nvpn's stderr and display
+	the error when the program is terminated abruptly.
+
+2006-03-31  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* src/nm-novellvpn-service.c
+	(nm_novellvpn_start_novellvpn_binary): re-apply the patch to
+	async_spawn to have its stdout to be multiplexed with nm stdout.
+	(nm_novellvpn_dbus_process_helper_ip4_config): set mss and pass to
+	nm to be set.
+
+2006-03-29  Vinay A R  <rvinay@novell.com>
+
+	* auth-dialog/gnome-two-password-dialog.c : Edited 'is_a_std_gateway_function' 
+		so that it checks for the auth type instead of the gateway type which 
+		was being done previously.
+	  
+	* auth-dialog/main.c : call to is_a_certificate_connection() instead of 
+		is_a_std_gw_connection.
+
+	* properties/nm-novellvpn-dialog.glade : Interface changes to accomodate Authentication
+		type combobox.
+
+	* properties/nm-novellvpn-propertiesui.c :
+	* properties/nm-novellvpn-propertiesui.h :
+	* properties/nm-novellvpn-vpnui-impl.c :  Interface related changes, All the actions 
+		associated with gateway type has been shifted to auth type.
+
+	* src/nm-novellvpn-service.c : Changes related to passing of Auth type.
+	* src/nm-novellvpn-service.h :	
+
+2006-02-28  Vinay A R  <rvinay@novell.com>
+
+	* src/nm-novellvpn-service.c : Added pfs group 'off' support
+
+	* auth-dialog/gnome-two-password-dialog.c : Added support for Enc and Unenc password storing in gnome-keyring
+						  : Added code to deactivate the group password box when it is automatically populated.
+
+	* properties/nm-novellvpn-dialog.glade : Solved the dh group and pfs group spacing problem
+						: Added pfs group 'off' option
+
+
+2006-02-23  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* src/nm-novellvpn-service.c (nm_novellvpn_start_novellvpn_binary): 
+	leave stdout to be NULL so that make child to log his messages to NM.
+
+2006-02-23  Vinay A R <rvinay@novell.com>
+
+	* src/gnome-two-password-dialog.c: removed the warnings
+	* src/nm-novellvpn-service.c : Added pfs group related changes to send the pfs group to nvpn
+				       Changed the novellvpn binary to nvpn
+	* properties/nm-novellvpn-dialog.glade : Adjusted the width of combobox of dh group and pfs group
+
+2006-02-01  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* src/nm-novellvpn-service-novellvpn-helper.c (send_config_info):
+	NM_DBUS_VPN_SIGNAL_IP4_CONFIG signature change
+
+	* src/nm-novellvpn-service.c (nm_novellvpn_write_gauth_config):
+	add uncoded password support
+	(nm_novellvpn_dbus_process_helper_ip4_config):
+	NM_DBUS_VPN_SIGNAL_IP4_CONFIG signature change
+
+	* auth-dialog/main.c (main): add a GNOME_PARAM_NONE
+
+2006-01-13  Vinay R <rvinay@novell.com>
+	    Sureshkumar T  <tsureshkumar@novell.com>
+	    
+	* nm-novellvpn-service.c:
+	added support to pass standard gateway parameters.
+
+
+2006-01-13  Vinay R  <rvinay@novell.com>
+	
+	* main.c: 
+	* nm-novellvpn-propertiesui.c:
+	* gnome-two-password-dialog.c: added support for standard gateway
+	(cert+passwd).
+	* nm-novellvpn-dialog.glade: added widgets for standard gateway.
+
