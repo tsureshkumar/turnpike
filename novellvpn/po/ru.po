@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: NetworkManager-novellvpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-11-11 02:30-0500\n"
-"PO-Revision-Date: 2009-02-04 14:32\n"
+"PO-Revision-Date: 2009-02-05 08:14\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -15,104 +15,104 @@ msgstr ""
 
 #: ../auth-dialog/gnome-two-password-dialog.c:134
 msgid "_Password:"
-msgstr "_Contraseña:"
+msgstr "П_ароль:"
 
 #: ../auth-dialog/gnome-two-password-dialog.c:135
 msgid "_Secondary Password:"
-msgstr "Contraseña _secundaria:"
+msgstr "_Дополнительный пароль:"
 
 #: ../auth-dialog/gnome-two-password-dialog.c:252
 msgid "_Username:"
-msgstr "_Usuario:"
+msgstr "_Имя пользователя:"
 
 #: ../auth-dialog/gnome-two-password-dialog.c:254
 msgid "_Domain:"
-msgstr "_Dominio:"
+msgstr "_Домен:"
 
 #: ../auth-dialog/gnome-two-password-dialog.c:346
 msgid "Connect _anonymously"
-msgstr "Conectar de forma _anónima"
+msgstr "Подключиться _анонимно"
 
 #: ../auth-dialog/gnome-two-password-dialog.c:351
 msgid "Connect as _user:"
-msgstr "Conectar como _usuario:"
+msgstr "Подключиться _как пользователь:"
 
 #: ../auth-dialog/gnome-two-password-dialog.c:471
 msgid "_Remember password for this session"
-msgstr "_Recordar contraseña para esta sesión"
+msgstr "_Запомнить пароль для этого сеанса"
 
 #: ../auth-dialog/gnome-two-password-dialog.c:473
 msgid "_Save password in keyring"
-msgstr "_Guardar contraseña en Keyring"
+msgstr "_Сохранить пароль в хранилище"
 
 #: ../auth-dialog/main.c:145
 #, c-format
 msgid "You need to authenticate to access the Novell's  Virtual Private Network '%s'."
-msgstr "Debe autenticarse para acceder a la red privada virtual de Novell %s."
+msgstr "Вам необходимо идентифицироваться для доступа к Novell's  Virtual Private Network '%s'."
 
 #: ../auth-dialog/main.c:147
 msgid "Authenticate Novell VPN"
-msgstr "Autenticar Novell VPN"
+msgstr "Идентификация Novell VPN"
 
 #: ../auth-dialog/main.c:180
 msgid "_Group Password:"
-msgstr "_Contraseña de grupo:"
+msgstr "_Групповой пароль:"
 
 #: ../auth-dialog/main.c:201
 msgid "_Cert Password:"
-msgstr "_Contraseña de certificado:"
+msgstr "_Пароль сертификата:"
 
 #: ../nm-novellvpn.desktop.in.h:1
 msgid "Add, Remove, and Edit VPN Connections"
-msgstr "Añadir, eliminar y editar conexiones VPN"
+msgstr "Добавить, Удалить и Изменить VPN соединения"
 
 #: ../nm-novellvpn.desktop.in.h:2
 msgid "VPN Connection Manager (NovellVPN)"
-msgstr "Gestor de conexiones VPN (NovellVPN)"
+msgstr "Менеджер соединений VPN (NovellVPN)"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:1
 msgid "768 bits (DH1)\n1024 bits (DH2)"
-msgstr "768 bits (DH1)\n1.024 bits (DH2)"
+msgstr "768 разрядов (DH1)\n1024 разряда (DH2)"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:3
 msgid "<b>Authentication</b>"
-msgstr "<b>Autenticación</b>"
+msgstr "<b>Аутентификация</b>"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:4
 msgid "<b>General</b>"
-msgstr "<b>General</b>"
+msgstr "<b>Общие</b>"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:5
 msgid "<b>Optional Information</b>"
-msgstr "<b>Información opcional</b>"
+msgstr "<b>Дополнительная информация</b>"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:6
 msgid "Certificate file:"
-msgstr "Archivo de certificado:"
+msgstr "Файл сертификата:"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:7
 msgid "G_roup Password:"
-msgstr "_Contraseña de grupo:"
+msgstr "_Групповой пароль:"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:8
 msgid "Gate_way Type:"
-msgstr "Tipo de gate_way"
+msgstr "Тип ш_люза:"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:9
 msgid "Nortel\nStandard Gateway"
-msgstr "Nortel\nGateway estándar"
+msgstr "Nortel\nСтандартный шлюз"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:11
 msgid "Off\n768 bits (PFS 1)\n1024 bits (PFS 2)"
-msgstr "Desactivado\n768 bits (PFS 1)\n1.024 bits (PFS 2)"
+msgstr "Выкл\n768 разрядов (PFS 1)\n1024 разряда (PFS 2)"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:14
 msgid "Show passwords"
-msgstr "Mostrar contraseñas"
+msgstr "Показать пароли"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:15
 msgid "U_ser Password:"
-msgstr "Contra_seña de usuario:"
+msgstr "_Пароль пользователя:"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:16
 msgid "X.509"
@@ -124,33 +124,33 @@ msgstr "XAUTH"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:18
 msgid "XAUTH\nX.509 Certificate"
-msgstr "XAUTH\nCertificado X.509"
+msgstr "XAUTH\nСертификат X.509"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:20
 msgid "_Certificate password:"
-msgstr "_Contraseña de certificado:"
+msgstr "_Пароль сертификата:"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:21
 msgid "_DH Group:"
-msgstr "Grupo _DH: "
+msgstr "Группа _DH:"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:22
 msgid "_Gateway:"
-msgstr "_Gateway:"
+msgstr "_Шлюз:"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:23
 msgid "_Group Name:"
-msgstr "Nombre de _grupo:"
+msgstr "Имя _группы:"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:24
 msgid "_PFS Group:"
-msgstr "Grupo _PFS: "
+msgstr "Группа _PFS:"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:25
 msgid "_Type:"
-msgstr "_Tipo:"
+msgstr "_Тип:"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:26
 msgid "_User Name:"
-msgstr "Nombre de _usuario: "
+msgstr "_Имя пользователя:"
 

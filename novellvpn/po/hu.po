@@ -1,69 +1,64 @@
+# translation of NetworkManager-novellvpn.hu.po to Hungarian
+# translation of NetworkManager-novellvpn.hu.po to
 # translation of hu.po to
 # Hungarian message File YaST2 (@memory@).
 # Copyright (C) 2005 SUSE Linux Products GmbH.
 # Copyright (C) 2002 SuSE Linux AG.
 # Copyright (C) 2000, 2001 SuSE GmbH.
+#
 # Marcel Hilzinger <hili@suselinux.hu>, 2001.
 # Sári Gábor <saga@tux.hu>, 2000.
 # Steve Varadi <svaradi@usa.com>, 2000.
 # Zoltán Levárdy <pogacsa@programmer.net>, 1999.
-# Kéménczy Kálmán <kkemenczy@novell.com>, 2006.
-#
+# Kalman Kemenczy <kkemenczy@novell.com>, 2006, 2007, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: hu\n"
+"Project-Id-Version: NetworkManager-novellvpn.hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-16 17:19+0200\n"
-"PO-Revision-Date: 2006-05-20 21:19+0100\n"
-"Last-Translator: Szabolcs Varga <shirokuma@shirokuma.hu>\n"
-"Language-Team:  <en@li.org>\n"
+"POT-Creation-Date: 2008-11-11 02:30-0500\n"
+"PO-Revision-Date: 2008-11-11 15:02+0100\n"
+"Last-Translator: Kalman Kemenczy <kkemenczy@novell.com>\n"
+"Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: ../auth-dialog/gnome-two-password-dialog.c:163
-msgid "_Secondary Password:"
-msgstr "_Másodlagos jelszó:"
-
-#: ../auth-dialog/gnome-two-password-dialog.c:297
-msgid "Unable to fetch Group Password"
-msgstr "A csoportjelszó lekérése sikertelen"
-
-#: ../auth-dialog/gnome-two-password-dialog.c:742
-msgid "_Username:"
-msgstr "_Felhasználónév:"
-
-#: ../auth-dialog/gnome-two-password-dialog.c:744
-msgid "_Domain:"
-msgstr "_Tartomány:"
-
-#: ../auth-dialog/gnome-two-password-dialog.c:751
-msgid "_Certificate Password:"
-msgstr "_Tanúsítvány jelszó:"
-
-#: ../auth-dialog/gnome-two-password-dialog.c:756
+#: ../auth-dialog/gnome-two-password-dialog.c:134
 msgid "_Password:"
 msgstr "_Jelszó:"
 
-# clients/printconf_ask_device.ycp:192
-#: ../auth-dialog/gnome-two-password-dialog.c:841
-msgid "Connect _anonymously"
-msgstr "Kapcsolódás anonymousként"
+#: ../auth-dialog/gnome-two-password-dialog.c:135
+msgid "_Secondary Password:"
+msgstr "_Másodlagos jelszó:"
 
-#: ../auth-dialog/gnome-two-password-dialog.c:846
+#: ../auth-dialog/gnome-two-password-dialog.c:252
+msgid "_Username:"
+msgstr "_Felhasználónév:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:254
+msgid "_Domain:"
+msgstr "_Tartomány:"
+
+# clients/printconf_ask_device.ycp:192
+#: ../auth-dialog/gnome-two-password-dialog.c:346
+msgid "Connect _anonymously"
+msgstr "Kapcsolódás anonymusként"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:351
 msgid "Connect as _user:"
 msgstr "Kapcsolódás _felhasználóként:"
 
-#: ../auth-dialog/gnome-two-password-dialog.c:952
+#: ../auth-dialog/gnome-two-password-dialog.c:471
 msgid "_Remember password for this session"
 msgstr "Jelszó _tárolása a kapcsolat idejére"
 
-#: ../auth-dialog/gnome-two-password-dialog.c:954
+#: ../auth-dialog/gnome-two-password-dialog.c:473
 msgid "_Save password in keyring"
 msgstr "Jelszó _mentése a kulcscsomóba"
 
-#: ../auth-dialog/main.c:172
+#: ../auth-dialog/main.c:145
 #, c-format
 msgid ""
 "You need to authenticate to access the Novell's  Virtual Private Network '%"
@@ -72,13 +67,17 @@ msgstr "Hitelesítenie kell magát a Novell '%s' virtuális magánhálózatához
 
 # modules/inst_sw_single.ycp:63
 # clients/inst_sw_single.ycp:118
-#: ../auth-dialog/main.c:173
+#: ../auth-dialog/main.c:147
 msgid "Authenticate Novell VPN"
 msgstr "Hitelesítés a Novell VPN-be"
 
 #: ../auth-dialog/main.c:180
 msgid "_Group Password:"
 msgstr "_Csoportjelszó:"
+
+#: ../auth-dialog/main.c:201
+msgid "_Cert Password:"
+msgstr "_Tanúsítványjelszó:"
 
 #: ../nm-novellvpn.desktop.in.h:1
 msgid "Add, Remove, and Edit VPN Connections"
@@ -90,63 +89,40 @@ msgid "VPN Connection Manager (NovellVPN)"
 msgstr "VPN kapcsolatkezelő (NovellVPN)"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:1
-msgid "           "
-msgstr "           "
-
-#: ../properties/nm-novellvpn-dialog.glade.h:2
-msgid "                     "
-msgstr "                     "
-
-#: ../properties/nm-novellvpn-dialog.glade.h:3
-msgid "<b>Connection Name</b>"
-msgstr "<b>Kapcsolat neve</b>"
-
-#: ../properties/nm-novellvpn-dialog.glade.h:4
-msgid "<b>Optional Information</b>"
-msgstr "<b>Opcionális adatok</b>"
-
-#: ../properties/nm-novellvpn-dialog.glade.h:5
-msgid "<b>Required Information</b>"
-msgstr "<b>Kötelező adatok</b>"
+msgid ""
+"768 bits (DH1)\n"
+"1024 bits (DH2)"
+msgstr ""
+"768 bit (DH1)\n"
+"1024 bit (DH2)"
 
 # modules/inst_sw_single.ycp:63
 # clients/inst_sw_single.ycp:118
+#: ../properties/nm-novellvpn-dialog.glade.h:3
+msgid "<b>Authentication</b>"
+msgstr "<b>Hitelesítés</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:4
+msgid "<b>General</b>"
+msgstr "<b>Általános</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:5
+msgid "<b>Optional Information</b>"
+msgstr "<b>Opcionális adatok</b>"
+
 #: ../properties/nm-novellvpn-dialog.glade.h:6
-msgid "Authentication Type  "
-msgstr "Hitelesítés típusa"
+msgid "Certificate file:"
+msgstr "Tanúsítványfájl:"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:7
-msgid "Certificate file  "
-msgstr "Tanúsítványfájl"
+msgid "G_roup Password:"
+msgstr "_Csoportjelszó:"
 
-# clients/inst_sw_single.ycp:1298
 #: ../properties/nm-novellvpn-dialog.glade.h:8
-msgid "DH Group: "
-msgstr "DH csoport:"
+msgid "Gate_way Type:"
+msgstr "Át_járó típusa:"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:9
-msgid ""
-"DH1\n"
-"DH2"
-msgstr ""
-"DH1\n"
-"DH2"
-
-#: ../properties/nm-novellvpn-dialog.glade.h:11
-msgid "Gateway  "
-msgstr "Átjáró"
-
-#: ../properties/nm-novellvpn-dialog.glade.h:12
-msgid "Gateway Type  "
-msgstr "Átjáró típusa"
-
-# /usr/lib/YaST2/clients/lan_dns.ycp:85
-# clients/lan_dns.ycp:269
-#: ../properties/nm-novellvpn-dialog.glade.h:13
-msgid "Group Name  "
-msgstr "Csoportnév"
-
-#: ../properties/nm-novellvpn-dialog.glade.h:14
 msgid ""
 "Nortel\n"
 "Standard Gateway"
@@ -154,133 +130,69 @@ msgstr ""
 "Nortel\n"
 "standard átjáró"
 
+#: ../properties/nm-novellvpn-dialog.glade.h:11
+msgid ""
+"Off\n"
+"768 bits (PFS 1)\n"
+"1024 bits (PFS 2)"
+msgstr ""
+"Kikapcsolt\n"
+"768 bit (PFS 1)\n"
+"1024 bit (PFS 2)"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:14
+msgid "Show passwords"
+msgstr "Jelszó megjelenítése"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:15
+msgid "U_ser Password:"
+msgstr "_Felhasználói jelszó:"
+
 #: ../properties/nm-novellvpn-dialog.glade.h:16
-msgid ""
-"Only use VPN connection for these addresses\n"
-"example: 172.16.0.0/16 10.11.12.0/24"
-msgstr ""
-"VPN használata csak az alábbi címek esetén\n"
-"Példa: 172.16.0.0/16 10.11.12.0/24"
-
-#: ../properties/nm-novellvpn-dialog.glade.h:18
-msgid "PFS Group: "
-msgstr "PFS csoport:"
-
-#: ../properties/nm-novellvpn-dialog.glade.h:19
-msgid ""
-"Please enter the information provided by your system administrator below. Do "
-"not enter your password here as you will be prompted when connecting."
-msgstr ""
-"Adja meg a rendszeradminisztrátortól kapott adatokat. Itt ne írja be a "
-"jelszavát, arra majd kapcsolódás közben kérdez rá a rendszer."
-
-# /usr/lib/YaST2/clients/lan_dns.ycp:85
-# clients/lan_dns.ycp:269
-#: ../properties/nm-novellvpn-dialog.glade.h:20
-msgid "User Name  "
-msgstr "Felhasználónév"
-
-#: ../properties/nm-novellvpn-dialog.glade.h:21
 msgid "X.509"
 msgstr "X.509"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:22
+#: ../properties/nm-novellvpn-dialog.glade.h:17
 msgid "XAUTH"
 msgstr "XAUTH"
 
 # modules/inst_sw_single.ycp:63
 # clients/inst_sw_single.ycp:118
-#: ../properties/nm-novellvpn-dialog.glade.h:23
+#: ../properties/nm-novellvpn-dialog.glade.h:18
 msgid ""
 "XAUTH\n"
-"X.509 Certificate\n"
+"X.509 Certificate"
 msgstr ""
 "XAUTH\n"
-"X.509 tanúsítvány\n"
+"X.509 tanúsítvány"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:20
+msgid "_Certificate password:"
+msgstr "_Tanúsítványjelszó:"
+
+# clients/inst_sw_single.ycp:1298
+#: ../properties/nm-novellvpn-dialog.glade.h:21
+msgid "_DH Group:"
+msgstr "_DH csoport:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:22
+msgid "_Gateway:"
+msgstr "Át_járó"
+
+# /usr/lib/YaST2/clients/lan_dns.ycp:85
+# clients/lan_dns.ycp:269
+#: ../properties/nm-novellvpn-dialog.glade.h:23
+msgid "_Group Name:"
+msgstr "_Csoportnév:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:24
+msgid "_PFS Group:"
+msgstr "_PFS csoport:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:25
+msgid "_Type:"
+msgstr "_Típus:"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:26
-msgid ""
-"_Name used to identify the connection to the private network, e.g. \"Campus "
-"VPN\" or \"Corporate Network\""
-msgstr ""
-"A magánhálózathoz csatlakozáskor azonosításra szolgáló _név, pl. \"Egyetemi "
-"VPN\" vagy \"Vállalati hálózat\""
-
-#: ../properties/nm-novellvpn-dialog.glade.h:27
-msgid ""
-"off\n"
-"1\n"
-"2"
-msgstr ""
-"off\n"
-"1\n"
-"2"
-
-#: ../properties/nm-novellvpn-vpnui-impl.c:67
-msgid "Select certificate to use"
-msgstr "Válassza ki a használandó tanúsítványfájlt."
-
-#: ../properties/nm-novellvpn-vpnui-impl.c:111
-msgid "Wrong certificate file format"
-msgstr "Helytelen tanúsítványfájl-formátum."
-
-# modules/printconf/printconf.ycp:360
-# clients/printconf.ycp:182 clients/printconf_ask_remote.ycp:198
-#: ../properties/nm-novellvpn-vpnui-impl.c:211
-msgid "NovellVPN Client"
-msgstr "NovellVPN kliens"
-
-#: ../properties/nm-novellvpn-vpnui-impl.c:268
-msgid "The following NovellVPN connection will be created:"
-msgstr "A következő NovellVPN kapcsolat kerül létrehozásra:"
-
-#: ../properties/nm-novellvpn-vpnui-impl.c:270
-#, c-format
-msgid "Name:  %s"
-msgstr "Név:  %s"
-
-#: ../properties/nm-novellvpn-vpnui-impl.c:273
-msgid "The connection details can be changed using the \"Edit\" button."
-msgstr "A kapcsolat részletei a \"Szerkesztés\" gombra kattintva módosíthatók."
-
-#: ../src/nm-novellvpn-service.c:148
-msgid ""
-"The VPN login failed because the user name and password were not accepted or "
-"the certificate password was wrong."
-msgstr ""
-"A VPN-bejelentkezés nem sikerült, el nem fogadott név vagy jelszó miatt, "
-"vagy mert a tanúsítvány jelszava helytelen volt."
-
-#: ../src/nm-novellvpn-service.c:152
-msgid "The VPN login failed because the VPN program could not be started."
-msgstr ""
-"A VPN-bejelentkezés nem sikerült, mert nem sikerült elindítani a VPN "
-"programot."
-
-#: ../src/nm-novellvpn-service.c:155
-msgid ""
-"The VPN login failed because the VPN program could not connect to the VPN "
-"server."
-msgstr ""
-"A VPN-bejelentkezés nem sikerült, mert a VPN program nem tudott csatlakozni "
-"a VPN kiszolgálóra."
-
-#: ../src/nm-novellvpn-service.c:158
-msgid ""
-"The VPN login failed because the VPN configuration options were invalid."
-msgstr ""
-"A VPN-bejelentkezés nem sikerült, mert a VPN konfigurációs beállítások "
-"érvénytelenek."
-
-#: ../src/nm-novellvpn-service.c:161
-msgid ""
-"The VPN login failed because the VPN program received an invalid "
-"configuration from the VPN server."
-msgstr ""
-"A VPN-bejelentkezés nem sikerült, mert a VPN program érvénytelen "
-"konfigurációt kapott a VPN kiszolgálótól."
-
-# clients/rc_config_step1.ycp:316
-#: ../src/nm-novellvpn-service.c:164
-msgid "VPN connection failed"
-msgstr "A VPN kapcsolat meghiúsult"
+msgid "_User Name:"
+msgstr "_Felhasználónév:"

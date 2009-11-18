@@ -1,78 +1,66 @@
-# Japanese message file for YaST2 (@memory@).
-# Copyright (C) 2005 SUSE Linux Products GmbH.
-# Copyright (C) 2002 SuSE Linux AG.
-# Copyright (C) 2000, 2001 SuSE GmbH.
-# Mike Fabian <mfabian@suse.de>, 2000, 2001.
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: YaST (@memory@)\n"
+"Project-Id-Version: NetworkManager-novellvpn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-16 17:19+0200\n"
-"PO-Revision-Date: 2006-06-16 14:06\n"
+"POT-Creation-Date: 2008-11-11 02:30-0500\n"
+"PO-Revision-Date: 2009-02-04 15:11\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../auth-dialog/gnome-two-password-dialog.c:163
-msgid "_Secondary Password:"
-msgstr "_セカンダリパスワード:"
-
-#: ../auth-dialog/gnome-two-password-dialog.c:297
-msgid "Unable to fetch Group Password"
-msgstr "グループパスワードをフェッチできません"
-
-#: ../auth-dialog/gnome-two-password-dialog.c:742
-msgid "_Username:"
-msgstr "_ユーザ名:"
-
-#: ../auth-dialog/gnome-two-password-dialog.c:744
-msgid "_Domain:"
-msgstr "_ドメイン:"
-
-#: ../auth-dialog/gnome-two-password-dialog.c:751
-msgid "_Certificate Password:"
-msgstr "_パスワードの認証:"
-
-#: ../auth-dialog/gnome-two-password-dialog.c:756
+#: ../auth-dialog/gnome-two-password-dialog.c:134
 msgid "_Password:"
 msgstr "_パスワード:"
 
-#: ../auth-dialog/gnome-two-password-dialog.c:841
+#: ../auth-dialog/gnome-two-password-dialog.c:135
+msgid "_Secondary Password:"
+msgstr "_セカンダリパスワード:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:252
+msgid "_Username:"
+msgstr "_ユーザ名:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:254
+msgid "_Domain:"
+msgstr "_ドメイン:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:346
 msgid "Connect _anonymously"
 msgstr "_匿名で接続"
 
-#: ../auth-dialog/gnome-two-password-dialog.c:846
+#: ../auth-dialog/gnome-two-password-dialog.c:351
 msgid "Connect as _user:"
 msgstr "接続_ユーザ:"
 
-#: ../auth-dialog/gnome-two-password-dialog.c:952
+#: ../auth-dialog/gnome-two-password-dialog.c:471
 msgid "_Remember password for this session"
 msgstr "このセッションのパスワードを_記憶"
 
-#: ../auth-dialog/gnome-two-password-dialog.c:954
+#: ../auth-dialog/gnome-two-password-dialog.c:473
 msgid "_Save password in keyring"
 msgstr "_キーリングにパスワードを保存"
 
-#: ../auth-dialog/main.c:172
+#: ../auth-dialog/main.c:145
 #, c-format
-msgid ""
-"You need to authenticate to access the Novell's  Virtual Private Network '%"
-"s'."
-msgstr ""
-"Novellの仮想プライベートネットワーク「%s」へのアクセスを認証する必要がありま"
-"す。"
+msgid "You need to authenticate to access the Novell's  Virtual Private Network '%s'."
+msgstr "Novellの仮想プライベートネットワーク「%s」へのアクセスを認証する必要があります。"
 
-#: ../auth-dialog/main.c:173
+#: ../auth-dialog/main.c:147
 msgid "Authenticate Novell VPN"
 msgstr "Novell VPNの認証"
 
 #: ../auth-dialog/main.c:180
 msgid "_Group Password:"
 msgstr "_グループパスワード:"
+
+#: ../auth-dialog/main.c:201
+msgid "_Cert Password:"
+msgstr "パスワードの証明書(_C):"
 
 #: ../nm-novellvpn.desktop.in.h:1
 msgid "Add, Remove, and Edit VPN Connections"
@@ -83,180 +71,86 @@ msgid "VPN Connection Manager (NovellVPN)"
 msgstr "VPN接続マネージャ(NovellVPN)"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:1
-msgid "           "
-msgstr "           "
-
-#: ../properties/nm-novellvpn-dialog.glade.h:2
-msgid "                     "
-msgstr "                     "
+msgid "768 bits (DH1)\n1024 bits (DH2)"
+msgstr "768ビット(DH1)\n1024ビット(DH2)"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:3
-msgid "<b>Connection Name</b>"
-msgstr "<b>接続名</b>"
+msgid "<b>Authentication</b>"
+msgstr "<b>認証</b>"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:4
+msgid "<b>General</b>"
+msgstr "<b>一般</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:5
 msgid "<b>Optional Information</b>"
 msgstr "<b>オプション情報</b>"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:5
-msgid "<b>Required Information</b>"
-msgstr "<b>必須情報</b>"
-
 #: ../properties/nm-novellvpn-dialog.glade.h:6
-msgid "Authentication Type  "
-msgstr "認証タイプ"
+msgid "Certificate file:"
+msgstr "証明書ファイル:"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:7
-msgid "Certificate file  "
-msgstr "証明書ファイル"
+msgid "G_roup Password:"
+msgstr "グループパスワード(_R):"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:8
-msgid "DH Group: "
-msgstr "DHグループ: "
+msgid "Gate_way Type:"
+msgstr "ゲートウェイタイプ(_W):"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:9
-msgid ""
-"DH1\n"
-"DH2"
-msgstr ""
-"DH1\n"
-"DH2"
+msgid "Nortel\nStandard Gateway"
+msgstr "Nortel\n標準ゲートウェイ"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:11
-msgid "Gateway  "
-msgstr "ゲートウェイ"
-
-#: ../properties/nm-novellvpn-dialog.glade.h:12
-msgid "Gateway Type  "
-msgstr "ゲートウェイタイプ"
-
-#: ../properties/nm-novellvpn-dialog.glade.h:13
-msgid "Group Name  "
-msgstr "グループ名"
+msgid "Off\n768 bits (PFS 1)\n1024 bits (PFS 2)"
+msgstr "オフ\n768ビット(PFS 1)\n1024ビット(PFS 2)"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:14
-msgid ""
-"Nortel\n"
-"Standard Gateway"
-msgstr ""
-"Nortel\n"
-"標準ゲートウェイ"
+msgid "Show passwords"
+msgstr "パスワードの表示"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:15
+msgid "U_ser Password:"
+msgstr "ユーザパスワード(_S):"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:16
-msgid ""
-"Only use VPN connection for these addresses\n"
-"example: 172.16.0.0/16 10.11.12.0/24"
-msgstr ""
-"これらのアドレスにはVPN接続のみを使用します\n"
-"例: 172.16.0.0/16 10.11.12.0/24"
-
-#: ../properties/nm-novellvpn-dialog.glade.h:18
-msgid "PFS Group: "
-msgstr "PFSグループ: "
-
-#: ../properties/nm-novellvpn-dialog.glade.h:19
-msgid ""
-"Please enter the information provided by your system administrator below. Do "
-"not enter your password here as you will be prompted when connecting."
-msgstr ""
-"システム管理者から付与された情報を以下に入力してください。接続時にプロンプト"
-"でメッセージが表示されるので、ここにはパスワードを入力しないでください。"
-
-#: ../properties/nm-novellvpn-dialog.glade.h:20
-msgid "User Name  "
-msgstr "ユーザ名"
-
-#: ../properties/nm-novellvpn-dialog.glade.h:21
 msgid "X.509"
 msgstr "X.509"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:22
+#: ../properties/nm-novellvpn-dialog.glade.h:17
 msgid "XAUTH"
 msgstr "XAUTH"
 
+#: ../properties/nm-novellvpn-dialog.glade.h:18
+msgid "XAUTH\nX.509 Certificate"
+msgstr "XAUTH\nX.509証明書"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:20
+msgid "_Certificate password:"
+msgstr "_パスワードの認証:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:21
+msgid "_DH Group:"
+msgstr "DHグループ(_D): "
+
+#: ../properties/nm-novellvpn-dialog.glade.h:22
+msgid "_Gateway:"
+msgstr "_ゲートウェイ(_G):"
+
 #: ../properties/nm-novellvpn-dialog.glade.h:23
-msgid ""
-"XAUTH\n"
-"X.509 Certificate\n"
-msgstr ""
-"XAUTH\n"
-"X.509証明書\n"
+msgid "_Group Name:"
+msgstr "グループ名(_G):"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:24
+msgid "_PFS Group:"
+msgstr "PFSグループ(_P): "
+
+#: ../properties/nm-novellvpn-dialog.glade.h:25
+msgid "_Type:"
+msgstr "種類(_T):"
 
 #: ../properties/nm-novellvpn-dialog.glade.h:26
-msgid ""
-"_Name used to identify the connection to the private network, e.g. \"Campus "
-"VPN\" or \"Corporate Network\""
-msgstr ""
-"_プライベートネットワークへの接続を識別するために使用される名前(例:「Campus "
-"VPN」または「Corporate Network」)"
+msgid "_User Name:"
+msgstr "ユーザ名(_U):"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:27
-msgid ""
-"off\n"
-"1\n"
-"2"
-msgstr ""
-"オフ\n"
-"1\n"
-"2"
-
-#: ../properties/nm-novellvpn-vpnui-impl.c:67
-msgid "Select certificate to use"
-msgstr "使用する証明書の選択"
-
-#: ../properties/nm-novellvpn-vpnui-impl.c:111
-msgid "Wrong certificate file format"
-msgstr "不正な証明書ファイル形式"
-
-#: ../properties/nm-novellvpn-vpnui-impl.c:211
-msgid "NovellVPN Client"
-msgstr "NovellVPNクライアント"
-
-#: ../properties/nm-novellvpn-vpnui-impl.c:268
-msgid "The following NovellVPN connection will be created:"
-msgstr "次のNovellVPN接続が作成されます:"
-
-#: ../properties/nm-novellvpn-vpnui-impl.c:270
-#, c-format
-msgid "Name:  %s"
-msgstr "名前:  %s"
-
-#: ../properties/nm-novellvpn-vpnui-impl.c:273
-msgid "The connection details can be changed using the \"Edit\" button."
-msgstr "接続の詳細は［編集］ボタンを使用して変更することができます。"
-
-#: ../src/nm-novellvpn-service.c:148
-msgid ""
-"The VPN login failed because the user name and password were not accepted or "
-"the certificate password was wrong."
-msgstr ""
-"ユーザ名とパスワードが許可されないか、証明書パスワードが不正のため、VPNログイ"
-"ンに失敗しました。"
-
-#: ../src/nm-novellvpn-service.c:152
-msgid "The VPN login failed because the VPN program could not be started."
-msgstr "VPNプログラムを起動できないため、VPNログインに失敗しました。"
-
-#: ../src/nm-novellvpn-service.c:155
-msgid ""
-"The VPN login failed because the VPN program could not connect to the VPN "
-"server."
-msgstr ""
-"VPNプログラムがVPNサーバに接続できないため、VPNログインに失敗しました。"
-
-#: ../src/nm-novellvpn-service.c:158
-msgid ""
-"The VPN login failed because the VPN configuration options were invalid."
-msgstr "VPN設定オプションが無効のため、VPNログインに失敗しました。"
-
-#: ../src/nm-novellvpn-service.c:161
-msgid ""
-"The VPN login failed because the VPN program received an invalid "
-"configuration from the VPN server."
-msgstr ""
-"VPNプログラムがVPNサーバから無効な設定を受信したため、VPNログインに失敗しまし"
-"た。"
-
-#: ../src/nm-novellvpn-service.c:164
-msgid "VPN connection failed"
-msgstr "VPN接続に失敗しました。"
