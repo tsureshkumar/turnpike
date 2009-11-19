@@ -1,0 +1,124 @@
+#!/bin/bash
+exec >/dev/null
+exec 2>/dev/null
+
+source /var/tmp/ipcfg
+
+NULL=" "
+IPCFG="/var/tmp/ipcfg"
+if [ $1 = "up" ]; then
+
+SRC=`ip route|grep default | sed 's/default.* src \([^ ]*\).*/\1/'`
+
+if [ "$SRC" = "$ASSIGNEDIP" ]; then
+	MTU=`ip route|grep default | grep mtu |sed 's/default.* mtu \([^ ]*\).*/\1/'`
+	ADVMSS=`ip route|grep default | grep advmss |sed 's/default.* advmss \([^ ]*\).*/\1/'`
+else	
+	# IPRGW holds output from ip r get GWADDR, lines are yanked...
+	IPRGW=$(ip route get $GWADDR)
+
+	if [ ${#IPRGW} -eq 0 ]; then
+		MTU=1350
+	        ADVMSS=1310
+	else
+	        # reduce MTU and ADVMSS by size of ipsec header
+		MTU=$(( $(echo $IPRGW | sed 's/.*mtu[ \t]*\([0-9]*\).*/\1/') - 64))
+		ADVMSS=$(( $(echo $IPRGW | sed 's/.*advmss[ \t]*\([0-9]*\).*/\1/') - 64))
+	fi
+fi
+
+
+DEFGW=`ip route get $GWADDR| grep via`
+if [ ${#DEFGW} -eq 0 ]; then
+	echo "NULL"
+	DEFAULTGW=`ip route|grep default |grep via | sed 's/default.* via \([^ ]*\).*/\1/'`
+	PUBLICDEV=`ip route|grep default |grep dev | sed 's/default.* dev \([^ ]*\).*/\1/'`
+	echo $DEFAULTGW
+		if [ ${#DEFAULTGW} -eq 0 ]; then
+		echo "NO DEFAULT"
+		PUBLICDEV=`ip route get $GWADDR|grep dev | sed 's/.* dev \([^ ]*\).*/\1/'`
+		fi
+	
+else 
+	DEFAULTGW=`echo $DEFGW|grep via | sed 's/.* via \([^ ]*\).*/\1/'`
+	PUBLICDEV=`echo $DEFGW|grep dev | sed 's/.* dev \([^ ]*\).*/\1/'`
+fi 
+
+if [ ${#DEFAULTGW} -ne 0 ]; then
+	echo "DEFAULTGW=$DEFAULTGW">>$IPCFG
+fi
+
+VIRTUALDEV=$PUBLICDEV:1
+echo "VIRTUALDEV=$VIRTUALDEV">>$IPCFG
+
+if [ ${#NETMASK} -ne 0 ]; then
+	NMSTR="netmask $NETMASK"
+fi
+if [ ${#BROADCAST} -ne 0 ]; then
+	BCSTR="broadcast $BROADCAST"
+fi
+/sbin/ifconfig $VIRTUALDEV $ASSIGNEDIP $NMSTR $BCSTR
+
+if [ "$ANY" = "1" ]; then
+	
+	if [ ${#DEFAULTGW} -ne 0 ]; then
+
+	ORGDEFAULTGW=`ip route|grep default |grep via | sed 's/default.* via \([^ ]*\).*/\1/'`
+	    echo "ORGDEFAULTGW=$ORGDEFAULTGW">>$IPCFG
+    	/sbin/route del default	
+    	echo "Route Deleted $GWADDR"
+	    /sbin/ip route add  $GWADDR via $DEFAULTGW dev $PUBLICDEV mtu $MTU advmss $ADVMSS
+	fi
+
+    /sbin/ip route add 0.0.0.0/0 dev $VIRTUALDEV src $ASSIGNEDIP mtu $MTU advmss $ADVMSS
+exit 0
+fi
+
+
+counter=0
+
+if [ ${#DEFAULTGW} -ne 0 ]; then
+/sbin/ip route add  $GWADDR via $DEFAULTGW dev $PUBLICDEV mtu $MTU advmss $ADVMSS 
+fi
+
+if [ "$NUMRT" != "0" -a "$DEFAULTGW" != "" ]; then
+	/sbin/route del -net 0.0.0.0/0 $VIRTUALDEV 
+	/sbin/route add default gw $DEFAULTGW
+fi
+
+if [ $NO_SPLIT_TUNNEL -eq 1 ]; then
+	exit 0
+fi
+
+while [ "$counter" -lt "$NUMRT" ]
+do
+	echo "${IPADDR[$counter]}"
+        
+  if [ ${IPADDR[$counter]} != $GWADDR ]; then
+	if [ ${IPMASK[$counter]} -lt "32" ]; then 
+		/sbin/ip route add ${IPADDR[$counter]}/${IPMASK[$counter]} dev $VIRTUALDEV src $ASSIGNEDIP mtu $MTU advmss $ADVMSS
+	else 
+		/sbin/ip route add ${IPADDR[$counter]} dev $VIRTUALDEV src $ASSIGNEDIP mtu $MTU advmss $ADVMSS
+	fi
+  fi
+		counter=`expr $counter + 1`
+done
+exit 0
+fi
+
+
+#SUSE ONLY Must replace with something else 
+
+if [ $1 = "down" ]; then
+	if [ "$ANY" = "1" ]; then
+		if [ ${#ORGDEFAULTGW} -ne 0 ]; then
+		  route add default gw $ORGDEFAULTGW
+		fi
+	 fi
+ 
+if [ ${#DEFAULTGW} -ne 0 ]; then
+	/sbin/route del  $GWADDR gw $DEFAULTGW $PUBLICDEV  
+fi
+/sbin/ifconfig $VIRTUALDEV down
+#/etc/rc.d/network start
+fi

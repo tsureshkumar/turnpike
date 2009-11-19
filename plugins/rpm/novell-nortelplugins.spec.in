@@ -1,0 +1,90 @@
+#
+# spec file for package @PACKAGE@ (Version @VERSION@)
+#
+# Copyright (c) 2005 Novell Inc, USA
+# This file and all modifications and additions to the pristine
+# package are under the same license as the package itself.
+#
+# Please submit bug fixes or comments via http://www.suse.de/feedback/
+#
+
+# norootforbuild
+# neededforbuild  libxml2 libxml2-devel openssl openssl-devel readline-devel pkgconfig cairo cairo-devel freetype2 freetype2-devel fontconfig fontconfig-devel gtk2 gtk2-devel libart_lgpl libart_lgpl-devel libbonobo libbonobo-devel libbonoboui libbonoboui-devel libgcrypt libgcrypt-devel libglade2 libglade2-devel pango pango-devel gconf2 gconf2-devel gdbm gettext glib2 glib2-devel xorg-x11-devel xorg-x11-libs libpng libpng-devel libpixman libpixman-devel glitz glitz-devel atk atk-devel expat novell-ipsec-tools-devel turnpike
+
+BuildRequires: aaa_base acl attr bash bind-utils bison bzip2 coreutils cpio cpp cracklib cvs cyrus-sasl db devs diffutils e2fsprogs file filesystem fillup findutils flex gawk gdbm-devel glibc glibc-devel glibc-locale gpm grep groff gzip info insserv less libacl libattr libgcc libselinux libstdc++ libxcrypt libzio m4 make man mktemp module-init-tools ncurses ncurses-devel net-tools netcfg openldap2-client openssl pam pam-modules patch permissions popt procinfo procps psmisc pwdutils rcs readline sed strace syslogd sysvinit tar tcpd texinfo timezone unzip util-linux vim zlib zlib-devel autoconf automake binutils gcc gdbm gettext kernel-source libtool openssl-devel perl readline-devel rpm libxml2 novell-ipsec-tools pkgconfig cairo cairo-devel freetype2 freetype2-devel fontconfig fontconfig-devel gtk2 gtk2-devel libart_lgpl libart_lgpl-devel libbonobo libbonobo-devel libbonoboui libbonoboui-devel libgcrypt libgcrypt-devel libglade2 libglade2-devel pango pango-devel gconf2 gconf2-devel gdbm gettext glib2 glib2-devel xorg-x11-devel xorg-x11-libs libpng libpng-devel libpixman libpixman-devel glitz glitz-devel atk atk-devel expat novell-ipsec-tools turnpike
+
+Name: 			@PACKAGE@
+%define prefix /opt/novell
+%define sysconfdir /etc%prefix
+%define plugindir %prefix/%_lib/turnpike/plugins
+Summary: 		Nortel Contivity plugins for Turnpike project 
+Version: 		@VERSION@
+Release: 		@RELEASE@
+Copyright: 		Novell Inc.
+Group: 			Productivity/Networking/Security
+Source: 		%{name}-%{version}.tar.gz
+URL:			http://www.novell.com/
+Vendor: 		Novell Inc.
+Packager: 		Novell
+Requires:               novell-ipsec-tools >= 0.6
+Requires:               turnpike
+Requires: 		kernel >= 2.5.54
+
+BuildRoot: 		%{_tmppath}/%{name}-%{version}-%{release}-build
+NoSource:		0
+#BuildArchitectures: 	noarch
+#ExclusiveArch: 	%ix86
+
+%description
+This package contains plugins to be used by novell-ipsec-tools/Turnpike project
+to connect to Nortel Contivity VPN gateway. 
+
+%prep
+
+%setup -q
+
+%build
+#CFLAGS="$RPM_OPT_FLAGS -I%{prefix}/include" \
+CFLAGS="-I%{prefix}/include" \
+./configure \
+    --prefix=%{prefix} \
+    --exec-prefix=%{prefix}  \
+    --mandir=%{_mandir} \
+    --infodir=%{_infodir} \
+    --sysconfdir=%{sysconfdir} \
+    --sharedstatedir=/var/run \
+    --localstatedir=/var \
+    --mandir=%{prefix}/share/man \
+    --infodir=%{prefix}/share/info \
+    --libdir=%{plugindir} \
+    --libexecdir=%{plugindir} \
+    --with-plugindir=%{plugindir}
+make
+
+%install
+rm -rf %{buildroot}
+mkdir %{buildroot}
+make install DESTDIR=%{buildroot}
+
+mkdir -p %{buildroot}/var/turnpike
+
+%pre
+
+%post
+%run_ldconfig
+
+%preun
+
+%postun 
+%run_ldconfig
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root)
+%{plugindir}
+/var/turnpike/
+#%doc /opt/novell/turnpike/help/plugin_userguide.pdf
+
+

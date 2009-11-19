@@ -1,0 +1,7 @@
+2005-12-12  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* cli: command line plugin for turnpike
+	* gui: gui plugin for turnpike
+	* ike: ike plugin for turnpike
+	* common: common code in static library for cli & gui
+

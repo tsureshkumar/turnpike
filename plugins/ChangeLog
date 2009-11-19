@@ -1,0 +1,426 @@
+2009-08-11  Bin Li  <bili@novell.com>
+	* nortel/gui/Makefile.am:
+	* nortel/cli/Makefile.am:
+	* nortel/common/Makefile.am:
+	* nortel/ike/Makefile.am:
+	Use the plugindir to specify where to put the plugins.
+2009-06-04  Bin Li  <bili@novell.com>
+	* COPYING:
+	Add GPL v2 copying.
+2009-05-27  Bin Li  <bili@novell.com>
+	* *.[ch]:
+	Add copyright information for GPL v2.
+2009-03-04  Bin Li  <bili@novell.com>
+	* nortel/gui/Makefile.am:
+	* nortel/cli/Makefile.am:
+	* nortel/ike/Makefile.am:
+	Plugin doesn't need to be versioned.
+2009-02-24  Bin Li  <bili@novell.com>
+	* nortel/cli/nortelcli.h:
+	* nortel/cli/adminport.c:
+	* nortel/ike/fwinterface.c:
+	Support the secondary DNS setting.
+2009-02-19  Bin Li  <bili@novell.com>
+	* dnsupdate:
+	* nortel/ike/utility.h:
+	* nortel/ike/utility.c:
+	* nortel/ike/nortel_inf.h:
+	* nortel/ike/callbacks.c:
+	* nortel/ike/fwinterface.c:
+	Don't set the DNS and Domain Name when use NM.
+	* nortel/ike/Makefile.am:
+	Let the dnsupdate could be distributed.
+	* README:
+	dismiss the blank.
+2009-02-09  Bin Li  <bili@novell.com>
+	* NEWS:
+	* README:
+	* AUTHORS:
+	add some missing file of automake.
+2009-02-04  Bin Li  <bili@novell.com>
+	* nortel/ike/utility.c:
+	* nortel/ike/nortel_inf.h:
+	* nortel/ike/utility.h:
+	* nortel/ike/callbacks.c:
+	* nortel/ike/Makefile.am:
+	* nortel/ike/fwinterface.c:
+	* Makefile.am:
+	* dnsupdate:
+	support the DNS and Domain Name setting.
+2009-02-02  Bin Li  <bili@novell.com>
+	* nortel/ike/nortel_inf.h:
+	* nortel/ike/callbacks.c:
+	dismiss the blank.
+	* configure.in:
+	upgrade the version to 0.1.4.
+2009-01-22  Bin Li  <bili@novell.com>
+	* ipalias:
+	* nortel/ike/utility.c:
+	* nortel/ike/nortel_inf.h:
+	* nortel/ike/utility.h:
+	* nortel/ike/callbacks.c:
+	* nortel/ike/fwinterface.c:
+	Support the "no split tunnel" feature.
+2009-01-19  Bin Li  <bili@novell.com>
+	* nortel/common/plog.h:
+	Change the log level define follow the upstream.
+2009-01-12  Bin Li  <bili@novell.com>
+	* nortel/cli/profile.c:
+	scanf's parameter, don't need use '\n' in it.
+2008-11-24  Bin Li  <bili@novell.com>
+	* nortel/ike/fwinterface.c:
+	Change the debug information.
+	* nortel/common/plog.h:
+	* nortel/ike/packets.c:
+	* nortel/ike/nortel_cfg.c:
+	* nortel/ike/nortel_nat.c:
+	* nortel/ike/nortel_inf.c:
+	* nortel/ike/registerpayload.c:
+	* nortel/ike/registerpayload.h:
+	* nortel/ike/payloadcheck.c:
+	* nortel/ike/registerattr.h:
+	* nortel/ike/registerattr.c:
+	* nortel/ike/callbacks.c:
+	Change code for ipsec-tools 0.7.1.
+2008-09-03  Bin Li  <bili@novell.com>
+	* nortel/cli/profile.c:
+	Fix the get username failed when username already exist.
+	* nortel/ike/utility.c:
+	In addRoutesForServerPolicies when rt_list is null, don't return -1.
+	It cause set ip and netmask failed when in MainMode.
+2008-08-27  Bin Li  <bili@novell.com>
+	* nortel/ike/nortel_inf.h:
+	Redefine macro for supportting the big endian for ppc.
+	* nortel/cli/profile.c:
+	Fix the getchar() bug in ppc, it return int value, the first
+	byte isn't the read letter in ppc, change to fgets.
+	* nortel/ike/attrgen.c:
+	* nortel/ike/nortel_nat.c:
+	* nortel/ike/callbacks.c:
+	Add some debug information.
+
+2008-07-02  Bin Li  <bili@novell.com>
+	* nortel/ike/nortel_inf.h: support the big endian for ppc.
+2008-06-23  Bin Li  <bili@novell.com>
+	* nortel/ike/callbacks.c: change the groupname's debug method.
+2008-02-05  Bin Li  <bili@novell.com>
+	
+	* configure.in: update to 0.1.3
+	* nortel/nortel/ike/utility.c: change writeToIpcfg's parameter.
+	* nortel/cli/profile.c: dismiss warning for userName.
+	* nortel/ike/nortel_nat.c: dismiss warning for function declare.
+	* nortel/ike/callbacks.c: check the indataptr for security.
+	* nortel/ike/nortel_cfg.c: change debug information.
+	* nortel/cli/adminport.c:
+	* nortel/cli/profile.c:
+	* nortel/ike/nortel_cfg.c:
+	* nortel/ike/nortel_cfg.h:
+	* nortel/ike/nortel_inf.c:
+	* nortel/ike/nortel_nat.c:
+	* nortel/ike/utility.c:
+	avoiding some warn_unused_result warnings for gcc 3.4.
+
+2007-12-04  Bin Li  <bili@novell.com>
+
+	* nortel/ike/callbacks.c: Add debug info at callbacks' entry. 
+	* nortel/ike/utility.c: Dynamic malloc ipaddrlst, not just 20.
+
+2006-11-17  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* nortel/ike/nortel_nat.c: make 64bit clean when calling
+	sched_new.
+
+2006-09-27  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* nortel/ike/payloadgen.c (ka_sched_callback): when traffic is
+	flowing, still reschedule for server keep alive functionality.
+
+	* nortel/ike/nortel_nat.c (isakmp_client_ka_send): add client keep
+	alive functionality.
+
+2006-09-13  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* nortel/ike/nortel_nat.c (nortel_nat_enable_natt): if nat
+	detected, make the ipsec to send ISAKMP NAT Keep Alive
+
+2006-08-28  tsureshkumar  <tsureshkumar@sureshkumar-dev.blr.novell.com>
+
+	* nortel/ike/callbacks.c (cfgAckIPv4DomainNameCallback): fix
+	memory leak in domain name which cause no packet going through
+	tunnel.
+
+2006-08-11  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* nortel/ike/nortel_inf.c (nortel_get_ph1_handle): helper to get
+	ph1 handle given remote address.
+
+	* nortel/ike/registerpayload.c (registerOpaqueIDCallback): change
+	cfg callbacks to all modes.
+
+	* nortel/ike/nortel_cfg.c (nortel_cfg_set): set keep alive options
+
+	* nortel/ike/callbacks.c (cfgAckNatKeepAliveIntervalCallback): add
+	hook for natkeepalive.
+
+	* nortel/ike/fwinterface.c (turnpike_nortel_init): --do--
+
+2006-05-20  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* nortel/ike/nortel_cfg.c (nortel_cfg_split_tunnel_mode): user
+	preference takes precedance through env variable.
+
+2006-05-19  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* nortel/ike/utility.c (sock_numeric_host): helper function.
+
+	* nortel/ike/nortel_inf.h (GETPLUGINHANDLE): helper macro
+	
+	* nortel/ike/nortel_cfg.c: handle split tunelling case.
+
+	* nortel/ike/registerpayload.c (registerCfgSetAckCallback): 
+	* nortel/ike/callbacks.c (cfgSetAckCallback): new hook function
+	for ack cfg set callback
+
+	* nortel/gui/hooks.c (nortel_connect): return size_t
+
+2006-05-05  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* 64 bit fixes for vpnlogin:
+	* nortel/gui/connection.c (nortel_connect): use size_t
+	* nortel/gui/adminport.c (nortel_parse_message_from_adminport): use size_t
+
+2006-05-04  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* autogen.sh: remove gnome-autogen.sh.
+
+	* nortel/ike/payloadgen.c (generatePresharedKey): 
+	* nortel/common/norteladmin.c (nortel_get_vendor_private_data): 
+	* nortel/common/encrypt.c: 
+	* nortel/cli/profile.c (nortel_get_privdata): 
+	* nortel/cli/adminport.c (nortel_construct_message): 64 bit fix.
+
+	* configure.in: search for openssl in lib64 first.
+
+2006-04-25  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* configure.in: update version to 0.1.2 as aes is introduced.
+
+2006-04-17  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* nortel/gui/phase2.c (ph2encarray): 
+	* nortel/gui/phase1.c (ph1encarray): 
+	* nortel/cli/phase2.c (ph2encarray): 
+	* nortel/cli/phase1.c (ph1encarray): add aes support.
+
+	right now supports only 128 bit keylen for aes.
+
+2006-03-29  Vinay A R <rvinay@novell.com>
+
+	* configure.in : Version change to 0.1.1
+
+	* ipalias : mtu and advmss is set for each route we add.
+
+	* tel/cli/init.c : Since Authentication type is a new member of Interface Info 
+		structure, so changes to initialize that.
+
+	* nortel/cli/nortelcli.h : Macros for XATUH and CERTIFICATE
+
+	* nortel/cli/phase1.c : Removed multiple proposal on Auth type and passed the
+		Auth type.
+
+	* nortel/cli/phase1.h : Changed the signatuer of the write proposal fun.
+
+	* nortel/cli/profile.c : Put conditions on the basis of Auth type to prompt for
+		Username and Userpassword.
+
+	* nortel/cli/racoon.c : Edited the racoon conf file writing function to write 
+		based upon the Auth type.
+
+	* nortel/gui/connection.c : Edited to not ask for Username and Userpassword 
+		from GUI.
+
+	* nortel/gui/entrypoint.c : Edited to make showing of Username and User Password dialog 
+		not default.
+
+	* nortel/gui/hooks.c : Made gui init function as plugin function.
+
+	* nortel/gui/phase1.c : Removed multiple proposal on Auth type and passed the
+		Auth type.
+
+	* nortel/gui/phase1.h :  Changed the signatuer of the write proposal fun.
+
+	* nortel/gui/profile.c : Added new function related to profile manager.
+
+	* nortel/gui/racoon.c : Edited the racoon conf file writing function to write
+		based upon the Auth type.
+
+	* nortel/ike/registerattr.c : Made the hook point function to be hooked to
+		ISAKMP_ANYPHASE1 instead of ISAKMP_AGG.
+
+2006-03-01  Vinay A R <rvinay@novell.com>
+
+	* nortel/gui/profile.c : Solved the vpnlogin group password reenccryption problem
+
+2006-02-27  Vinay A R  <rvinay@novell.com>
+
+	* nortel/cli/adminport.c : DNS setting related changes
+	* nortel/cli/phase1.c :
+	* nortel/cli/phase1.h :
+	* nortel/cli/phase2.c :
+	* nortel/cli/phase2.h :
+	* nortel/cli/racoon.c : racoon.conf writing related changes
+	* nortel/gui/Makefile.am : Added 2 more file to gui because of multiple proposals
+	* nortel/gui/phase1.c : Multiple proposal related changes
+	* nortel/gui/profile.c : User name setting changes
+	* nortel/gui/racoon.c : Multiple proposal related chnages
+
+
+2006-02-13  Vinay A R  <rvinay@novell.com>
+	
+	* nortel/cli/phase2.h :
+	* nortel/cli/phase2.c : Changed the signature of write_ph2_proposal to take another argument 'pfs_group'
+
+	* nortel/cli/racoon.c : Passed an extra argument to write_ph2_proposal got through ifInfo->pfs_group
+			        Added the condition for writing ph1 proposals on the basis of withProfileFile
+	
+	* nortel/gui/profile.c : Added function call to set the username of the last successful vpn connection
+	
+	* nortel/gui/adminport.c : Removed the line which was printing "vendor  port" to STDOUT from vpnlogin
+
+2006-02-01  Vinay A R  <rvinay@novell.com>
+	
+	* nortel/cli/adminport.c : Commented all NM related printf statements
+
+2006-01-31  Preggna S  <spreggna@novell.com>
+
+	* nortel/cli/adminport.c (parse_message_from_admin_port): read netmask and set env.
+
+2006-01-31 Vinay A R <rvinay@novell.com>
+	
+	* nortel/cli/profile.c : Removed the hardcoded path where vendor profile is being created
+	* nortel/gui/profile.c : Edited the nortel_write_profile function to take another parameter 'gateway_ip'
+				 which is required for vendor profile creation.
+
+2006-01-27  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* nortel/ike/fwinterface.c (turnpike_nortel_init): use %p for pointers.
+
+	* nortel/ike/utility.c (addRoutesForServerPolicies): use ntohl to
+	calculate CIDR.
+
+2006-01-17  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* nortel/ike/utility.c: change the ifcfg directory to /var/tmp
+
+	* nortel/common/Makefile.am (libnortelhelper_la_CFLAGS): add -fPIC
+	option, neverthless it wont' succeed on non i386 platforms.
+
+2006-01-12  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* nortel/cli/profile.c (nortel_get_privdata): remove extrace space
+	in scanf.
+
+2005-12-23  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* rpm/novell-nortelplugins.spec.in: moved nortelplugins.spec.in to
+	novell-nortelplugins.spec.in to enable to create packages for
+	submitting to autobuild server.
+
+	* configure.in: rename package to novell-nortelplugins.
+
+2005-12-21  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* nortel/ike/Makefile.am (INCLUDES): remove AM_CFLAGS. RACOONSRC
+	is passed as CFLAGS from configure.
+
+	* nortel/gui/hooks.c: 
+	* nortel/cli/racoon.c: 
+	* nortel/cli/nortelcli.h: include turnpike/ style only if
+	--with-turnpike is not specified
+
+	* configure.in: define HAVE_TURNPIKE_DIR to include headers based
+	on cross reference or from standard headers.
+
+2005-12-19  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* configure.in (LIB_LOAD_PATH): add with-plugindir option
+	* proper INCLUDES.
+	* now able to compile without ipsec-tools, turnpike dir but both
+	installed to standard locations.
+	* removed unused variables.
+
+2005-12-12  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* configure.in: degrade libxml version to 2.6.0
+
+	* noretel: plugins for nortel gateway.
+
+	* re-orgnaised the directory structures.
+	
+
+2005-12-12  A Aravindhan  <aaravindhan@novell.com>
+	
+Removed the directories and created new directories nortel, rpm, cli, gui, ike.
+old directory structure
+.
+|-- ChangeLog
+|-- include
+|   |-- common.h
+|   |-- error.h
+|   |-- framework.h
+|   |-- hashtable.h
+|   `-- position.h
+|-- plugins
+|   |-- Makefile.am
+|   |-- bootstrap
+|   |-- configure.ac
+|   |-- ipalias
+|   |-- nortelCliPlugin
+|   |   |-- Makefile.am
+|   |   |-- nortelCli.c
+|   |   |-- nortelCli.h
+|   |   |-- vpncEncrypt.c
+|   |   `-- vpncEncrypt.h
+|   |-- nortelGuiPlugin
+|   |   |-- Makefile.am
+|   |   |-- global.c
+|   |   |-- global.h
+|   |   |-- vpncEncrypt.c
+|   |   `-- vpncEncrypt.h
+|   |-- nortelPlugin
+|   |   |-- Makefile.am
+|   |   |-- include
+|   |   |   |-- callbacks.h
+|   |   |   |-- nortel_inf.h
+|   |   |   |-- nortel_vmbuf.h
+|   |   |   |-- packets.h
+|   |   |   |-- payloadgen.h
+|   |   |   |-- registerAttr.h
+|   |   |   |-- registerPayload.h
+|   |   |   `-- utility.h
+|   |   `-- src
+|   |       |-- Makefile.am
+|   |       |-- attrcheck.c
+|   |       |-- attrgen.c
+|   |       |-- callbacks.c
+|   |       |-- fwInterface.c
+|   |       |-- nortel_vmbuf.c
+|   |       |-- packets.c
+|   |       |-- payloadcheck.c
+|   |       |-- payloadgen.c
+|   |       |-- registerAttr.c
+|   |       |-- registerPayload.c
+|   |       `-- utility.c
+|   |-- package_version.h.in
+|   |-- po
+|   `-- rpm
+|       |-- Makefile.am
+|       `-- nortelplugins.spec.in
+`-- src
+    `-- plugin
+        `-- testfile.c
+
+11 directories, 45 files
+
+-------------------------------------
+Build for 17th May 2005 done
