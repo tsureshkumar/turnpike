@@ -1,3 +1,6 @@
+2009-12-01  Bin Li  <bili@novell.com>
+	* nortel/cli/adminport.c:
+	Add the secondary verbose info and change format.
 2009-08-11  Bin Li  <bili@novell.com>
 	* nortel/gui/Makefile.am:
 	* nortel/cli/Makefile.am:
