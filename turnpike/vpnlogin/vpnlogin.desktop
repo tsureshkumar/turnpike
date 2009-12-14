@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=VPN Login
+Comment=Novell VPN Client for Linux
+Version=1.0
+Exec=/opt/novell/bin/vpnlogin
+Icon=/opt/novell/turnpike/pixmaps/vpnlogin.gif
+Terminal=false
+Type=Application
+Categories=GNOME;Application;Utility			
+X-GNOME-DocPath=

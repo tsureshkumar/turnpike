@@ -22,6 +22,7 @@
 #include <config.h>
 #endif
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <dlfcn.h>
 
@@ -84,6 +85,65 @@ static int writeDNScfg(
 
 	return 0;
 }
+
+#if defined(TARGET_SUSE)
+static int write_netconfig(
+	const char *iface,
+	int primary_dns,
+	int secondary_dns,
+	char *domain)
+{
+	FILE *fd;
+	struct in_addr inaddr;
+	char dns_servers[32] = {0};
+
+	if ((fd = fopen(DNS_CFGFILE, "w+")) == NULL ) {
+		return -1;
+	}
+
+	fprintf(fd, "INTERFACE='%s'\n", iface);
+
+	if (domain && strlen (domain))
+		fprintf(fd, "DNSSEARCH='%s'\n", domain);
+
+	if (primary_dns) {
+		inaddr.s_addr = primary_dns;
+		snprintf (dns_servers, 31, "%s", inet_ntoa (inaddr));
+	}
+
+	if (secondary_dns) {
+		inaddr.s_addr = secondary_dns;
+		strcat (dns_servers, " ");
+		strcat (dns_servers, inet_ntoa (inaddr));
+	}
+	fprintf(fd, "DNSSERVERS='%s'\n", dns_servers);
+
+	fclose(fd);
+
+	return 0;
+}
+
+#define NETCONFIG "/sbin/netconfig"
+
+static int run_netconfig()
+{
+	char command[255] = {0};
+
+	snprintf (command, 255, "%s modify --service %s --lease-file %s",
+			NETCONFIG,
+			"NetworkManager",
+			DNS_CFGFILE);
+
+	if (-1 == system(command)) {
+		plog(LLV_ERROR, LOCATION, NULL,
+			"Run script(%s) failed.\n", command);
+		return -1;
+	}
+
+	return 0;
+}
+
+#endif
 
 static int writeToIpcfg(
 	long *iplst,
@@ -246,6 +306,20 @@ int updateDNSForServerPolicies(
 {
 	int ret = 0;
 
+#ifdef TARGET_SUSE
+	ret = write_netconfig (":1", primary_dns, secondary_dns, domain);
+	if (ret != 0) {
+		plog(LLV_ERROR, LOCATION, NULL, "write_netconfig failed.\n");
+		return -1;
+	}
+
+	ret = run_netconfig ();
+	if (ret != 0) {
+		plog(LLV_ERROR, LOCATION, NULL, "run_netconfig failed.\n");
+		return -1;
+	}
+	return 0;
+#endif
 	ret = writeDNScfg (no_dns, primary_dns, secondary_dns, domain);
 	if (ret != 0) {
 		plog(LLV_ERROR, LOCATION, NULL, "writeDNScfg failed.\n");
@@ -253,11 +327,10 @@ int updateDNSForServerPolicies(
 	}
 
     /* don't set the interface, vpnc or NM will set it.*/
-	if (-1 == system(DNSUP)) {
-		plog(LLV_ERROR, LOCATION, NULL,
-				"Run script(%s) failed.\n", DNSUP);
-	}
-
+	//if (-1 == system(DNSUP)) {
+	//	plog(LLV_ERROR, LOCATION, NULL,
+	//			"Run script(%s) failed.\n", DNSUP);
+	//}
 	return 0;
 }
 

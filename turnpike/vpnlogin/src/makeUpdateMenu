@@ -1,0 +1,1 @@
+ gcc menuUpdate.c -o vpnUpdateMenu `xml2-config --libs` `xml2-config --cflags`

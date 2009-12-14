@@ -148,6 +148,42 @@ LIBXML_LIBS=`$PKG_CONFIG --libs libxml-2.0`
 AC_SUBST(LIBXML_CFLAGS)
 AC_SUBST(LIBXML_LIBS)
 
+dnl check for target
+AC_ARG_WITH(distro, AS_HELP_STRING([--with-distro=DISTRO], [Specify the Linux distribution to target: One of redhat, suse, gentoo, debian, arch, slackware, paldo or mandriva]))
+if test "z$with_distro" = "z"; then
+        AC_CHECK_FILE(/etc/redhat-release,with_distro="redhat")
+        AC_CHECK_FILE(/etc/SuSE-release,with_distro="suse")
+        AC_CHECK_FILE(/etc/fedora-release,with_distro="redhat")
+        AC_CHECK_FILE(/etc/gentoo-release,with_distro="gentoo")
+        AC_CHECK_FILE(/etc/debian_version,with_distro="debian")
+        AC_CHECK_FILE(/etc/arch-release,with_distro="arch")
+        AC_CHECK_FILE(/etc/slackware-version,with_distro="slackware")
+        AC_CHECK_FILE(/etc/frugalware-release,with_distro="frugalware")
+        AC_CHECK_FILE(/etc/mandriva-release,with_distro="mandriva")
+        if test "z$with_distro" = "z"; then
+                with_distro=`lsb_release -is`
+        fi
+fi
+with_distro=`echo ${with_distro} | tr '[[:upper:]]' '[[:lower:]]' `
+
+if test "z$with_distro" = "z"; then
+        echo "Linux distribution autodetection failed, you must specify the distribution to target using --with-distro=DISTRO"
+        exit 1
+else
+        case $with_distro in
+                redhat|suse|gentoo|debian|slackware|arch|paldo|frugalware|mandriva) ;;
+                *)
+                        echo "Your distribution (${with_distro}) is not yet supported!  (patches welcome)"
+                        exit 1
+                        ;;
+        esac
+fi
+
+AM_CONDITIONAL(TARGET_SUSE, test x"$with_distro" = xsuse)
+if test x"$with_distro" = xsuse; then
+  AC_DEFINE(TARGET_SUSE, 1, [Define if you have OpenSUSE or SLES or SLED])
+fi
+
 dnl Checks for typedefs, structures, and compiler characteristics.
 
 dnl Checks for library functions.
@@ -168,3 +204,7 @@ AC_CONFIG_FILES([Makefile
 		 nortel/ike/Makefile
 		 rpm/novell-nortelplugins.spec])
 AC_OUTPUT
+
+echo
+echo Distribution targeting: ${with_distro}
+echo 'if this is not correct, please specifiy your distro with --with-distro=DISTRO'
