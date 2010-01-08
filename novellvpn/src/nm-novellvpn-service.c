@@ -478,8 +478,8 @@ nm_novellvpn_start_novellvpn_binary (NMNovellvpnPlugin *plugin,
 
 	gint how_many_passwords = 0;
 	gboolean is_grp_pwd_encrypted = TRUE;
-	const char *dh_group = dh_group_arg [1];
-	const char *pfs_group = pfs_group_arg [0];
+	const char *dh_group = dh_group_arg [1]; // the default value is 1
+	const char *pfs_group = pfs_group_arg [0]; // the default value is 0
 	const char *tmp = NULL;
 	gboolean no_split_tunnel = FALSE;
 
@@ -574,12 +574,10 @@ nm_novellvpn_start_novellvpn_binary (NMNovellvpnPlugin *plugin,
 		return FALSE;
 	}
 
-	/* every gateway has the dhgroup */
+	// every gateway has the dhgroup
+	// when user don't set the dhgroup, use the default value
 	tmp = nm_setting_vpn_get_data_item (s_vpn, NM_NOVELLVPN_KEY_DHGROUP);
-	if (!tmp || !strlen (tmp)) {
-		nm_vpn_set_missing_arg_error (error, NM_NOVELLVPN_KEY_DHGROUP);
-		return FALSE;
-	} else {
+	if (tmp && strlen (tmp)) {
 		gint dhgroup = DHGROUP_INVALID;
 
 		dhgroup = (gint) strtol (tmp, NULL, 10);
@@ -591,12 +589,10 @@ nm_novellvpn_start_novellvpn_binary (NMNovellvpnPlugin *plugin,
 		}
 	}
 
-	/* every gateway has the pfsgroup */
+	// every gateway has the pfsgroup
+	// when user don't set the pfsgroup, use the default value
 	tmp = nm_setting_vpn_get_data_item (s_vpn, NM_NOVELLVPN_KEY_PFSGROUP);
-	if (!tmp || !strlen (tmp)) {
-		nm_vpn_set_missing_arg_error (error, NM_NOVELLVPN_KEY_PFSGROUP);
-		return FALSE;
-	} else {
+	if (tmp && strlen (tmp)) {
 		gint pfsgroup = PFSGROUP_INVALID;
 
 		pfsgroup = (gint) strtol (tmp, NULL, 10);
@@ -608,10 +604,9 @@ nm_novellvpn_start_novellvpn_binary (NMNovellvpnPlugin *plugin,
 		}
 	} 
 
+	// when user don't set the split_tunnle, use the default value
 	tmp = nm_setting_vpn_get_data_item (s_vpn, NM_NOVELLVPN_KEY_NOSPLITTUNNEL);
-	if (!tmp || !strlen (tmp)) {
-		nm_vpn_set_missing_arg_error (error, NM_NOVELLVPN_KEY_NOSPLITTUNNEL);
-	} else {
+	if (tmp && strlen (tmp)) {
 		nm_debug("%s = %s!", NM_NOVELLVPN_KEY_NOSPLITTUNNEL, tmp);
 		if (!strcmp (tmp, "yes")) {
 			no_split_tunnel = TRUE;

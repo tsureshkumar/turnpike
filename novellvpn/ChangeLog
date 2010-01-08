@@ -1,3 +1,7 @@
+2010-01-08 Bin Li <bili@novell.com>
+	* src/nm-novellvpn-service.c:
+	Use the dhgroup and pfsgroup default value when not set in advanced
+	dialog(bnc#568534).
 2009-11-10 Bin Li <bili@novell.com>
 	Move from novell forge svn to google svn.
 2009-06-26 Bin Li <bili@novell.com>
