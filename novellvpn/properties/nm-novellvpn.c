@@ -1129,6 +1129,34 @@ update_connection (NMVpnPluginUiWidgetInterface *iface,
 		auth_widget_update_connection (priv->xml, auth_type, s_vpn);
 	}
 
+	/* System secrets get stored in the connection, user secrets are saved
+	 * via the save_secrets() hook.
+	 */
+	if (nm_connection_get_scope (connection) == NM_CONNECTION_SCOPE_SYSTEM) {
+
+		if (!strcmp (auth_type, NM_NOVELLVPN_CONTYPE_GROUPAUTH_STRING)) {
+			// User password
+			widget = glade_xml_get_widget (priv->xml, "userpassword_entry");
+			str = (char *) gtk_entry_get_text (GTK_ENTRY (widget));
+			if (str && strlen (str))
+				nm_setting_vpn_add_secret (s_vpn, NM_NOVELLVPN_KEY_USER_PWD, str);
+
+			// Group password
+			widget = glade_xml_get_widget (priv->xml, "grouppassword_entry");
+			str = (char *) gtk_entry_get_text (GTK_ENTRY (widget));
+			if (str && strlen (str))
+				nm_setting_vpn_add_secret (s_vpn, NM_NOVELLVPN_KEY_GRP_PWD, str);
+
+		} else if (!strcmp (auth_type, NM_NOVELLVPN_CONTYPE_X509_STRING)) {
+			// Certificate password
+			widget = glade_xml_get_widget (priv->xml, "certpassword_entry");
+			str = (char *) gtk_entry_get_text (GTK_ENTRY (widget));
+			if (str && strlen (str))
+				nm_setting_vpn_add_secret (s_vpn, NM_NOVELLVPN_KEY_CERT_PWD, str);
+		} else
+			g_assert_not_reached ();
+	}
+
 	// add each vpn properties into connections from advanced hash table
 	if (priv->advanced)
 		g_hash_table_foreach (priv->advanced, hash_copy_advanced, s_vpn);
