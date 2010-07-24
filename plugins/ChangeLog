@@ -1,3 +1,6 @@
+2010-04-21  Bin Li  <bili@novell.com>
+	* configure.in:
+	link against shared libcrypto.
 2009-12-01  Bin Li  <bili@novell.com>
 	* nortel/cli/adminport.c:
 	Add the secondary verbose info and change format.

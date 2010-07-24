@@ -111,7 +111,7 @@ fi
 if test "x$crypto_dir" != "x"; then
         LIBS="$LIBS -L${crypto_dir}/$openssl_dir"
         CPPFLAGS_ADD="-I${crypto_dir}/include $CPPFLAGS_ADD"
-        CRYPTOBJS="$CRYPTOBJS ${crypto_dir}/$openssl_dir/libcrypto.a"
+        CRYPTOBJS="$CRYPTOBJS -lcrypto"
 
         AC_DEFINE([OPENSSLDIR], [], [Enable openssl])
 
