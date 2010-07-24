@@ -1,3 +1,6 @@
+2010-07-16 Bin Li <bili@novell.com>
+	* configure.in:
+	Bump version to 0.8 for build with NetworkManager 0.8.
 2010-03-21 Bin Li <bili@novell.com>
 	* properties/nm-novellvpn.c:
 	Save the password for system connection(bnc#582539).
