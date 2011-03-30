@@ -1551,9 +1551,9 @@ novellvpn_plugin_ui_interface_init (NMVpnPluginUiInterface *iface_class)
 	// the get_capabilities callback return a bitmask of capabilities
 	iface_class->get_capabilities = get_capabilities;
 	// import callback try to import a connection from the specified path
-	iface_class->import = import;
+	iface_class->import_from_file = import;
 	// export callback try to export a connection to the specified path
-	iface_class->export = export;
+	iface_class->export_to_file = export;
 	// get_suggested_name callback return a suggested file name
 	// for exporting a given connection
 	iface_class->get_suggested_name = get_suggested_name;

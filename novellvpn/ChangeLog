@@ -1,3 +1,8 @@
+2011-03-30 Bin Li <bili@novell.com>
+	* po/POTFILES.in:
+	Fix to not include files not existing in the tarball.
+	* properties/nm-novellvpn.c:
+	Fix build for NM 0.8.2.
 2010-07-16 Bin Li <bili@novell.com>
 	* configure.in:
 	Bump version to 0.8 for build with NetworkManager 0.8.
