@@ -207,7 +207,7 @@ void get_the_vendor_file_name(char* vendor_file_name_to_read, char* vpn_uuid)
 	conf_list = gconf_client_all_dirs (gconf_client,
 			GCONF_PATH_NM_CONNECTIONS, NULL);
 	if (NULL == conf_list) {
-		nm_warning ("can't found any connections in %s", 
+		g_warning ("can't found any connections in %s",
 				GCONF_PATH_NM_CONNECTIONS);
 		strcpy( vendor_file_name_to_read, "not_found");
 		return;

@@ -1,4 +1,13 @@
 2011-03-30 Bin Li <bili@novell.com>
+	* src/nm-novellvpn-service-novellvpn-helper.c:
+	* src/nm-novellvpn-service.c:
+	* properties/nm-novellvpn.c:
+	* auth-dialog/profile.c:
+	replace nm_warning/nm_info usage with g_warning/g_message
+	* properties/nm-novellvpn-propertiesui.c:
+	* properties/nm-novellvpn-propertiesui.h:
+	* properties/nm-novellvpn-vpnui-impl.c:
+	delete the unused files.
 	* po/POTFILES.in:
 	Fix to not include files not existing in the tarball.
 	* properties/nm-novellvpn.c:

@@ -194,7 +194,7 @@ nm_nvpn_watch_stderr_cb (GIOChannel *channel, GIOCondition cond, gpointer user_d
 	NMVPNPlugin *plugin = NM_VPN_PLUGIN (user_data);
 	NMNovellvpnPluginPrivate *priv = NM_NOVELLVPN_PLUGIN_GET_PRIVATE (plugin);
 
-	nm_debug ("Enter nm_nvpn_watch_stderr_cb...");
+	g_debug ("Enter nm_nvpn_watch_stderr_cb...");
 
 	if ( (cond & (G_IO_IN | G_IO_PRI))) { // something to read
 		NmNovellVPN_IOData *iodata = priv->io_data;
@@ -247,19 +247,19 @@ novellvpn_watch_cb (GPid pid, gint status, gpointer user_data)
 	NMVPNPlugin *plugin = NM_VPN_PLUGIN (user_data);
 	NMNovellvpnPluginPrivate *data = NM_NOVELLVPN_PLUGIN_GET_PRIVATE (plugin);
 
-	nm_debug ("Enter novellvpn_watch_cb...");
+	g_debug ("Enter novellvpn_watch_cb...");
 
 	if (WIFEXITED (status)) {
 		error = WEXITSTATUS (status);
 		if (error != 0)
-			nm_warning ("novellvpn exited with error code %d", error);
+			g_warning ("novellvpn exited with error code %d", error);
 	}
 	else if (WIFSTOPPED (status))
-		nm_warning ("novellvpn stopped unexpectedly with signal %d", WSTOPSIG (status));
+		g_warning ("novellvpn stopped unexpectedly with signal %d", WSTOPSIG (status));
 	else if (WIFSIGNALED (status))
-		nm_warning ("novellvpn died with signal %d", WTERMSIG (status));
+		g_warning ("novellvpn died with signal %d", WTERMSIG (status));
 	else
-		nm_warning ("novellvpn died from an unknown cause");
+		g_warning ("novellvpn died from an unknown cause");
 
 	/* Reap child if needed. */
 	waitpid (data->pid, NULL, WNOHANG);
@@ -275,7 +275,7 @@ novellvpn_watch_cb (GPid pid, gint status, gpointer user_data)
 				//nm_novellvpn_dbus_signal_failure_with_msg (data, 
 				//		NM_DBUS_VPN_SIGNAL_CONNECT_FAILED,
 				//		data->io_data->err_string);
-				nm_warning ("novellvpn exited with error: %s", 
+				g_warning ("novellvpn exited with error: %s",
 						data->io_data->err_string);
 				nm_vpn_plugin_failure (plugin,
 					   	NM_VPN_PLUGIN_FAILURE_CONNECT_FAILED);
@@ -303,16 +303,16 @@ get_connection_type (NMSettingVPN *s_vpn)
 
 	ctype = nm_setting_vpn_get_data_item (s_vpn, NM_NOVELLVPN_KEY_AUTHTYPE);
 	if (NULL != ctype) {
-		nm_debug ("g_value_get_string %s=%s",
+		g_debug ("g_value_get_string %s=%s",
 				NM_NOVELLVPN_KEY_AUTHTYPE, ctype);
 
 		if (!strcmp (ctype, NM_NOVELLVPN_CONTYPE_GROUPAUTH_STRING)
 				|| !strcmp (ctype, NM_NOVELLVPN_CONTYPE_X509_STRING))
 			return ctype;
 		else
-			nm_warning ("This connection type not found!");
+			g_warning ("This connection type not found!");
 	} else {
-		nm_warning ("g_value_get_string %s failed", NM_NOVELLVPN_KEY_AUTHTYPE);
+		g_warning ("g_value_get_string %s failed", NM_NOVELLVPN_KEY_AUTHTYPE);
 	}
 
 	return NULL;
@@ -485,7 +485,7 @@ nm_novellvpn_start_novellvpn_binary (NMNovellvpnPlugin *plugin,
 
 	g_return_val_if_fail (plugin != NULL, -1);
 
-	nm_debug ("Enter nm_novellvpn_start_novellvpn_binary...");
+	g_debug ("Enter nm_novellvpn_start_novellvpn_binary...");
 
 	priv->pid = 0;
 
@@ -500,7 +500,7 @@ nm_novellvpn_start_novellvpn_binary (NMNovellvpnPlugin *plugin,
 
 		return FALSE;
 	} else {
-		nm_debug ("novellvpn's path is %s", novellvpn_binary);
+		g_debug ("novellvpn's path is %s", novellvpn_binary);
 	}
 
 	/* First check in which mode we are operating.
@@ -515,7 +515,7 @@ nm_novellvpn_start_novellvpn_binary (NMNovellvpnPlugin *plugin,
 		return FALSE;
 	}
 
-	nm_debug("%s = %s!", NM_NOVELLVPN_KEY_GWTYPE, gateway_type);
+	g_debug("%s = %s!", NM_NOVELLVPN_KEY_GWTYPE, gateway_type);
 
 	/* get gateway's address */
 	remote = nm_setting_vpn_get_data_item (s_vpn, NM_NOVELLVPN_KEY_GATEWAY);
@@ -607,7 +607,7 @@ nm_novellvpn_start_novellvpn_binary (NMNovellvpnPlugin *plugin,
 	// when user don't set the split_tunnle, use the default value
 	tmp = nm_setting_vpn_get_data_item (s_vpn, NM_NOVELLVPN_KEY_NOSPLITTUNNEL);
 	if (tmp && strlen (tmp)) {
-		nm_debug("%s = %s!", NM_NOVELLVPN_KEY_NOSPLITTUNNEL, tmp);
+		g_debug("%s = %s!", NM_NOVELLVPN_KEY_NOSPLITTUNNEL, tmp);
 		if (!strcmp (tmp, "yes")) {
 			no_split_tunnel = TRUE;
 		} else {
@@ -683,7 +683,7 @@ nm_novellvpn_start_novellvpn_binary (NMNovellvpnPlugin *plugin,
 					error))
 		{
 			free_novellvpn_args (novellvpn_argv);
-			nm_warning ("novellvpn failed to start failed! '%s'",
+			g_warning ("novellvpn failed to start failed! '%s'",
 					(*error)->message);
 
 			return FALSE;
@@ -691,7 +691,7 @@ nm_novellvpn_start_novellvpn_binary (NMNovellvpnPlugin *plugin,
 
 		free_novellvpn_args (novellvpn_argv);
 
-		nm_info ("novellvpn started with pid %d", pid);
+		g_message ("novellvpn started with pid %d", pid);
 
 		priv->pid = pid;
 
@@ -796,7 +796,7 @@ nm_novellvpn_start_novellvpn_binary (NMNovellvpnPlugin *plugin,
 		nm_novellvpn_schedule_helper_timer (priv);
 
 	} else {
-		nm_warning("%s is null! Can't connect vpn!",
+		g_warning("%s is null! Can't connect vpn!",
 				NM_NOVELLVPN_KEY_AUTHTYPE);
 
 		return FALSE;
@@ -833,10 +833,10 @@ start_racoon (const char *action)
 	char * cmd = g_strdup_printf ("%s %s", RACOON_LAUNCHER_SCRIPT, action);
 	int ret;
 
-	nm_info ("launching %s", cmd);
+	g_message ("launching %s", cmd);
 	ret = system (cmd);
 	if (ret == -1)
-		nm_warning ("launching command failed '%s'", cmd);
+		g_warning ("launching command failed '%s'", cmd);
 	g_free (cmd);
 }
 
@@ -854,7 +854,7 @@ validate_one_property (const char *key, const char *val, gpointer user_data)
 	long int tmp = 0;
 
 	if (*info->error) {
-		nm_warning ("Already failed, return now!");
+		g_warning ("Already failed, return now!");
 		return;
 	}
 
@@ -870,7 +870,7 @@ validate_one_property (const char *key, const char *val, gpointer user_data)
 		if (strcmp (prop.name, key))
 			continue;	
 
-		nm_debug ("found it, name=%s, val=%s", prop.name, val);
+		g_debug ("found it, name=%s, val=%s", prop.name, val);
 
 		switch (prop.type) {
 			case G_TYPE_STRING:
@@ -886,7 +886,7 @@ validate_one_property (const char *key, const char *val, gpointer user_data)
 					/* Property is ok */
 					return;
 				}
-				nm_debug ("property '%s' wrong value, %s", prop.name, strerror (errno));
+				g_debug ("property '%s' wrong value, %s", prop.name, strerror (errno));
 				break;
 			case G_TYPE_BOOLEAN:
 				if (!strcmp (val, "yes") || !strcmp (val, "no"))
@@ -965,7 +965,7 @@ real_connect (NMVPNPlugin *plugin,
 	NMSettingVPN *s_vpn = NULL;
 	gboolean success = FALSE;
 
-	nm_debug ("Enter real_connect...");
+	g_debug ("Enter real_connect...");
 
 	s_vpn = NM_SETTING_VPN (
 			nm_connection_get_setting (
@@ -977,7 +977,7 @@ real_connect (NMVPNPlugin *plugin,
 				"%s",
 				"get NMSettingVPN failed!");
 
-		nm_warning ("get NMSettingVPN failed!");
+		g_warning ("get NMSettingVPN failed!");
 		goto out;
 	}
 
@@ -998,7 +998,7 @@ real_connect (NMVPNPlugin *plugin,
 
 	if (!nm_novellvpn_start_novellvpn_binary (NM_NOVELLVPN_PLUGIN (plugin), s_vpn, error)) {
 
-		nm_warning ("Could not start novellvpn binary!");
+		g_warning ("Could not start novellvpn binary!");
 		goto out;
 	}
 
@@ -1022,7 +1022,7 @@ real_need_secrets (NMVPNPlugin *plugin,
 	const char* connection_type = NULL;
 	gboolean need_secrets = FALSE;
 
-	nm_debug("Enter real_need_secrets...");
+	g_debug("Enter real_need_secrets...");
 
 	g_return_val_if_fail (NM_IS_VPN_PLUGIN (plugin), FALSE);
 	g_return_val_if_fail (NM_IS_CONNECTION (connection), FALSE);
@@ -1049,7 +1049,7 @@ real_need_secrets (NMVPNPlugin *plugin,
 		if (!nm_setting_vpn_get_secret (s_vpn,
 					NM_NOVELLVPN_KEY_USER_PWD)) {
 			need_secrets = TRUE;
-			nm_warning ("need secrets!");
+			g_warning ("need secrets!");
 		} else  {
 			/* Fall through */
 			nm_warning ("already have %s!", NM_NOVELLVPN_KEY_USER_PWD);
@@ -1057,7 +1057,7 @@ real_need_secrets (NMVPNPlugin *plugin,
 	} else if (!strcmp (connection_type, NM_NOVELLVPN_CONTYPE_X509_STRING)) {
 		/* May require certificate password */
 		need_secrets = TRUE;
-		nm_debug ("X509 also need password!");
+		g_debug ("X509 also need password!");
 	}
 
 	if (need_secrets)
@@ -1083,7 +1083,7 @@ real_disconnect (NMVPNPlugin *plugin, GError **err)
 {
 	NMNovellvpnPluginPrivate *priv = NM_NOVELLVPN_PLUGIN_GET_PRIVATE (plugin);
 
-	nm_debug("Enter real_disconnect...");
+	g_debug("Enter real_disconnect...");
 
 	if (priv->pid) {
 		//nm_novellvpn_set_state (data, NM_VPN_STATE_STOPPING);
@@ -1094,7 +1094,7 @@ real_disconnect (NMVPNPlugin *plugin, GError **err)
 		else
 			kill (priv->pid, SIGKILL);
 
-		nm_info ("Terminated novellvpn daemon with PID %d.", priv->pid);
+		g_message ("Terminated novellvpn daemon with PID %d.", priv->pid);
 		priv->pid = 0;
 
 		start_racoon ("down");
@@ -1109,7 +1109,7 @@ real_disconnect (NMVPNPlugin *plugin, GError **err)
 static void
 nm_novellvpn_plugin_init (NMNovellvpnPlugin *plugin)
 {
-	nm_debug("Enter nm_novellvpn_plugin_init...");
+	g_debug("Enter nm_novellvpn_plugin_init...");
 }
 
 static void
@@ -1118,7 +1118,7 @@ nm_novellvpn_plugin_class_init (NMNovellvpnPluginClass *plugin_class)
 	GObjectClass *object_class = G_OBJECT_CLASS (plugin_class);
 	NMVPNPluginClass *parent_class = NM_VPN_PLUGIN_CLASS (plugin_class);
 
-	nm_debug("Enter nm_novellvpn_plugin_class_init...");
+	g_debug("Enter nm_novellvpn_plugin_class_init...");
 
 	g_type_class_add_private (object_class, sizeof (NMNovellvpnPluginPrivate));
 
@@ -1131,7 +1131,7 @@ nm_novellvpn_plugin_class_init (NMNovellvpnPluginClass *plugin_class)
 NMNovellvpnPlugin *
 nm_novellvpn_plugin_new (void)
 {
-	nm_debug("Enter nm_novellvpn_plugin_new...");
+	g_debug("Enter nm_novellvpn_plugin_new...");
 
 	return (NMNovellvpnPlugin *) g_object_new (NM_TYPE_NOVELLVPN_PLUGIN,
 			NM_VPN_PLUGIN_DBUS_SERVICE_NAME,
@@ -1155,7 +1155,7 @@ main( int argc, char *argv[] )
 
 	plugin = nm_novellvpn_plugin_new ();
 	if (NULL == plugin) {
-		nm_error("Create new novellvpn_plugin failed!");
+		g_warning("Create new novellvpn_plugin failed!");
 		exit (EXIT_FAILURE);
 	}
 

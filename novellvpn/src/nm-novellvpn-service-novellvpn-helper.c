@@ -60,7 +60,7 @@ helper_failed (DBusGConnection *connection, const char *reason)
     DBusGProxy *proxy = NULL;
     GError *err = NULL;
 
-    nm_warning ("nm-novellvpn-service-novellvpn-helper did not receive a valid %s from novellvpn",
+    g_warning ("nm-novellvpn-service-novellvpn-helper did not receive a valid %s from novellvpn",
 		   	reason);
 
     proxy = dbus_g_proxy_new_for_name (connection,
@@ -74,7 +74,7 @@ helper_failed (DBusGConnection *connection, const char *reason)
                     G_TYPE_INVALID);
 
     if (err) {
-        nm_warning ("Could not send failure information: %s", err->message);
+        g_warning ("Could not send failure information: %s", err->message);
         g_error_free (err);
     }
 
@@ -188,7 +188,7 @@ send_ip4_config (DBusGConnection *connection, GHashTable *config)
 	DBusGProxy *proxy;
 	GError *err = NULL;
 
-	nm_debug ("Enter send_ip4_config...");
+	g_debug ("Enter send_ip4_config...");
 
 	proxy = dbus_g_proxy_new_for_name (connection,
 			NM_DBUS_SERVICE_NOVELLVPN,
@@ -202,7 +202,7 @@ send_ip4_config (DBusGConnection *connection, GHashTable *config)
 			G_TYPE_INVALID);
 
 	if (err) {
-		nm_warning ("Could not send failure information: %s", err->message);
+		g_warning ("Could not send failure information: %s", err->message);
 		g_error_free (err);
 	}
 
@@ -235,14 +235,14 @@ get_routes (void)
 			break;
 
 		if (inet_pton (AF_INET, tmp, &network) <= 0) {
-			nm_warning ("Ignoring invalid static route address '%s'", tmp ? tmp : "NULL");
+			g_warning ("Ignoring invalid static route address '%s'", tmp ? tmp : "NULL");
 			continue;
 		}
 
 		snprintf (buf, BUFLEN, "route_netmask_%d", i);
 		tmp = getenv (buf);
 		if (!tmp || inet_pton (AF_INET, tmp, &netmask) <= 0) {
-			nm_warning ("Ignoring invalid static route netmask '%s'", tmp ? tmp : "NULL");
+			g_warning ("Ignoring invalid static route netmask '%s'", tmp ? tmp : "NULL");
 			continue;
 		}
 
@@ -250,7 +250,7 @@ get_routes (void)
 		tmp = getenv (buf);
 		/* gateway can be missing */
 		if (tmp && (inet_pton (AF_INET, tmp, &gateway) <= 0)) {
-			nm_warning ("Ignoring invalid static route gateway '%s'", tmp ? tmp : "NULL");
+			g_warning ("Ignoring invalid static route gateway '%s'", tmp ? tmp : "NULL");
 			continue;
 		}
 
@@ -263,7 +263,7 @@ get_routes (void)
 			errno = 0;
 			tmp_metric = strtol (tmp, NULL, 10);
 			if (errno || tmp_metric < 0 || tmp_metric > G_MAXUINT32) {
-				nm_warning ("Ignoring invalid static route metric '%s'", tmp);
+				g_warning ("Ignoring invalid static route metric '%s'", tmp);
 				continue;
 			}
 			metric = (guint32) tmp_metric;
@@ -305,19 +305,19 @@ main(int argc, char *argv[])//, char **env )
 
 	int i = 1;
 
-	//nm_debug ("Start the helper...");
+	//g_debug ("Start the helper...");
 
 	g_type_init ();
 
 	connection = dbus_g_bus_get (DBUS_BUS_SYSTEM, &err);
 	if (NULL == connection) {
-		nm_warning ("Could not get the system bus: %s", err->message);
+		g_warning ("Could not get the system bus: %s", err->message);
 		exit (1);
 	}
 
 	config = g_hash_table_new (g_str_hash, g_str_equal);
 	if (NULL == config) {
-		nm_warning ("Could create hashtable for config information");
+		g_warning ("Could create hashtable for config information");
 		exit (1);
 	}
 
@@ -394,14 +394,14 @@ main(int argc, char *argv[])//, char **env )
 	}
 
 	if (dns_list) {
-		nm_debug ("insert dns_list to hashtable");
+		g_debug ("insert dns_list to hashtable");
 		g_hash_table_insert (config, 
 				NM_VPN_PLUGIN_IP4_CONFIG_DNS, 
 				dns_list);
 	}
 
 	if (nbns_list) {
-		nm_debug ("insert ndns_list to hashtable");
+		g_debug ("insert ndns_list to hashtable");
 		g_hash_table_insert (config, 
 				NM_VPN_PLUGIN_IP4_CONFIG_NBNS, 
 				nbns_list);
@@ -412,7 +412,7 @@ main(int argc, char *argv[])//, char **env )
 	 * which one should selected?
 	 */
 	if (dns_domain) {
-		nm_debug ("insert dns_domain to hashtable");
+		g_debug ("insert dns_domain to hashtable");
 		g_hash_table_insert (config, 
 				NM_VPN_PLUGIN_IP4_CONFIG_DOMAIN, 
 				dns_domain);

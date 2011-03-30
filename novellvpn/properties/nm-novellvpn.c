@@ -215,7 +215,7 @@ check_validity (NovellvpnPluginUiWidget *self, GError **error)
 	const char *str = NULL;
 	const char *auth_type = NULL;
 
-	nm_debug ("Enter check_validity...");
+	g_debug ("Enter check_validity...");
 
 	widget = glade_xml_get_widget (priv->xml, "gateway_entry");
 	str = gtk_entry_get_text (GTK_ENTRY (widget));
@@ -252,7 +252,7 @@ gateway_type_changed (GtkWidget *combo, gpointer user_data)
 	gint sel = gtk_combo_box_get_active (GTK_COMBO_BOX (combo));
 	GtkWidget *widget = NULL;
 
-	nm_debug("Enter gateway_type_changed(%d)...", sel);
+	g_debug("Enter gateway_type_changed(%d)...", sel);
 
 	widget = glade_xml_get_widget (priv->xml, "authtype_combo");
 	switch (sel)
@@ -375,7 +375,7 @@ x509_init_auth_widget(GladeXML *xml,
 	GtkFileFilter *filter = NULL;
 	const char *value = NULL;
 
-	nm_debug ("Enter x509_init_auth_widget...");
+	g_debug ("Enter x509_init_auth_widget...");
 
 	g_return_if_fail (xml != NULL);
 	g_return_if_fail (group != NULL);
@@ -415,7 +415,7 @@ xauth_init_auth_widget(GladeXML *xml,
 	GtkWidget *widget = NULL;
 	const char *value = NULL;
 
-	nm_debug ("Enter xauth_init_auth_widget...");
+	g_debug ("Enter xauth_init_auth_widget...");
 
 	g_return_if_fail (xml != NULL);
 	g_return_if_fail (group != NULL);
@@ -495,13 +495,13 @@ advanced_dialog_new (GHashTable *hash)
 	glade_file = g_strdup_printf ("%s/%s", GLADEDIR, "nm-novellvpn-dialog.glade");
 	xml = glade_xml_new (glade_file, "novellvpn-advanced-dialog", GETTEXT_PACKAGE);
 	if (xml == NULL) {
-		nm_debug ("Create xml for novellvpn-advanced-dialog failed!");
+		g_debug ("Create xml for novellvpn-advanced-dialog failed!");
 		goto out;
 	}
 
 	dialog = glade_xml_get_widget (xml, "novellvpn-advanced-dialog");
 	if (!dialog) {
-		nm_debug ("Couldn't found novellvpn-advanced-dialog!");
+		g_debug ("Couldn't found novellvpn-advanced-dialog!");
 		g_object_unref (G_OBJECT (xml));
 		goto out;
 	}
@@ -517,7 +517,7 @@ advanced_dialog_new (GHashTable *hash)
 
 	// set dhgroup
 	value = g_hash_table_lookup (hash, NM_NOVELLVPN_KEY_DHGROUP); // "dhgroup"
-	nm_debug ("Prepare set the dhgroup type...");
+	g_debug ("Prepare set the dhgroup type...");
 	if (value && strlen (value)) {
 		long int temp = 0;
 
@@ -585,7 +585,7 @@ advanced_dialog_new_hash_from_dialog (GtkWidget *dialog, GError **error)
 	widget = glade_xml_get_widget (xml, "dhgroup_combo");
 	if (widget != NULL) {
 		gint dhgroup = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
-		nm_debug ("dhgroup is %d", dhgroup);
+		g_debug ("dhgroup is %d", dhgroup);
 		if ((dhgroup > DHGROUP_INVALID)
 				&& (dhgroup <= DHGROUP_DH2)) {
 
@@ -598,7 +598,7 @@ advanced_dialog_new_hash_from_dialog (GtkWidget *dialog, GError **error)
 	widget = glade_xml_get_widget (xml, "pfsgroup_combo");
 	if (widget != NULL) {
 		gint pfsgroup = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
-		nm_debug ("pfsgroup is %d", pfsgroup);
+		g_debug ("pfsgroup is %d", pfsgroup);
 		if ((pfsgroup > PFSGROUP_INVALID)
 				&& (pfsgroup <= PFSGROUP_PFS2)) {
 
@@ -612,7 +612,7 @@ advanced_dialog_new_hash_from_dialog (GtkWidget *dialog, GError **error)
 	if (widget != NULL) {
 		gboolean nosplittunnel =
 		   	gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-		nm_debug ("nosplittunnel is %d", nosplittunnel);
+		g_debug ("nosplittunnel is %d", nosplittunnel);
 		if (nosplittunnel) {
 			g_hash_table_insert (hash,
 				   	g_strdup (NM_NOVELLVPN_KEY_NOSPLITTUNNEL),
@@ -679,7 +679,7 @@ advanced_button_clicked_cb (GtkWidget *button, gpointer user_data)
 
 	dialog = advanced_dialog_new (priv->advanced);
 	if (!dialog) {
-		nm_warning ("%s: failed to create the Advanced dialog!", __func__);
+		g_warning ("%s: failed to create the Advanced dialog!", __func__);
 		return;
 	}
 
@@ -721,7 +721,7 @@ fill_password (GladeXML *xml,
 	if (nm_connection_get_scope (connection) == NM_CONNECTION_SCOPE_SYSTEM) {
 		NMSettingVPN *s_vpn;
 
-		nm_debug ("enter scope system now!");
+		g_debug ("enter scope system now!");
 
 		s_vpn = (NMSettingVPN *) nm_connection_get_setting (connection, NM_TYPE_SETTING_VPN);
 		if (s_vpn) {
@@ -735,7 +735,7 @@ fill_password (GladeXML *xml,
 		NMSettingConnection *s_con = NULL;
 		gboolean unused;
 
-		nm_debug ("it's not scope system now!");
+		g_debug ("it's not scope system now!");
 
 		s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
 
@@ -762,7 +762,7 @@ fill_vpn_passwords (GladeXML *xml,
 {
 	GtkWidget *w = NULL;
 
-	nm_debug ("enter fill_vpn_passwords(%s)", contype);
+	g_debug ("enter fill_vpn_passwords(%s)", contype);
 
 	if (!strcmp (contype, NM_NOVELLVPN_CONTYPE_GROUPAUTH_STRING)) {
 		GtkWidget *w2 = NULL;
@@ -798,7 +798,7 @@ init_plugin_ui (NovellvpnPluginUiWidget *self,
 	const char *value = NULL;
 	const char *contype = NULL;
 
-	nm_debug ("Enter init_plugin_ui...");
+	g_debug ("Enter init_plugin_ui...");
 
 	s_vpn = (NMSettingVPN *) nm_connection_get_setting (connection, NM_TYPE_SETTING_VPN);
 
@@ -951,7 +951,7 @@ advanced_dialog_new_hash_from_connection (
 
 	s_vpn = (NMSettingVPN *) nm_connection_get_setting (connection, NM_TYPE_SETTING_VPN);
 	if (s_vpn == NULL) {
-		nm_debug ("Get vpn setting failed from connection.");
+		g_debug ("Get vpn setting failed from connection.");
 	}
 
 	// copy each vpn properties from connections into advanced hash
@@ -969,7 +969,7 @@ get_widget (NMVpnPluginUiWidgetInterface *iface)
 	NovellvpnPluginUiWidget *self = NOVELLVPN_PLUGIN_UI_WIDGET (iface);
 	NovellvpnPluginUiWidgetPrivate *priv = NOVELLVPN_PLUGIN_UI_WIDGET_GET_PRIVATE (self);
 
-	nm_debug ("Enter get_widget...");
+	g_debug ("Enter get_widget...");
 
 	return G_OBJECT (priv->widget);
 }
@@ -1048,7 +1048,7 @@ auth_widget_update_connection (GladeXML *xml,
 		update_from_filechooser (xml, NM_NOVELLVPN_KEY_CERTIFICATE,
 				"certificate_file_chooser", s_vpn);
 	} else {
-		nm_warning ("Wrong auth-type(%s)!", contype);
+		g_warning ("Wrong auth-type(%s)!", contype);
 		g_assert_not_reached ();
 	}
 }
@@ -1084,7 +1084,7 @@ update_connection (NMVpnPluginUiWidgetInterface *iface,
 	const char *auth_type = NULL;
 	int gateway_type = NM_NOVELLVPN_GWTYPE_INVALID;
 
-	nm_debug ("Enter update_connection...");
+	g_debug ("Enter update_connection...");
 
 	if (!check_validity (self, error))
 		return FALSE;
@@ -1103,7 +1103,7 @@ update_connection (NMVpnPluginUiWidgetInterface *iface,
 
 	widget = glade_xml_get_widget (priv->xml, "gateway_type_combo");
 	gateway_type = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
-	nm_debug ("gateway_type is %d", gateway_type);
+	g_debug ("gateway_type is %d", gateway_type);
 	if ((gateway_type > NM_NOVELLVPN_GWTYPE_INVALID)
 			&& (gateway_type <= NM_NOVELLVPN_GWTYPE_STDGW)) {
 
@@ -1117,7 +1117,7 @@ update_connection (NMVpnPluginUiWidgetInterface *iface,
 				gwtype = NM_NOVELLVPN_GWTYPE_STDGW_STRING;
 				break;
 			default:
-				nm_warning("Wrong gateway-type(%d)!", gateway_type);
+				g_warning("Wrong gateway-type(%d)!", gateway_type);
 		}
 		nm_setting_vpn_add_data_item (s_vpn,
 				NM_NOVELLVPN_KEY_GWTYPE,
@@ -1179,7 +1179,7 @@ save_secret (GladeXML *xml,
 	GnomeKeyringResult result;
 	gboolean ret = FALSE;
 
-	nm_debug ("save_secret(%s, %s, %s, %s)", widget_name,
+	g_debug ("save_secret(%s, %s, %s, %s)", widget_name,
 			vpn_uuid, vpn_name, secret_name);
 	w = glade_xml_get_widget (xml, widget_name);
 	g_assert (w);
@@ -1190,7 +1190,7 @@ save_secret (GladeXML *xml,
 		// why not return by function
 		ret = result == GNOME_KEYRING_RESULT_OK;
 		if (!ret)
-			nm_warning ("%s: failed to save user password to keyring.", __func__);
+			g_warning ("%s: failed to save user password to keyring.", __func__);
 	} else
 		ret = keyring_helpers_delete_secret (vpn_uuid, secret_name);
 
@@ -1260,7 +1260,7 @@ nm_vpn_plugin_ui_widget_interface_new (NMConnection *connection, GError **error)
 	NovellvpnPluginUiWidgetPrivate *priv = NULL;
 	char *glade_file = NULL;
 
-	nm_debug ("Enter nm_vpn_plugin_ui_widget_interface_new...");
+	g_debug ("Enter nm_vpn_plugin_ui_widget_interface_new...");
 
 	if (error)
 		g_return_val_if_fail (*error == NULL, NULL);
@@ -1315,7 +1315,7 @@ dispose (GObject *object)
 	NovellvpnPluginUiWidget *plugin = NOVELLVPN_PLUGIN_UI_WIDGET (object);
 	NovellvpnPluginUiWidgetPrivate *priv = NOVELLVPN_PLUGIN_UI_WIDGET_GET_PRIVATE (plugin);
 
-	nm_debug ("Enter dispose...");
+	g_debug ("Enter dispose...");
 
 	if (priv->group)
 		g_object_unref (priv->group);
@@ -1340,7 +1340,7 @@ novellvpn_plugin_ui_widget_class_init (NovellvpnPluginUiWidgetClass *req_class)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (req_class);
 
-	nm_debug ("Enter novellvpn_plugin_ui_widget_class_init...");
+	g_debug ("Enter novellvpn_plugin_ui_widget_class_init...");
 
 	g_type_class_add_private (req_class, sizeof (NovellvpnPluginUiWidgetPrivate));
 
@@ -1350,13 +1350,13 @@ novellvpn_plugin_ui_widget_class_init (NovellvpnPluginUiWidgetClass *req_class)
 static void
 novellvpn_plugin_ui_widget_init (NovellvpnPluginUiWidget *plugin)
 {
-	nm_debug ("Enter novellvpn_plugin_ui_widget_init...");
+	g_debug ("Enter novellvpn_plugin_ui_widget_init...");
 }
 
 static void
 novellvpn_plugin_ui_widget_interface_init (NMVpnPluginUiWidgetInterface *iface_class)
 {
-	nm_debug ("Enter novellvpn_plugin_ui_widget_interface_init...");
+	g_debug ("Enter novellvpn_plugin_ui_widget_interface_init...");
 	// interface implementation
 	iface_class->get_widget = get_widget;
 	iface_class->update_connection = update_connection;
@@ -1453,7 +1453,7 @@ get_suggested_name (NMVpnPluginUiInterface *iface, NMConnection *connection)
 	NMSettingConnection *s_con = NULL;
 	const char *id;
 
-	nm_debug ("Enter get_suggested_name...");
+	g_debug ("Enter get_suggested_name...");
 
 	g_return_val_if_fail (connection != NULL, NULL);
 
@@ -1473,7 +1473,7 @@ get_suggested_name (NMVpnPluginUiInterface *iface, NMConnection *connection)
 static guint32
 get_capabilities (NMVpnPluginUiInterface *iface)
 {
-	nm_debug ("Enter get_capabilities...");
+	g_debug ("Enter get_capabilities...");
 
 	return (NM_VPN_PLUGIN_UI_CAPABILITY_IMPORT | NM_VPN_PLUGIN_UI_CAPABILITY_EXPORT);
 }
@@ -1486,7 +1486,7 @@ get_capabilities (NMVpnPluginUiInterface *iface)
 static NMVpnPluginUiWidgetInterface *
 ui_factory (NMVpnPluginUiInterface *iface, NMConnection *connection, GError **error)
 {
-	nm_debug ("Enter ui_factory...");
+	g_debug ("Enter ui_factory...");
 	return nm_vpn_plugin_ui_widget_interface_new (connection, error);
 }
 
@@ -1494,7 +1494,7 @@ static void
 get_property (GObject *object, guint prop_id,
 			  GValue *value, GParamSpec *pspec)
 {
-	nm_debug ("Enter get_property(%d)...", prop_id);
+	g_debug ("Enter get_property(%d)...", prop_id);
 
 	switch (prop_id) {
 		case NM_VPN_PLUGIN_UI_INTERFACE_PROP_NAME: // 4096
@@ -1517,7 +1517,7 @@ novellvpn_plugin_ui_class_init (NovellvpnPluginUiClass *req_class)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (req_class);
 
-	nm_debug ("Enter novellvpn_plugin_ui_class_init...");
+	g_debug ("Enter novellvpn_plugin_ui_class_init...");
 
 	object_class->get_property = get_property;
 
@@ -1537,13 +1537,13 @@ novellvpn_plugin_ui_class_init (NovellvpnPluginUiClass *req_class)
 static void
 novellvpn_plugin_ui_init (NovellvpnPluginUi *plugin)
 {
-	nm_debug ("Enter novellvpn_plugin_ui_init...");
+	g_debug ("Enter novellvpn_plugin_ui_init...");
 }
 
 static void
 novellvpn_plugin_ui_interface_init (NMVpnPluginUiInterface *iface_class)
 {
-	nm_debug ("Enter novellvpn_plugin_ui_interface_init...");
+	g_debug ("Enter novellvpn_plugin_ui_interface_init...");
 	/* interface implementation */
    	// the ui_factory callback return a GObject that implements 
 	// NMVpnPluginUiWidgetInterface
@@ -1570,7 +1570,7 @@ novellvpn_plugin_ui_interface_init (NMVpnPluginUiInterface *iface_class)
 G_MODULE_EXPORT NMVpnPluginUiInterface *
 nm_vpn_plugin_ui_factory (GError **error)
 {
-	nm_debug ("Enter nm_vpn_plugin_ui_factory...");
+	g_debug ("Enter nm_vpn_plugin_ui_factory...");
 	if (error)
 		g_return_val_if_fail (*error == NULL, NULL);
 
