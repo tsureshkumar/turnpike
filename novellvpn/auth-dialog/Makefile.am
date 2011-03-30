@@ -4,7 +4,7 @@ nm_novellvpn_auth_dialog_CPPFLAGS =			\
 	$(GTHREAD_CFLAGS)			\
 	$(GTK_CFLAGS)				\
 	$(LIBGNOMEUI_CFLAGS)			\
-	$(NETWORK_MANAGER_CFLAGS)		\
+	$(NM_CFLAGS)		\
 	-DICONDIR=\""$(datadir)/pixmaps"\"	\
 	-DGLADEDIR=\""$(gladedir)"\"		\
 	-DBINDIR=\""$(bindir)"\"		\

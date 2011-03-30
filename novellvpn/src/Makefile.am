@@ -4,7 +4,7 @@ AM_CPPFLAGS =							\
 	$(DBUS_CFLAGS)						\
 	$(GTHREAD_CFLAGS)					\
 	$(LIBNL_CFLAGS)						\
-	$(NETWORK_MANAGER_CFLAGS)				\
+	$(NM_CFLAGS)				\
 	-DDBUS_API_SUBJECT_TO_CHANGE				\
 	-DG_DISABLE_DEPRECATED					\
 	-DBINDIR=\"$(bindir)\"					\
@@ -27,8 +27,8 @@ nm_novellvpn_service_SOURCES =				\
 nm_novellvpn_service_LDADD = 						\
 				$(DBUS_LIBS)				\
 				$(GTHREAD_LIBS)				\
-				$(NETWORK_MANAGER_LIBS)			\
-				-lnm_glib_vpn
+				$(NM_LIBS)			\
+				-lnm-glib-vpn
 
 
 
@@ -40,6 +40,6 @@ nm_novellvpn_service_novellvpn_helper_LDADD = 					\
 				$(DBUS_LIBS)				\
 				$(GTHREAD_LIBS)				\
 				$(LIBNL_LIBS)				\
-				$(NETWORK_MANAGER_LIBS)
+				$(NM_LIBS)
 
 CLEANFILES = *~

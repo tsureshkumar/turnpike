@@ -1,4 +1,10 @@
 2011-03-30 Bin Li <bili@novell.com>
+	* configure.in:
+	* src/Makefile.am:
+	* common-gnome/Makefile.am:
+	* properties/Makefile.am:
+	* auth-dialog/Makefile.am:
+	rename NETWORK_MANAGER_* build flags to just NM_*.
 	* src/nm-novellvpn-service-novellvpn-helper.c:
 	* src/nm-novellvpn-service.c:
 	* properties/nm-novellvpn.c:
