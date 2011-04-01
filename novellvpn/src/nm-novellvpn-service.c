@@ -1052,7 +1052,7 @@ real_need_secrets (NMVPNPlugin *plugin,
 			g_warning ("need secrets!");
 		} else  {
 			/* Fall through */
-			nm_warning ("already have %s!", NM_NOVELLVPN_KEY_USER_PWD);
+			g_warning ("already have %s!", NM_NOVELLVPN_KEY_USER_PWD);
 		}
 	} else if (!strcmp (connection_type, NM_NOVELLVPN_CONTYPE_X509_STRING)) {
 		/* May require certificate password */

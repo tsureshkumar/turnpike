@@ -7,17 +7,16 @@ libnm_novellvpn_properties_la_SOURCES = \
 	nm-novellvpn.c 	\
 	nm-novellvpn.h
 
-gladedir = $(datadir)/gnome-vpn-properties/novellvpn
-glade_DATA = nm-novellvpn-dialog.glade
+uidir = $(datadir)/gnome-vpn-properties/novellvpn
+ui_DATA = nm-novellvpn-dialog.ui
 
 libnm_novellvpn_properties_la_CFLAGS =                          \
-        $(GLADE_CFLAGS)                                 \
         $(GTK_CFLAGS)                                   \
         $(GCONF_CFLAGS)                                 \
         $(LIBGNOMEUI_CFLAGS)                            \
 	$(NM_CFLAGS)			\
         -DICONDIR=\""$(datadir)/pixmaps"\"              \
-        -DGLADEDIR=\""$(gladedir)"\"                    \
+        -DUIDIR=\""$(uidir)"\"                    \
         -DG_DISABLE_DEPRECATED                          \
         -DGDK_DISABLE_DEPRECATED                        \
         -DGNOME_DISABLE_DEPRECATED                      \
@@ -25,7 +24,6 @@ libnm_novellvpn_properties_la_CFLAGS =                          \
         -DVERSION=\"$(VERSION)\"
 
 libnm_novellvpn_properties_la_LIBADD =       \
-        $(GLADE_LIBS)                   \
         $(GTK_LIBS)                     \
         $(GCONF_LIBS)                   \
         $(LIBGNOMEUI_LIBS)		\

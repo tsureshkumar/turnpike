@@ -37,7 +37,6 @@
 #include <glib/gi18n-lib.h>
 #include <string.h>
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 
 #define NM_VPN_API_SUBJECT_TO_CHANGE
 
@@ -77,7 +76,7 @@ G_DEFINE_TYPE_EXTENDED (NovellvpnPluginUiWidget, novellvpn_plugin_ui_widget, G_T
 #define NOVELLVPN_PLUGIN_UI_WIDGET_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NOVELLVPN_TYPE_PLUGIN_UI_WIDGET, NovellvpnPluginUiWidgetPrivate))
 
 typedef struct {
-	GladeXML *xml;
+	GtkBuilder *builder;
 	GtkWidget *widget;
 	GtkSizeGroup *group;           // Grouping widgets so they request same size
 	GtkWindowGroup *window_group;
@@ -131,12 +130,12 @@ novellvpn_plugin_ui_error_get_type (void)
 }
 
 static gboolean
-validate_file_chooser (GladeXML *xml, const char *name)
+validate_file_chooser (GtkBuilder *builder, const char *name)
 {
 	GtkWidget *widget = NULL;
 	char *str = NULL;
 
-	widget = glade_xml_get_widget (xml, name);
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, name));
 	str = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
 	if (!str || !strlen (str))
 		return FALSE;
@@ -145,14 +144,14 @@ validate_file_chooser (GladeXML *xml, const char *name)
 }
 
 gboolean
-auth_widget_check_validity (GladeXML *xml, const char *contype, GError **error)
+auth_widget_check_validity (GtkBuilder *builder, const char *contype, GError **error)
 {
 	GtkWidget *widget = NULL;
 	const char *str = NULL;
 
 	if (!strcmp (contype, NM_NOVELLVPN_CONTYPE_GROUPAUTH_STRING)) {
 		// check the username and groupname when XAUTH
-		widget = glade_xml_get_widget (xml, "username_entry");
+		widget = GTK_WIDGET (gtk_builder_get_object (builder, "username_entry"));
 		str = gtk_entry_get_text (GTK_ENTRY (widget));
 		if (!str || !strlen (str)) {
 			g_set_error (error,
@@ -161,7 +160,7 @@ auth_widget_check_validity (GladeXML *xml, const char *contype, GError **error)
 					NM_NOVELLVPN_KEY_USER_NAME);
 			return FALSE;
 		}
-		widget = glade_xml_get_widget (xml, "groupname_entry");
+		widget = GTK_WIDGET (gtk_builder_get_object (builder, "groupname_entry"));
 		str = gtk_entry_get_text (GTK_ENTRY (widget));
 		if (!str || !strlen (str)) {
 			g_set_error (error,
@@ -172,7 +171,7 @@ auth_widget_check_validity (GladeXML *xml, const char *contype, GError **error)
 		}
 	} else if (!strcmp (contype, NM_NOVELLVPN_CONTYPE_X509_STRING)) {
 		// check certificated file name when X509
-		if (!validate_file_chooser (xml, "certificate_file_chooser")) {
+		if (!validate_file_chooser (builder, "certificate_file_chooser")) {
 			g_set_error (error,
 					NOVELLVPN_PLUGIN_UI_ERROR,
 					NOVELLVPN_PLUGIN_UI_ERROR_INVALID_PROPERTY,
@@ -188,14 +187,14 @@ auth_widget_check_validity (GladeXML *xml, const char *contype, GError **error)
 }
 
 static const char *
-get_auth_type (GladeXML *glade_xml)
+get_auth_type (GtkBuilder *glade_builder)
 {
 	GtkComboBox *combo = NULL;
 	GtkTreeModel *model = NULL;
 	GtkTreeIter iter;
 	const char *auth_type = NULL;
 
-	combo = GTK_COMBO_BOX (glade_xml_get_widget (glade_xml, "authtype_combo"));
+	combo = GTK_COMBO_BOX (GTK_WIDGET (gtk_builder_get_object (glade_builder, "authtype_combo")));
 	g_assert (combo);
 
 	model = gtk_combo_box_get_model (combo);
@@ -217,7 +216,7 @@ check_validity (NovellvpnPluginUiWidget *self, GError **error)
 
 	g_debug ("Enter check_validity...");
 
-	widget = glade_xml_get_widget (priv->xml, "gateway_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "gateway_entry"));
 	str = gtk_entry_get_text (GTK_ENTRY (widget));
 	if (!str || !strlen (str)) {
 		g_set_error (error,
@@ -227,9 +226,9 @@ check_validity (NovellvpnPluginUiWidget *self, GError **error)
 		return FALSE;
 	}
 
-	auth_type = get_auth_type (priv->xml);
+	auth_type = get_auth_type (priv->builder);
 	if (auth_type) {
-		if (!auth_widget_check_validity (priv->xml, auth_type, error))
+		if (!auth_widget_check_validity (priv->builder, auth_type, error))
 			return FALSE;
 	}
 
@@ -254,7 +253,7 @@ gateway_type_changed (GtkWidget *combo, gpointer user_data)
 
 	g_debug("Enter gateway_type_changed(%d)...", sel);
 
-	widget = glade_xml_get_widget (priv->xml, "authtype_combo");
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "authtype_combo"));
 	switch (sel)
 	{
 		case NM_NOVELLVPN_GWTYPE_NORTEL:
@@ -294,7 +293,7 @@ auth_combo_changed_cb (GtkWidget *combo, gpointer user_data)
 	GtkTreeIter iter;
 	gint new_page = 0;
 
-	auth_notebook = glade_xml_get_widget (priv->xml, "auth_notebook");
+	auth_notebook = GTK_WIDGET (gtk_builder_get_object (priv->builder, "auth_notebook"));
 	g_assert (auth_notebook);
 
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
@@ -365,7 +364,7 @@ cert_file_chooser_filter_new (void)
 
 
 void
-x509_init_auth_widget(GladeXML *xml,
+x509_init_auth_widget(GtkBuilder *builder,
 		GtkSizeGroup *group,
 		NMSettingVPN *s_vpn,
 		ChangedCallback changed_cb,
@@ -377,11 +376,11 @@ x509_init_auth_widget(GladeXML *xml,
 
 	g_debug ("Enter x509_init_auth_widget...");
 
-	g_return_if_fail (xml != NULL);
+	g_return_if_fail (builder != NULL);
 	g_return_if_fail (group != NULL);
 	g_return_if_fail (changed_cb != NULL);
 
-	widget = glade_xml_get_widget (xml, "certificate_file_chooser");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "certificate_file_chooser"));
 	g_return_if_fail (widget != NULL);
 
 	gtk_size_group_add_widget(group, widget);
@@ -406,7 +405,7 @@ x509_init_auth_widget(GladeXML *xml,
 }
 
 void
-xauth_init_auth_widget(GladeXML *xml,
+xauth_init_auth_widget(GtkBuilder *builder,
 		GtkSizeGroup *group,
 		NMSettingVPN *s_vpn,
 		ChangedCallback changed_cb,
@@ -417,12 +416,12 @@ xauth_init_auth_widget(GladeXML *xml,
 
 	g_debug ("Enter xauth_init_auth_widget...");
 
-	g_return_if_fail (xml != NULL);
+	g_return_if_fail (builder != NULL);
 	g_return_if_fail (group != NULL);
 	g_return_if_fail (changed_cb != NULL);
 
 	// 1. init username entry
-	widget = glade_xml_get_widget(xml, "username_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "username_entry"));
 	g_return_if_fail (widget != NULL);
 
 	gtk_size_group_add_widget(group, widget);
@@ -439,7 +438,7 @@ xauth_init_auth_widget(GladeXML *xml,
 			G_CALLBACK (changed_cb), user_data);
 
 	// 2. init groupname entry
-	widget = glade_xml_get_widget(xml, "groupname_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "groupname_entry"));
 	g_return_if_fail (widget != NULL);
 
 	gtk_size_group_add_widget(group, widget);
@@ -465,15 +464,15 @@ show_toggled_cb (GtkCheckButton *button, NovellvpnPluginUiWidget *self)
 
 	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
-	widget = glade_xml_get_widget (priv->xml, "userpassword_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "userpassword_entry"));
 	g_assert (widget);
 	gtk_entry_set_visibility (GTK_ENTRY (widget), visible);
 
-	widget = glade_xml_get_widget (priv->xml, "grouppassword_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "grouppassword_entry"));
 	g_assert (widget);
 	gtk_entry_set_visibility (GTK_ENTRY (widget), visible);
 
-	widget = glade_xml_get_widget (priv->xml, "certpassword_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "certpassword_entry"));
 	g_assert (widget);
 	gtk_entry_set_visibility (GTK_ENTRY (widget), visible);
 }
@@ -484,35 +483,41 @@ show_toggled_cb (GtkCheckButton *button, NovellvpnPluginUiWidget *self)
 static GtkWidget *
 advanced_dialog_new (GHashTable *hash)
 {
-	GladeXML *xml = NULL;
+	GtkBuilder *builder = NULL;
 	GtkWidget *dialog = NULL;
-	char *glade_file = NULL;
+	char *ui_file = NULL;
 	GtkWidget *widget = NULL;
 	const char *value = NULL;
+	GError *error = NULL;
 
 	g_return_val_if_fail (hash != NULL, NULL);
 
-	glade_file = g_strdup_printf ("%s/%s", GLADEDIR, "nm-novellvpn-dialog.glade");
-	xml = glade_xml_new (glade_file, "novellvpn-advanced-dialog", GETTEXT_PACKAGE);
-	if (xml == NULL) {
-		g_debug ("Create xml for novellvpn-advanced-dialog failed!");
-		goto out;
-	}
+	ui_file = g_strdup_printf ("%s/%s", UIDIR, "nm-novellvpn-dialog.ui");
+	builder = gtk_builder_new ();
 
-	dialog = glade_xml_get_widget (xml, "novellvpn-advanced-dialog");
+    if (!gtk_builder_add_from_file (builder, ui_file, &error)) {
+        g_warning ("Couldn't load builder file: %s", error->message);
+        g_error_free (error);
+        g_object_unref (G_OBJECT (builder));
+        goto out;
+    }
+
+	gtk_builder_set_translation_domain (builder, GETTEXT_PACKAGE);
+
+	dialog = GTK_WIDGET (gtk_builder_get_object (builder, "novellvpn-advanced-dialog"));
 	if (!dialog) {
 		g_debug ("Couldn't found novellvpn-advanced-dialog!");
-		g_object_unref (G_OBJECT (xml));
+		g_object_unref (G_OBJECT (builder));
 		goto out;
 	}
 
 	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
-	g_object_set_data_full (G_OBJECT (dialog), "glade-xml",
-			xml, (GDestroyNotify) g_object_unref);
+	g_object_set_data_full (G_OBJECT (dialog), "builder",
+			builder, (GDestroyNotify) g_object_unref);
 
 	// get DH Group type ComboBox
-	widget = glade_xml_get_widget (xml, "dhgroup_combo");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "dhgroup_combo"));
 	g_return_val_if_fail (widget != NULL, FALSE);
 
 	// set dhgroup
@@ -530,7 +535,7 @@ advanced_dialog_new (GHashTable *hash)
 	}
 
 	// get PFS Group type ComboBox
-	widget = glade_xml_get_widget (xml, "pfsgroup_combo");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "pfsgroup_combo"));
 	g_return_val_if_fail (widget != NULL, FALSE);
 
 	// set pfsgroup
@@ -546,7 +551,7 @@ advanced_dialog_new (GHashTable *hash)
 				PFSGROUP_OFF);
 	}
 
-	widget = glade_xml_get_widget (xml, "no_split_tunnel_checkbutton");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "no_split_tunnel_checkbutton"));
 	g_return_val_if_fail (widget != NULL, FALSE);
 
 	// set nosplittunnel
@@ -558,7 +563,7 @@ advanced_dialog_new (GHashTable *hash)
 	}
 
 out:
-	g_free (glade_file);
+	g_free (ui_file);
 
 	return dialog;
 }
@@ -571,18 +576,18 @@ advanced_dialog_new_hash_from_dialog (GtkWidget *dialog, GError **error)
 {
 	GHashTable *hash = NULL;
 	GtkWidget *widget = NULL;
-	GladeXML *xml = NULL;
+	GtkBuilder *builder = NULL;
 
 	g_return_val_if_fail (dialog != NULL, NULL);
 	if (error)
 		g_return_val_if_fail (*error == NULL, NULL);
 
-	xml = g_object_get_data (G_OBJECT (dialog), "glade-xml");
-	g_return_val_if_fail (xml != NULL, NULL);
+	builder = g_object_get_data (G_OBJECT (dialog), "builder");
+	g_return_val_if_fail (builder != NULL, NULL);
 
 	hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
-	widget = glade_xml_get_widget (xml, "dhgroup_combo");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "dhgroup_combo"));
 	if (widget != NULL) {
 		gint dhgroup = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
 		g_debug ("dhgroup is %d", dhgroup);
@@ -595,7 +600,7 @@ advanced_dialog_new_hash_from_dialog (GtkWidget *dialog, GError **error)
 		}
 	}
 
-	widget = glade_xml_get_widget (xml, "pfsgroup_combo");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "pfsgroup_combo"));
 	if (widget != NULL) {
 		gint pfsgroup = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
 		g_debug ("pfsgroup is %d", pfsgroup);
@@ -608,7 +613,7 @@ advanced_dialog_new_hash_from_dialog (GtkWidget *dialog, GError **error)
 		}
 	}
 
-	widget = glade_xml_get_widget (xml, "no_split_tunnel_checkbutton");
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "no_split_tunnel_checkbutton"));
 	if (widget != NULL) {
 		gboolean nosplittunnel =
 		   	gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
@@ -702,58 +707,48 @@ advanced_button_clicked_cb (GtkWidget *button, gpointer user_data)
 }
 
 static GtkWidget *
-fill_password (GladeXML *xml,
+fill_password (GtkBuilder *builder,
 		const char *widget_name,
 		NMConnection *connection,
 		const char *password_type)
 {
+	NMSettingVPN *s_vpn = NULL;
 	GtkWidget *widget = NULL;
-	gchar *password = NULL;
+	gchar *keyring_pw = NULL;
+	gboolean unused;
 
-	widget = glade_xml_get_widget (xml, widget_name);
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, widget_name));
 	g_assert (widget);
 
 	if (!connection)
 		return widget;
 
-	password = NULL;
+	/* Grab from the connection first */
+	s_vpn = (NMSettingVPN *) nm_connection_get_setting (connection, NM_TYPE_SETTING_VPN);
+	if (s_vpn) {
+		const gchar *tmp = NULL;
 
-	if (nm_connection_get_scope (connection) == NM_CONNECTION_SCOPE_SYSTEM) {
-		NMSettingVPN *s_vpn;
-
-		g_debug ("enter scope system now!");
-
-		s_vpn = (NMSettingVPN *) nm_connection_get_setting (connection, NM_TYPE_SETTING_VPN);
-		if (s_vpn) {
-			const gchar *tmp = NULL;
-
-			tmp = nm_setting_vpn_get_secret (s_vpn, password_type);
-			if (tmp)
-				password = gnome_keyring_memory_strdup (tmp);
+		tmp = nm_setting_vpn_get_secret (s_vpn, password_type);
+		if (tmp) {
+			gtk_entry_set_text (GTK_ENTRY (widget), tmp);
+			return widget;
 		}
-	} else {
-		NMSettingConnection *s_con = NULL;
-		gboolean unused;
-
-		g_debug ("it's not scope system now!");
-
-		s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION));
-
-		password = keyring_helpers_lookup_secret (nm_setting_connection_get_uuid (s_con),
-				password_type,
-				&unused);
 	}
 
-	if (password) {
-		gtk_entry_set_text (GTK_ENTRY (widget), password);
-		gnome_keyring_memory_free (password);
+	/* If not the connection then from the keyring */
+	keyring_pw = keyring_helpers_lookup_secret (nm_connection_get_uuid (connection),
+			password_type,
+			&unused);
+	if (keyring_pw) {
+		gtk_entry_set_text (GTK_ENTRY (widget), keyring_pw);
+		gnome_keyring_memory_free (keyring_pw);
 	}
 
 	return widget;
 }
 
 void
-fill_vpn_passwords (GladeXML *xml,
+fill_vpn_passwords (GtkBuilder *builder,
 		GtkSizeGroup *group,
 		NMConnection *connection,
 		const char *contype,
@@ -767,16 +762,16 @@ fill_vpn_passwords (GladeXML *xml,
 	if (!strcmp (contype, NM_NOVELLVPN_CONTYPE_GROUPAUTH_STRING)) {
 		GtkWidget *w2 = NULL;
 
-		w = fill_password (xml, "userpassword_entry", connection, NM_NOVELLVPN_KEY_USER_PWD);
+		w = fill_password (builder, "userpassword_entry", connection, NM_NOVELLVPN_KEY_USER_PWD);
 
-		w2 = fill_password (xml, "grouppassword_entry", connection, NM_NOVELLVPN_KEY_GRP_PWD);
+		w2 = fill_password (builder, "grouppassword_entry", connection, NM_NOVELLVPN_KEY_GRP_PWD);
 		if (w2) {
 			gtk_size_group_add_widget (group, w2);
 			g_signal_connect (w2, "changed", G_CALLBACK (changed_cb), user_data);
 		}
 	}
 	else if (!strcmp (contype, NM_NOVELLVPN_CONTYPE_X509_STRING))
-		w = fill_password (xml, "certpassword_entry", connection, NM_NOVELLVPN_KEY_CERT_PWD);
+		w = fill_password (builder, "certpassword_entry", connection, NM_NOVELLVPN_KEY_CERT_PWD);
 
 	if (w) {
 		gtk_size_group_add_widget (group, w);
@@ -809,7 +804,7 @@ init_plugin_ui (NovellvpnPluginUiWidget *self,
 	g_return_val_if_fail (priv->group != NULL, FALSE);
 
 	// make Gateway entry could resize
-	widget = glade_xml_get_widget (priv->xml, "gateway_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "gateway_entry"));
 	g_return_val_if_fail (widget != NULL, FALSE);
 
 	gtk_size_group_add_widget (priv->group, widget);
@@ -823,7 +818,7 @@ init_plugin_ui (NovellvpnPluginUiWidget *self,
 	g_signal_connect (G_OBJECT (widget), "changed", G_CALLBACK (stuff_changed_cb), self);
 
 	// make Gateway type ComboBox could resize
-	widget = glade_xml_get_widget (priv->xml, "gateway_type_combo");
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "gateway_type_combo"));
 	g_return_val_if_fail (widget != NULL, FALSE);
 
 	gtk_size_group_add_widget (priv->group, widget);
@@ -846,7 +841,7 @@ init_plugin_ui (NovellvpnPluginUiWidget *self,
 	g_signal_connect (G_OBJECT (widget), "changed", G_CALLBACK (gateway_type_changed), self);
 
 	// make authentication type ComboBox could resize
-	widget = glade_xml_get_widget (priv->xml, "authtype_combo");
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "authtype_combo"));
 	g_return_val_if_fail (widget != NULL, FALSE);
 
 	gtk_size_group_add_widget (priv->group, widget);
@@ -867,7 +862,7 @@ init_plugin_ui (NovellvpnPluginUiWidget *self,
 	}
 
 	// XAUTH widget
-	xauth_init_auth_widget (priv->xml, priv->group, s_vpn,
+	xauth_init_auth_widget (priv->builder, priv->group, s_vpn,
 			stuff_changed_cb, self);
 
 	gtk_list_store_append (store, &iter);
@@ -878,11 +873,11 @@ init_plugin_ui (NovellvpnPluginUiWidget *self,
 			-1);
 
 	// X.509 auth widget */
-	x509_init_auth_widget (priv->xml, priv->group, s_vpn,
+	x509_init_auth_widget (priv->builder, priv->group, s_vpn,
 			stuff_changed_cb, self);
 
 	// just call one time
-	fill_vpn_passwords (priv->xml, priv->group, connection,
+	fill_vpn_passwords (priv->builder, priv->group, connection,
 			contype, stuff_changed_cb, self);
 
 	gtk_list_store_append (store, &iter);
@@ -900,14 +895,14 @@ init_plugin_ui (NovellvpnPluginUiWidget *self,
 	g_signal_connect (widget, "changed", G_CALLBACK (auth_combo_changed_cb), self);
 	gtk_combo_box_set_active (GTK_COMBO_BOX (widget), active < 0 ? 0 : active);
 
-	widget = glade_xml_get_widget (priv->xml, "show_passwords_checkbutton");
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "show_passwords_checkbutton"));
 	g_return_val_if_fail (widget != NULL, FALSE);
 	g_signal_connect (G_OBJECT (widget), "toggled",
 			G_CALLBACK (show_toggled_cb),
 			self);
 
 	// connect the advanced button to the advanced dialog
-	widget = glade_xml_get_widget (priv->xml, "advanced_button");
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "advanced_button"));
 	g_return_val_if_fail (widget != NULL, FALSE);
 
 	g_signal_connect (G_OBJECT (widget),
@@ -975,7 +970,7 @@ get_widget (NMVpnPluginUiWidgetInterface *iface)
 }
 
 static void
-update_entry (GladeXML *xml,
+update_entry (GtkBuilder *builder,
 		const char *key,
 		const char *widget_name,
 	   	NMSettingVPN *s_vpn)
@@ -983,12 +978,12 @@ update_entry (GladeXML *xml,
 	GtkWidget *widget = NULL;
 	const char *str = NULL;
 
-	g_return_if_fail (xml != NULL);
+	g_return_if_fail (builder != NULL);
 	g_return_if_fail (key != NULL);
 	g_return_if_fail (widget_name != NULL);
 	g_return_if_fail (s_vpn != NULL);
 
-	widget = glade_xml_get_widget (xml, widget_name);
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, widget_name));
 
 	str = gtk_entry_get_text (GTK_ENTRY (widget));
 	if (str && strlen (str)) {
@@ -997,7 +992,7 @@ update_entry (GladeXML *xml,
 }
 
 static void
-update_from_filechooser (GladeXML *xml,
+update_from_filechooser (GtkBuilder *builder,
 		const char *key,
 		const char *widget_name,
 		NMSettingVPN *s_vpn)
@@ -1005,12 +1000,12 @@ update_from_filechooser (GladeXML *xml,
 	GtkWidget *widget = NULL;
 	char *filename = NULL;
 
-	g_return_if_fail (xml != NULL);
+	g_return_if_fail (builder != NULL);
 	g_return_if_fail (key != NULL);
 	g_return_if_fail (widget_name != NULL);
 	g_return_if_fail (s_vpn != NULL);
 
-	widget = glade_xml_get_widget (xml, widget_name);
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, widget_name));
 
 	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (widget));
 	if (!filename)
@@ -1023,11 +1018,11 @@ update_from_filechooser (GladeXML *xml,
 }
 
 void
-auth_widget_update_connection (GladeXML *xml,
+auth_widget_update_connection (GtkBuilder *builder,
 		const char *contype,
 		NMSettingVPN *s_vpn)
 {
-	g_return_if_fail (xml != NULL);
+	g_return_if_fail (builder != NULL);
 	g_return_if_fail (contype != NULL);
 	g_return_if_fail (s_vpn != NULL);
 
@@ -1036,16 +1031,16 @@ auth_widget_update_connection (GladeXML *xml,
 		nm_setting_vpn_add_data_item (s_vpn, NM_NOVELLVPN_KEY_AUTHTYPE,
 				NM_NOVELLVPN_CONTYPE_GROUPAUTH_STRING);
 
-		update_entry (xml, NM_NOVELLVPN_KEY_USER_NAME,
+		update_entry (builder, NM_NOVELLVPN_KEY_USER_NAME,
 				"username_entry", s_vpn);
-		update_entry (xml, NM_NOVELLVPN_KEY_GROUP_NAME,
+		update_entry (builder, NM_NOVELLVPN_KEY_GROUP_NAME,
 				"groupname_entry", s_vpn);
 	} else if (!strcmp (contype, NM_NOVELLVPN_CONTYPE_X509_STRING)) {
 
 		nm_setting_vpn_add_data_item (s_vpn, NM_NOVELLVPN_KEY_AUTHTYPE,
 				NM_NOVELLVPN_CONTYPE_X509_STRING);
 
-		update_from_filechooser (xml, NM_NOVELLVPN_KEY_CERTIFICATE,
+		update_from_filechooser (builder, NM_NOVELLVPN_KEY_CERTIFICATE,
 				"certificate_file_chooser", s_vpn);
 	} else {
 		g_warning ("Wrong auth-type(%s)!", contype);
@@ -1093,7 +1088,7 @@ update_connection (NMVpnPluginUiWidgetInterface *iface,
 	g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE, NM_DBUS_SERVICE_NOVELLVPN, NULL);
 
 	// Get Gateway
-	widget = glade_xml_get_widget (priv->xml, "gateway_entry");
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "gateway_entry"));
 	str = (char *) gtk_entry_get_text (GTK_ENTRY (widget));
 	if (str && strlen (str)) {
 		nm_setting_vpn_add_data_item (s_vpn, 
@@ -1101,7 +1096,7 @@ update_connection (NMVpnPluginUiWidgetInterface *iface,
 				str);
 	}
 
-	widget = glade_xml_get_widget (priv->xml, "gateway_type_combo");
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "gateway_type_combo"));
 	gateway_type = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
 	g_debug ("gateway_type is %d", gateway_type);
 	if ((gateway_type > NM_NOVELLVPN_GWTYPE_INVALID)
@@ -1124,42 +1119,36 @@ update_connection (NMVpnPluginUiWidgetInterface *iface,
 				gwtype);
 	}
 
-	auth_type = get_auth_type (priv->xml);
+	auth_type = get_auth_type (priv->builder);
 	if (auth_type) {
-		auth_widget_update_connection (priv->xml, auth_type, s_vpn);
-	}
-
-	/* System secrets get stored in the connection, user secrets are saved
-	 * via the save_secrets() hook.
-	 */
-	if (nm_connection_get_scope (connection) == NM_CONNECTION_SCOPE_SYSTEM) {
-
-		if (!strcmp (auth_type, NM_NOVELLVPN_CONTYPE_GROUPAUTH_STRING)) {
-			// User password
-			widget = glade_xml_get_widget (priv->xml, "userpassword_entry");
-			str = (char *) gtk_entry_get_text (GTK_ENTRY (widget));
-			if (str && strlen (str))
-				nm_setting_vpn_add_secret (s_vpn, NM_NOVELLVPN_KEY_USER_PWD, str);
-
-			// Group password
-			widget = glade_xml_get_widget (priv->xml, "grouppassword_entry");
-			str = (char *) gtk_entry_get_text (GTK_ENTRY (widget));
-			if (str && strlen (str))
-				nm_setting_vpn_add_secret (s_vpn, NM_NOVELLVPN_KEY_GRP_PWD, str);
-
-		} else if (!strcmp (auth_type, NM_NOVELLVPN_CONTYPE_X509_STRING)) {
-			// Certificate password
-			widget = glade_xml_get_widget (priv->xml, "certpassword_entry");
-			str = (char *) gtk_entry_get_text (GTK_ENTRY (widget));
-			if (str && strlen (str))
-				nm_setting_vpn_add_secret (s_vpn, NM_NOVELLVPN_KEY_CERT_PWD, str);
-		} else
-			g_assert_not_reached ();
+		auth_widget_update_connection (priv->builder, auth_type, s_vpn);
 	}
 
 	// add each vpn properties into connections from advanced hash table
 	if (priv->advanced)
 		g_hash_table_foreach (priv->advanced, hash_copy_advanced, s_vpn);
+
+	if (!strcmp (auth_type, NM_NOVELLVPN_CONTYPE_GROUPAUTH_STRING)) {
+		// User password
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "userpassword_entry"));
+		str = (char *) gtk_entry_get_text (GTK_ENTRY (widget));
+		if (str && strlen (str))
+			nm_setting_vpn_add_secret (s_vpn, NM_NOVELLVPN_KEY_USER_PWD, str);
+
+		// Group password
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "grouppassword_entry"));
+		str = (char *) gtk_entry_get_text (GTK_ENTRY (widget));
+		if (str && strlen (str))
+			nm_setting_vpn_add_secret (s_vpn, NM_NOVELLVPN_KEY_GRP_PWD, str);
+
+	} else if (!strcmp (auth_type, NM_NOVELLVPN_CONTYPE_X509_STRING)) {
+		// Certificate password
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "certpassword_entry"));
+		str = (char *) gtk_entry_get_text (GTK_ENTRY (widget));
+		if (str && strlen (str))
+			nm_setting_vpn_add_secret (s_vpn, NM_NOVELLVPN_KEY_CERT_PWD, str);
+	} else
+		g_assert_not_reached ();
 
 	nm_connection_add_setting (connection, NM_SETTING (s_vpn));
 	valid = TRUE;
@@ -1168,7 +1157,7 @@ update_connection (NMVpnPluginUiWidgetInterface *iface,
 }
 
 static gboolean
-save_secret (GladeXML *xml,
+save_secret (GtkBuilder *builder,
 		const char *widget_name,
 		const char *vpn_uuid,
 		const char *vpn_name,
@@ -1181,7 +1170,7 @@ save_secret (GladeXML *xml,
 
 	g_debug ("save_secret(%s, %s, %s, %s)", widget_name,
 			vpn_uuid, vpn_name, secret_name);
-	w = glade_xml_get_widget (xml, widget_name);
+	w = GTK_WIDGET (gtk_builder_get_object (builder, widget_name));
 	g_assert (w);
 	secret = gtk_entry_get_text (GTK_ENTRY (w));
 	if (secret && strlen (secret)) {
@@ -1198,7 +1187,7 @@ save_secret (GladeXML *xml,
 }
 
 gboolean
-auth_widget_save_secrets (GladeXML *xml,
+auth_widget_save_secrets (GtkBuilder *builder,
 		const char *contype,
 		const char *uuid,
 		const char *name)
@@ -1206,11 +1195,11 @@ auth_widget_save_secrets (GladeXML *xml,
 	gboolean ret = FALSE;
 
 	if (!strcmp (contype, NM_NOVELLVPN_CONTYPE_GROUPAUTH_STRING)) {
-		ret = save_secret (xml, "userpassword_entry", uuid, name, NM_NOVELLVPN_KEY_USER_PWD);
-		ret = save_secret (xml, "grouppassword_entry", uuid, name, NM_NOVELLVPN_KEY_GRP_PWD);
+		ret = save_secret (builder, "userpassword_entry", uuid, name, NM_NOVELLVPN_KEY_USER_PWD);
+		ret = save_secret (builder, "grouppassword_entry", uuid, name, NM_NOVELLVPN_KEY_GRP_PWD);
 
 	} else if (!strcmp (contype, NM_NOVELLVPN_CONTYPE_X509_STRING))
-		ret = save_secret (xml, "certpassword_entry", uuid, name, NM_NOVELLVPN_KEY_CERT_PWD);
+		ret = save_secret (builder, "certpassword_entry", uuid, name, NM_NOVELLVPN_KEY_CERT_PWD);
 	else
 		g_assert_not_reached ();
 
@@ -1237,9 +1226,9 @@ save_secrets (NMVpnPluginUiWidgetInterface *iface,
 		return FALSE;
 	}
 
-	auth_type = get_auth_type (priv->xml);
+	auth_type = get_auth_type (priv->builder);
 	if (auth_type)
-		ret = auth_widget_save_secrets (priv->xml, auth_type,
+		ret = auth_widget_save_secrets (priv->builder, auth_type,
 				nm_setting_connection_get_uuid (s_con),
 				nm_setting_connection_get_id (s_con));
 
@@ -1258,7 +1247,7 @@ nm_vpn_plugin_ui_widget_interface_new (NMConnection *connection, GError **error)
 {
 	NMVpnPluginUiWidgetInterface *object = NULL;
 	NovellvpnPluginUiWidgetPrivate *priv = NULL;
-	char *glade_file = NULL;
+	char *ui_file = NULL;
 
 	g_debug ("Enter nm_vpn_plugin_ui_widget_interface_new...");
 
@@ -1273,18 +1262,24 @@ nm_vpn_plugin_ui_widget_interface_new (NMConnection *connection, GError **error)
 
 	priv = NOVELLVPN_PLUGIN_UI_WIDGET_GET_PRIVATE (object);
 
-	glade_file = g_strdup_printf ("%s/%s", GLADEDIR, "nm-novellvpn-dialog.glade");
-	priv->xml = glade_xml_new (glade_file, "novellvpn-vbox", GETTEXT_PACKAGE);
-	if (priv->xml == NULL) {
+	ui_file = g_strdup_printf ("%s/%s", UIDIR, "nm-novellvpn-dialog.ui");
+	priv->builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_file (priv->builder, ui_file, error)) {
+		g_warning ("Couldn't load builder file: %s",
+				error && *error ? (*error)->message : "(unknown)");
+		g_clear_error (error);
 		g_set_error (error, NOVELLVPN_PLUGIN_UI_ERROR, 0,
-				"could not load required resources at %s", glade_file);
-		g_free (glade_file);
+				"could not load required resources from %s", ui_file);
+		g_free (ui_file);
 		g_object_unref (object);
 		return NULL;
 	}
-	g_free (glade_file);
 
-	priv->widget = glade_xml_get_widget (priv->xml, "novellvpn-vbox");
+	gtk_builder_set_translation_domain (priv->builder, GETTEXT_PACKAGE);
+
+	g_free (ui_file);
+
+	priv->widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "novellvpn-vbox"));
 	if (!priv->widget) {
 		g_set_error (error, NOVELLVPN_PLUGIN_UI_ERROR, 0, "could not load UI widget");
 		g_object_unref (object);
@@ -1326,8 +1321,8 @@ dispose (GObject *object)
 	if (priv->widget)
 		g_object_unref (priv->widget);
 
-	if (priv->xml)
-		g_object_unref (priv->xml);
+	if (priv->builder)
+		g_object_unref (priv->builder);
 
 	if (priv->advanced)
 		g_hash_table_destroy (priv->advanced);
