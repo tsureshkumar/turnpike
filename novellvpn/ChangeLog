@@ -1,4 +1,14 @@
 2011-04-11 Bin Li <bili@novell.com>
+	* configure.in:
+	* common-gnome/Makefile.am:
+	* common-gnome/keyring-helpers.h:
+	* properties/Makefile.am:
+	* auth-dialog/gnome-two-password-dialog.h:
+	* auth-dialog/profile.c:
+	* auth-dialog/main.c:
+	* auth-dialog/Makefile.am:
+	* auth-dialog/gnome-two-password-dialog.c:
+	Replace the Deprecated API.
 	* po/*.po:
 	Replace the glade with ui.
 2011-04-06 Bin Li <bili@novell.com>

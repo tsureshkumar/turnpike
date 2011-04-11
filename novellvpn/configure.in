@@ -65,6 +65,10 @@ PKG_CHECK_MODULES(DBUS, dbus-glib-1 >= 0.74)
 AC_SUBST(DBUS_CFLAGS)
 AC_SUBST(DBUS_LIBS)
 
+PKG_CHECK_MODULES(LIBXML2, libxml-2.0)
+AC_SUBST(LIBXML2_CFLAGS)
+AC_SUBST(LIBXML2_LIBS)
+
 PKG_CHECK_MODULES(NM,
 	NetworkManager >= 0.8.998
 	libnm-util >= 0.8.998
@@ -104,9 +108,6 @@ PKG_CHECK_MODULES(LIBNL, libnl-1)
 AC_SUBST(LIBNL_CFLAGS)
 AC_SUBST(LIBNL_LIBS)
 
-NM_COMPILER_WARNINGS
-
-
 dnl
 dnl Distribution version string
 dnl
@@ -123,3 +124,4 @@ properties/Makefile
 po/Makefile.in
 nm-novellvpn-service.name
 ])
+AC_OUTPUT

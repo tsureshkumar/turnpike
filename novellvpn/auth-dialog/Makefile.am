@@ -3,8 +3,9 @@ libexec_PROGRAMS = nm-novellvpn-auth-dialog
 nm_novellvpn_auth_dialog_CPPFLAGS =			\
 	$(GTHREAD_CFLAGS)			\
 	$(GTK_CFLAGS)				\
-	$(LIBGNOMEUI_CFLAGS)			\
 	$(NM_CFLAGS)		\
+	$(GNOMEKEYRING_CFLAGS) \
+	$(LIBXML2_CFLAGS)	\
 	-DICONDIR=\""$(datadir)/pixmaps"\"	\
 	-DGLADEDIR=\""$(gladedir)"\"		\
 	-DBINDIR=\""$(bindir)"\"		\
@@ -26,7 +27,8 @@ nm_novellvpn_auth_dialog_SOURCES =			\
 
 nm_novellvpn_auth_dialog_LDADD =			\
 	$(GTK_LIBS)				\
-	$(LIBGNOMEUI_LIBS)			\
+	$(NM_LIBS) \
+	$(LIBXML2_LIBS)	\
 	$(top_builddir)/common-gnome/libnm-novellvpn-common-gnome.la		\
 	$(NULL)
 

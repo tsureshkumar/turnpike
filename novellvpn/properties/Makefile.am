@@ -12,9 +12,9 @@ ui_DATA = nm-novellvpn-dialog.ui
 
 libnm_novellvpn_properties_la_CFLAGS =                          \
         $(GTK_CFLAGS)                                   \
-        $(GCONF_CFLAGS)                                 \
-        $(LIBGNOMEUI_CFLAGS)                            \
 	$(NM_CFLAGS)			\
+        $(GNOMEKEYRING_CFLAGS)                            \
+	$(DISABLE_DEPRECATED)		\
         -DICONDIR=\""$(datadir)/pixmaps"\"              \
         -DUIDIR=\""$(uidir)"\"                    \
         -DG_DISABLE_DEPRECATED                          \
@@ -25,12 +25,11 @@ libnm_novellvpn_properties_la_CFLAGS =                          \
 
 libnm_novellvpn_properties_la_LIBADD =       \
         $(GTK_LIBS)                     \
-        $(GCONF_LIBS)                   \
-        $(LIBGNOMEUI_LIBS)		\
+        $(NM_LIBS)		\
 	$(top_builddir)/common-gnome/libnm-novellvpn-common-gnome.la		\
 	$(NULL)
 
-CLEANFILES = *.bak *.gladep *~
+CLEANFILES = *.bak *~
 
 EXTRA_DIST =                            \
-        $(glade_DATA)
+        $(ui_DATA)

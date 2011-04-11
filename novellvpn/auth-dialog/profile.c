@@ -41,7 +41,6 @@
 #include <sys/stat.h> 
 #include <unistd.h> 
  
-#include <gconf/gconf-client.h> 
 #include <nm-setting-connection.h> 
 #include <nm-setting-vpn.h> 
 #include <gtk/gtk.h>
@@ -188,7 +187,6 @@ void search_in_the_directory(char search_keys[][100])
 
 void get_the_vendor_file_name(char* vendor_file_name_to_read, char* vpn_uuid)
 {
-	GConfClient *gconf_client = NULL;
 	/* FIXME: search_keys shouldn't be static */
 	char search_keys[3][100] = { {'\0'}, {'\0'}, {'\0'}};
 	GSList *conf_list = NULL;
@@ -197,94 +195,9 @@ void get_the_vendor_file_name(char* vendor_file_name_to_read, char* vpn_uuid)
 	char *val = NULL;
 	char *connection_path = NULL;
 
-	gconf_client = gconf_client_get_default();
-
-	/* FIXME: This whole thing sucks: we should not go around poking gconf
-	 *        directly, but there's nothing that does it for us right now */
-
-	/* Lists the subdirectories in GCONF_PATH_NM_CONNECTIONS,
-	 * The returned list contains allocated strings, so need to free */
-	conf_list = gconf_client_all_dirs (gconf_client,
-			GCONF_PATH_NM_CONNECTIONS, NULL);
-	if (NULL == conf_list) {
-		g_warning ("can't found any connections in %s",
-				GCONF_PATH_NM_CONNECTIONS);
-		strcpy( vendor_file_name_to_read, "not_found");
-		return;
-	}
-
-	/* found the vpn connection dir, 'type' should be vpn, and 
-	 * also 'id' should be the VPN_Name */
-	for ( iter = conf_list; iter ; iter = iter->next) {
-		const char *path = (const char *) iter->data;
-
-		key = g_strdup_printf ("%s/%s/%s", path,
-				NM_SETTING_CONNECTION_SETTING_NAME,
-				NM_SETTING_CONNECTION_TYPE);
-		val = gconf_client_get_string (gconf_client, key, NULL);
-		g_free (key);
-
-		if (NULL == val || 0 != strcmp (val, "vpn")) {
-			g_free (val);
-			continue;
-		}
-		/* need free? */
-		g_free (val);
-
-		key = g_strdup_printf ("%s/%s/%s", path,
-				NM_SETTING_CONNECTION_SETTING_NAME,
-				NM_SETTING_CONNECTION_UUID);
-		val = gconf_client_get_string (gconf_client, key, NULL);
-		g_free (key);
-
-		if (NULL == val || 0 != strcmp (val, vpn_uuid)) {
-			g_free (val);
-			continue;
-		}
-		/* need free? */
-		g_free (val);
-
-		/* Woo, found the connection */
-		connection_path = g_strdup ((char *) iter->data);
-		break;
-	}
-
-	if (NULL != connection_path) {
-		key = g_strdup_printf ("%s/%s/%s",
-				connection_path,
-				NM_SETTING_VPN_SETTING_NAME,
-				NM_NOVELLVPN_KEY_GATEWAY);
-		val = gconf_client_get_string (gconf_client, key, NULL);
-		g_free (key);
-
-		if (NULL != val) {
-			strcpy (search_keys[0], val);
-		}
-		g_free (val);
-
-		key = g_strdup_printf ("%s/%s/%s",
-				connection_path,
-				NM_SETTING_VPN_SETTING_NAME,
-				NM_NOVELLVPN_KEY_GROUP_NAME);
-		val = gconf_client_get_string (gconf_client, key, NULL);
-		g_free (key);
-
-		if (NULL != val) {
-			strcpy (search_keys[1], val);
-		}
-		g_free (val);
-		g_free (connection_path);
-	}
-
-	/* g_free() each string in the list, then g_slist_free() the list itself */
-	g_slist_foreach (conf_list, (GFunc) g_free, NULL);
-	g_slist_free (conf_list);
-
 	strcpy(search_keys[2], "not_found");
 	search_in_the_directory(search_keys);
 	strcpy(vendor_file_name_to_read, search_keys[2]);
-
-	g_object_unref (gconf_client);
 }
 
 

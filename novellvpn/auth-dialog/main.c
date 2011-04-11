@@ -30,10 +30,8 @@
 #include <string.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <libgnomeui/libgnomeui.h>
 #include <nm-setting-vpn.h>
 #include <nm-setting-connection.h>
-#include <gconf/gconf-client.h>
 
 #include "gnome-two-password-dialog.h"
 #include "profile.h"
@@ -81,8 +79,8 @@ clear_secrets (PasswordsInfo *info)
 static gboolean
 get_passwords (PasswordsInfo *info, gboolean retry)
 {
+	GnomeTwoPasswordDialog *dialog = NULL;
 	char *prompt = NULL;
-	GtkWidget *dialog = NULL;
 	gboolean is_session = FALSE;
 	gboolean result = FALSE; 
 	gboolean need_secret = FALSE;
@@ -143,8 +141,8 @@ get_passwords (PasswordsInfo *info, gboolean retry)
 
 	prompt = g_strdup_printf (_("You need to authenticate to access the Novell's  Virtual Private Network '%s'."),
 		   	info->vpn_name);
-	dialog = gnome_two_password_dialog_new (_("Authenticate Novell VPN"), 
-			prompt, NULL, NULL, FALSE);
+	dialog = GNOME_TWO_PASSWORD_DIALOG (gnome_two_password_dialog_new (_("Authenticate Novell VPN"), 
+			prompt, NULL, NULL, FALSE));
 	g_free (prompt);
 
 	/* If nothing was found in the keyring, default to not remembering any secrets */
@@ -153,78 +151,78 @@ get_passwords (PasswordsInfo *info, gboolean retry)
 		/* Otherwise set default remember based on which keyring the secrets were found in */
 		if (is_session)
 			gnome_two_password_dialog_set_remember (
-					GNOME_TWO_PASSWORD_DIALOG (dialog),
+					dialog,
 				   	GNOME_TWO_PASSWORD_DIALOG_REMEMBER_SESSION);
 		else
 			gnome_two_password_dialog_set_remember (
-					GNOME_TWO_PASSWORD_DIALOG (dialog),
+					dialog,
 				   	GNOME_TWO_PASSWORD_DIALOG_REMEMBER_FOREVER);
 	} else {
 		gnome_two_password_dialog_set_remember (
-				GNOME_TWO_PASSWORD_DIALOG (dialog),
+				dialog,
 				GNOME_TWO_PASSWORD_DIALOG_REMEMBER_NOTHING);
 	}
 
 	gnome_two_password_dialog_set_show_username (
-			GNOME_TWO_PASSWORD_DIALOG (dialog), FALSE);
+			dialog, FALSE);
 	gnome_two_password_dialog_set_show_userpass_buttons (
-			GNOME_TWO_PASSWORD_DIALOG (dialog), FALSE);
+			dialog, FALSE);
 	gnome_two_password_dialog_set_show_domain (
-			GNOME_TWO_PASSWORD_DIALOG (dialog), FALSE);
+			dialog, FALSE);
 	gnome_two_password_dialog_set_show_remember (
-			GNOME_TWO_PASSWORD_DIALOG (dialog), TRUE);
+			dialog, TRUE);
 
 	if (info->need_password) {
 		gnome_two_password_dialog_set_password_secondary_label (
-				GNOME_TWO_PASSWORD_DIALOG (dialog), _("_Group Password:"));
+				dialog, _("_Group Password:"));
 		if (NULL != info->group_password) {
 			gnome_two_password_dialog_set_password_secondary (
-					GNOME_TWO_PASSWORD_DIALOG (dialog), 
+					dialog, 
 					info->group_password);
 			// don't allow user view and change group password
 			if (info->enc_group_password) {
 				gnome_two_password_dialog_set_password_secondary_editable(
-						GNOME_TWO_PASSWORD_DIALOG (dialog), 
+						dialog, 
 						FALSE);
 			}
 		}
 		/* if retrying, put in the passwords from the keyring */
 		if (NULL != info->user_password) {
 			gnome_two_password_dialog_set_password (
-					GNOME_TWO_PASSWORD_DIALOG (dialog), info->user_password);
+					dialog, info->user_password);
 		}
 	} else if (info->need_cert_password) {
 		gnome_two_password_dialog_set_show_password_secondary (
-				GNOME_TWO_PASSWORD_DIALOG (dialog), FALSE);
+				dialog, FALSE);
 		gnome_two_password_dialog_set_password_primary_label (
-				GNOME_TWO_PASSWORD_DIALOG (dialog), _("_Cert Password:"));
+				dialog, _("_Cert Password:"));
 		if (NULL != info->cert_password) {
 			gnome_two_password_dialog_set_password (
-					GNOME_TWO_PASSWORD_DIALOG (dialog),
+					dialog,
 					info->cert_password);
 		}
 	}
 
 	clear_secrets (info);
 
-	gtk_widget_show (dialog);
+	gtk_widget_show (GTK_WIDGET (dialog));
 
-	if (gnome_two_password_dialog_run_and_block (GNOME_TWO_PASSWORD_DIALOG (dialog)))
+	if (gnome_two_password_dialog_run_and_block (dialog))
 	{
 		const char *keyring = NULL;
 		gboolean save = FALSE;
 
 		if (info->need_password) {
 			info->user_password = g_strdup (gnome_two_password_dialog_get_password (
-						GNOME_TWO_PASSWORD_DIALOG (dialog)));
+						dialog));
 			info->group_password = g_strdup (gnome_two_password_dialog_get_password_secondary (
-						GNOME_TWO_PASSWORD_DIALOG (dialog)));
+						dialog));
 		} else if (info->need_cert_password) {
 			info->cert_password = g_strdup (gnome_two_password_dialog_get_password (
-						GNOME_TWO_PASSWORD_DIALOG (dialog)));
+						dialog));
 		}
 
-		switch (gnome_two_password_dialog_get_remember (GNOME_TWO_PASSWORD_DIALOG (dialog)))
+		switch (gnome_two_password_dialog_get_remember (dialog))
 		{
 			case GNOME_TWO_PASSWORD_DIALOG_REMEMBER_SESSION:
 				keyring = "session";
@@ -259,117 +257,53 @@ get_passwords (PasswordsInfo *info, gboolean retry)
 		result = TRUE;
 	}
 
-	gtk_widget_destroy (dialog);
+	gtk_widget_destroy (GTK_WIDGET (dialog));
 
 	return result;
 }
 
-static gboolean
-get_password_types (PasswordsInfo *info)
+static void
+get_password_types (GHashTable *data, PasswordsInfo *info)
 {
-	GConfClient *gconf_client = NULL;
-	GSList *conf_list = NULL;
-	GSList *iter = NULL;
-	char *key = NULL;
-	char *val = NULL;
-	char *connection_path = NULL;
+	const char *ctype, *val;
+	NMSettingSecretFlags flags = NM_SETTING_SECRET_FLAG_NONE;
 
-	gconf_client = gconf_client_get_default();
+	ctype = g_hash_table_lookup (data, NM_NOVELLVPN_KEY_AUTHTYPE);
+	g_return_if_fail (ctype != NULL);
 
-	/* FIXME: This whole thing sucks: we should not go around poking gconf
-	 *        directly, but there's nothing that does it for us right now */
+	if (!strcmp (ctype, NM_NOVELLVPN_CONTYPE_X509_STRING)) {
+		info->need_cert_password = TRUE;
+		/* FIXME: Need Cert password for X509 */
+		nm_vpn_plugin_utils_get_secret_flags (data, NM_NOVELLVPN_KEY_CERT_PWD, &flags);
+		if (!(flags & NM_SETTING_SECRET_FLAG_NOT_REQUIRED))
+			info->need_cert_password = TRUE;
 
-	/* Lists the subdirectories in GCONF_PATH_NM_CONNECTIONS,
-	 * The returned list contains allocated strings, so need to free */
-	conf_list = gconf_client_all_dirs (gconf_client,
-			GCONF_PATH_NM_CONNECTIONS, NULL);
-	if (NULL == conf_list) {
-		return FALSE;
-	}
-
-	/* found the vpn connection dir, 'type' should be vpn, and 
-	 * also 'id' should be the VPN_Name */
-	for ( iter = conf_list; iter ; iter = iter->next) {
-		const char *path = (const char *) iter->data;
-
-		key = g_strdup_printf ("%s/%s/%s", path,
-				NM_SETTING_CONNECTION_SETTING_NAME,
-				NM_SETTING_CONNECTION_TYPE);
-		val = gconf_client_get_string (gconf_client, key, NULL);
-		g_free (key);
-
-		if (NULL == val || 0 != strcmp (val, "vpn")) {
-			g_free (val);
-			continue;
-		}
-		/* need free? */
-		g_free (val);
-
-		key = g_strdup_printf ("%s/%s/%s", path,
-				NM_SETTING_CONNECTION_SETTING_NAME,
-				NM_SETTING_CONNECTION_UUID);
-		val = gconf_client_get_string (gconf_client, key, NULL);
-		g_free (key);
-
-		if (NULL == val || 0 != strcmp (val, info->vpn_uuid)) {
-			g_free (val);
-			continue;
-		}
-		/* need free? */
-		g_free (val);
-
-		/* Woo, found the connection */
-		connection_path = g_strdup ((char *) iter->data);
-		break;
-	}
-
-	/* g_free() each string in the list, then g_slist_free() the list itself */
-	g_slist_foreach (conf_list, (GFunc) g_free, NULL);
-	g_slist_free (conf_list);
-
-	if (NULL != connection_path) {
-		key = g_strdup_printf ("%s/%s/%s",
-				connection_path,
-				NM_SETTING_VPN_SETTING_NAME,
-				NM_NOVELLVPN_KEY_AUTHTYPE);
-		val = gconf_client_get_string (gconf_client, key, NULL);
-		g_free (key);
-
-		if (NULL != val) {
-			if (0 == strcmp (val, NM_NOVELLVPN_CONTYPE_X509_STRING)) {
-				info->need_cert_password = TRUE;
-			} else if (0 == strcmp (val, NM_NOVELLVPN_CONTYPE_GROUPAUTH_STRING)) {
-				info->need_password = TRUE;
-			} 
-		}
-		g_free (val);
-		
-		g_free (connection_path);
+	} else if (!strcmp (ctype, NM_NOVELLVPN_CONTYPE_GROUPAUTH_STRING)) {
+		info->need_password = TRUE;
+		/* Need user password for XAUTH */
+		nm_vpn_plugin_utils_get_secret_flags (data, NM_NOVELLVPN_KEY_USER_PWD, &flags);
+		if (!(flags & NM_SETTING_SECRET_FLAG_NOT_REQUIRED))
+			info->need_password = TRUE;
 	} else {
-		g_object_unref (gconf_client);
-		return FALSE;
+		g_warning ("Failed to get the auth type!");
 	}
-
-	g_object_unref (gconf_client);
-
-	return TRUE;
 }
 
 int 
 main (int argc, char *argv[])
 {
-	static gboolean retry = FALSE;
-	static gchar *vpn_name = NULL;
-	static gchar *vpn_uuid = NULL;
-	static gchar *vpn_service = NULL;
+	gboolean retry = FALSE;
+	gchar *vpn_name = NULL;
+	gchar *vpn_uuid = NULL;
+	gchar *vpn_service = NULL;
+	GHashTable *data = NULL, *secrets = NULL;
 	GOptionContext *context = NULL;
-	GnomeProgram *program = NULL;
 	int how_many_passwords = 0;
 	PasswordsInfo info;
 	gboolean result = FALSE;
 	int exit_status = 1;
 
-	static GOptionEntry entries[] = 
+	GOptionEntry entries[] = 
 	{
 		{ "reprompt", 'r', 0, G_OPTION_ARG_NONE, &retry, "Reprompt for passwords", NULL},
 		{ "uuid", 'u', 0, G_OPTION_ARG_STRING, &vpn_uuid, "UUID of VPN connection", NULL},
@@ -383,14 +317,12 @@ main (int argc, char *argv[])
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
+	gtk_init (&argc, &argv);
+
 	context = g_option_context_new ("- nvpn auth dialog");
 	g_option_context_add_main_entries (context, entries, GETTEXT_PACKAGE);
-
-	program = gnome_program_init ("nm-novellvpn-auth-dialog",
-		   	VERSION, LIBGNOMEUI_MODULE,
-			argc, argv, 
-			GNOME_PARAM_GOPTION_CONTEXT, context,
-			GNOME_PARAM_NONE);
+	g_option_context_parse (context, &argc, &argv, NULL);
+	g_option_context_free (context);
 
 	if (vpn_uuid == NULL || vpn_name == NULL || vpn_service == NULL) {
 		fprintf (stderr, "Have to supply UUID, name and service\n");
@@ -404,13 +336,20 @@ main (int argc, char *argv[])
 		goto out;
 	}
 
+	if (!nm_vpn_plugin_utils_read_vpn_details (0, &data, &secrets)) {
+		fprintf (stderr, "Failed to read '%s' (%s) data and secrets from stdin.\n",
+				vpn_name, vpn_uuid);
+		return 1;
+	}
+
 	memset (&info, 0, sizeof (PasswordsInfo));
 	info.vpn_uuid = vpn_uuid;
 	info.vpn_name = vpn_name;
 
-	if (!get_password_types (&info)) {
-		fprintf (stderr, "Invalid connection");
-		goto out;
+	get_password_types (data, &info);
+	if (!info.need_password && !info.need_cert_password) {
+		//printf ("%s\n%s\n\n\n", NM_OPENVPN_KEY_NOSECRET, "true");
+		return 0;
 	}
 
 	result = get_passwords (&info, retry);
@@ -474,8 +413,6 @@ main (int argc, char *argv[])
 	fread (buf, sizeof (char), sizeof (buf), stdin);
 
 out:
-	if (program)
-		g_object_unref (program);
 
 	// FIXME:
 	// Why crash when free context?

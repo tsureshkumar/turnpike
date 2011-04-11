@@ -27,7 +27,6 @@
 
 #include <glib.h>
 #include <gnome-keyring.h>
-#include <gnome-keyring-memory.h>
 
 char *keyring_helpers_lookup_secret (
 		const char *vpn_uuid,
