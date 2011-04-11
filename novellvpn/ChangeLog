@@ -1,3 +1,6 @@
+2011-04-11 Bin Li <bili@novell.com>
+	* po/*.po:
+	Replace the glade with ui.
 2011-04-06 Bin Li <bili@novell.com>
 	* configure.in:
 	Support the GTK 3.0.

@@ -70,87 +70,87 @@ msgstr "VPN接続の追加、削除、および編集"
 msgid "VPN Connection Manager (NovellVPN)"
 msgstr "VPN接続マネージャ(NovellVPN)"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:1
+#: ../properties/nm-novellvpn-dialog.ui.h:1
 msgid "768 bits (DH1)\n1024 bits (DH2)"
 msgstr "768ビット(DH1)\n1024ビット(DH2)"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:3
+#: ../properties/nm-novellvpn-dialog.ui.h:3
 msgid "<b>Authentication</b>"
 msgstr "<b>認証</b>"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:4
+#: ../properties/nm-novellvpn-dialog.ui.h:4
 msgid "<b>General</b>"
 msgstr "<b>一般</b>"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:5
+#: ../properties/nm-novellvpn-dialog.ui.h:5
 msgid "<b>Optional Information</b>"
 msgstr "<b>オプション情報</b>"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:6
+#: ../properties/nm-novellvpn-dialog.ui.h:6
 msgid "Certificate file:"
 msgstr "証明書ファイル:"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:7
+#: ../properties/nm-novellvpn-dialog.ui.h:7
 msgid "G_roup Password:"
 msgstr "グループパスワード(_R):"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:8
+#: ../properties/nm-novellvpn-dialog.ui.h:8
 msgid "Gate_way Type:"
 msgstr "ゲートウェイタイプ(_W):"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:9
+#: ../properties/nm-novellvpn-dialog.ui.h:9
 msgid "Nortel\nStandard Gateway"
 msgstr "Nortel\n標準ゲートウェイ"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:11
+#: ../properties/nm-novellvpn-dialog.ui.h:11
 msgid "Off\n768 bits (PFS 1)\n1024 bits (PFS 2)"
 msgstr "オフ\n768ビット(PFS 1)\n1024ビット(PFS 2)"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:14
+#: ../properties/nm-novellvpn-dialog.ui.h:14
 msgid "Show passwords"
 msgstr "パスワードの表示"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:15
+#: ../properties/nm-novellvpn-dialog.ui.h:15
 msgid "U_ser Password:"
 msgstr "ユーザパスワード(_S):"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:16
+#: ../properties/nm-novellvpn-dialog.ui.h:16
 msgid "X.509"
 msgstr "X.509"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:17
+#: ../properties/nm-novellvpn-dialog.ui.h:17
 msgid "XAUTH"
 msgstr "XAUTH"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:18
+#: ../properties/nm-novellvpn-dialog.ui.h:18
 msgid "XAUTH\nX.509 Certificate"
 msgstr "XAUTH\nX.509証明書"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:20
+#: ../properties/nm-novellvpn-dialog.ui.h:20
 msgid "_Certificate password:"
 msgstr "_パスワードの認証:"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:21
+#: ../properties/nm-novellvpn-dialog.ui.h:21
 msgid "_DH Group:"
 msgstr "DHグループ(_D): "
 
-#: ../properties/nm-novellvpn-dialog.glade.h:22
+#: ../properties/nm-novellvpn-dialog.ui.h:22
 msgid "_Gateway:"
 msgstr "_ゲートウェイ(_G):"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:23
+#: ../properties/nm-novellvpn-dialog.ui.h:23
 msgid "_Group Name:"
 msgstr "グループ名(_G):"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:24
+#: ../properties/nm-novellvpn-dialog.ui.h:24
 msgid "_PFS Group:"
 msgstr "PFSグループ(_P): "
 
-#: ../properties/nm-novellvpn-dialog.glade.h:25
+#: ../properties/nm-novellvpn-dialog.ui.h:25
 msgid "_Type:"
 msgstr "種類(_T):"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:26
+#: ../properties/nm-novellvpn-dialog.ui.h:26
 msgid "_User Name:"
 msgstr "ユーザ名(_U):"
 

@@ -70,87 +70,87 @@ msgstr "Добавить, Удалить и Изменить VPN соедине�
 msgid "VPN Connection Manager (NovellVPN)"
 msgstr "Менеджер соединений VPN (NovellVPN)"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:1
+#: ../properties/nm-novellvpn-dialog.ui.h:1
 msgid "768 bits (DH1)\n1024 bits (DH2)"
 msgstr "768 разрядов (DH1)\n1024 разряда (DH2)"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:3
+#: ../properties/nm-novellvpn-dialog.ui.h:3
 msgid "<b>Authentication</b>"
 msgstr "<b>Аутентификация</b>"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:4
+#: ../properties/nm-novellvpn-dialog.ui.h:4
 msgid "<b>General</b>"
 msgstr "<b>Общие</b>"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:5
+#: ../properties/nm-novellvpn-dialog.ui.h:5
 msgid "<b>Optional Information</b>"
 msgstr "<b>Дополнительная информация</b>"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:6
+#: ../properties/nm-novellvpn-dialog.ui.h:6
 msgid "Certificate file:"
 msgstr "Файл сертификата:"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:7
+#: ../properties/nm-novellvpn-dialog.ui.h:7
 msgid "G_roup Password:"
 msgstr "_Групповой пароль:"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:8
+#: ../properties/nm-novellvpn-dialog.ui.h:8
 msgid "Gate_way Type:"
 msgstr "Тип ш_люза:"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:9
+#: ../properties/nm-novellvpn-dialog.ui.h:9
 msgid "Nortel\nStandard Gateway"
 msgstr "Nortel\nСтандартный шлюз"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:11
+#: ../properties/nm-novellvpn-dialog.ui.h:11
 msgid "Off\n768 bits (PFS 1)\n1024 bits (PFS 2)"
 msgstr "Выкл\n768 разрядов (PFS 1)\n1024 разряда (PFS 2)"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:14
+#: ../properties/nm-novellvpn-dialog.ui.h:14
 msgid "Show passwords"
 msgstr "Показать пароли"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:15
+#: ../properties/nm-novellvpn-dialog.ui.h:15
 msgid "U_ser Password:"
 msgstr "_Пароль пользователя:"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:16
+#: ../properties/nm-novellvpn-dialog.ui.h:16
 msgid "X.509"
 msgstr "X.509"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:17
+#: ../properties/nm-novellvpn-dialog.ui.h:17
 msgid "XAUTH"
 msgstr "XAUTH"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:18
+#: ../properties/nm-novellvpn-dialog.ui.h:18
 msgid "XAUTH\nX.509 Certificate"
 msgstr "XAUTH\nСертификат X.509"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:20
+#: ../properties/nm-novellvpn-dialog.ui.h:20
 msgid "_Certificate password:"
 msgstr "_Пароль сертификата:"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:21
+#: ../properties/nm-novellvpn-dialog.ui.h:21
 msgid "_DH Group:"
 msgstr "Группа _DH:"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:22
+#: ../properties/nm-novellvpn-dialog.ui.h:22
 msgid "_Gateway:"
 msgstr "_Шлюз:"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:23
+#: ../properties/nm-novellvpn-dialog.ui.h:23
 msgid "_Group Name:"
 msgstr "Имя _группы:"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:24
+#: ../properties/nm-novellvpn-dialog.ui.h:24
 msgid "_PFS Group:"
 msgstr "Группа _PFS:"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:25
+#: ../properties/nm-novellvpn-dialog.ui.h:25
 msgid "_Type:"
 msgstr "_Тип:"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:26
+#: ../properties/nm-novellvpn-dialog.ui.h:26
 msgid "_User Name:"
 msgstr "_Имя пользователя:"
 

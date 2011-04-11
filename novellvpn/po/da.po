@@ -86,73 +86,73 @@ msgstr ""
 msgid "VPN Connection Manager (NovellVPN)"
 msgstr "VPN forbindelser (vpnc)"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:1
+#: ../properties/nm-novellvpn-dialog.ui.h:1
 #, fuzzy
 msgid "           "
 msgstr "      RAID      "
 
-#: ../properties/nm-novellvpn-dialog.glade.h:2
+#: ../properties/nm-novellvpn-dialog.ui.h:2
 #, fuzzy
 msgid "                     "
 msgstr "        Type        "
 
-#: ../properties/nm-novellvpn-dialog.glade.h:3
+#: ../properties/nm-novellvpn-dialog.ui.h:3
 msgid "<b>Connection Name</b>"
 msgstr "<b>Navn på forbindelse</b>"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:4
+#: ../properties/nm-novellvpn-dialog.ui.h:4
 msgid "<b>Optional Information</b>"
 msgstr "<b>Andre oplysninger</b>"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:5
+#: ../properties/nm-novellvpn-dialog.ui.h:5
 msgid "<b>Required Information</b>"
 msgstr "<b>Påkrævede oplysninger</b>"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:6
+#: ../properties/nm-novellvpn-dialog.ui.h:6
 #, fuzzy
 msgid "Authentication Type  "
 msgstr "Autentisering"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:7
+#: ../properties/nm-novellvpn-dialog.ui.h:7
 #, fuzzy
 msgid "Certificate file  "
 msgstr "Certifikatsfil som skal importeres"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:8
+#: ../properties/nm-novellvpn-dialog.ui.h:8
 #, fuzzy
 msgid "DH Group: "
 msgstr "Gruppe-ID"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:9
+#: ../properties/nm-novellvpn-dialog.ui.h:9
 msgid ""
 "DH1\n"
 "DH2"
 msgstr ""
 
 #
-#: ../properties/nm-novellvpn-dialog.glade.h:11
+#: ../properties/nm-novellvpn-dialog.ui.h:11
 #, fuzzy
 msgid "Gateway  "
 msgstr "Standard gateway"
 
 #
-#: ../properties/nm-novellvpn-dialog.glade.h:12
+#: ../properties/nm-novellvpn-dialog.ui.h:12
 #, fuzzy
 msgid "Gateway Type  "
 msgstr "Standard gateway"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:13
+#: ../properties/nm-novellvpn-dialog.ui.h:13
 #, fuzzy
 msgid "Group Name  "
 msgstr "&Gruppenavn"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:14
+#: ../properties/nm-novellvpn-dialog.ui.h:14
 msgid ""
 "Nortel\n"
 "Standard Gateway"
 msgstr ""
 
-#: ../properties/nm-novellvpn-dialog.glade.h:16
+#: ../properties/nm-novellvpn-dialog.ui.h:16
 #, fuzzy
 msgid ""
 "Only use VPN connection for these addresses\n"
@@ -160,12 +160,12 @@ msgid ""
 msgstr "Brug kun det private netværk til flg. adresser"
 
 #
-#: ../properties/nm-novellvpn-dialog.glade.h:18
+#: ../properties/nm-novellvpn-dialog.ui.h:18
 #, fuzzy
 msgid "PFS Group: "
 msgstr "Filgruppe"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:19
+#: ../properties/nm-novellvpn-dialog.ui.h:19
 msgid ""
 "Please enter the information provided by your system administrator below. Do "
 "not enter your password here as you will be prompted when connecting."
@@ -173,27 +173,27 @@ msgstr ""
 "Indtast oplysninger fra din systemadministrator nedenfor. Du skal ikke "
 "indtaste din nøgle her da du bliver spurgt om den ved forbindelse."
 
-#: ../properties/nm-novellvpn-dialog.glade.h:20
+#: ../properties/nm-novellvpn-dialog.ui.h:20
 #, fuzzy
 msgid "User Name  "
 msgstr "Brugernavn"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:21
+#: ../properties/nm-novellvpn-dialog.ui.h:21
 msgid "X.509"
 msgstr ""
 
-#: ../properties/nm-novellvpn-dialog.glade.h:22
+#: ../properties/nm-novellvpn-dialog.ui.h:22
 msgid "XAUTH"
 msgstr ""
 
-#: ../properties/nm-novellvpn-dialog.glade.h:23
+#: ../properties/nm-novellvpn-dialog.ui.h:23
 #, fuzzy
 msgid ""
 "XAUTH\n"
 "X.509 Certificate\n"
 msgstr "CA-certifikat"
 
-#: ../properties/nm-novellvpn-dialog.glade.h:26
+#: ../properties/nm-novellvpn-dialog.ui.h:26
 #, fuzzy
 msgid ""
 "_Name used to identify the connection to the private network, e.g. \"Campus "
@@ -202,7 +202,7 @@ msgstr ""
 "Navn brugt til at identificere forbindelsen til det private netværk, f.eks. "
 "\"Universitets Privat Netværk\" eller \"Arbejds Privat Netværk\""
 
-#: ../properties/nm-novellvpn-dialog.glade.h:27
+#: ../properties/nm-novellvpn-dialog.ui.h:27
 msgid ""
 "off\n"
 "1\n"
