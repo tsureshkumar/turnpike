@@ -1,4 +1,6 @@
 2011-06-28 Bin Li <bili@suse.de>
+	* configure.in:
+	Change version to 0.9.0 for NM 0.9.
 	* properties/nm-novellvpn-dialog.ui:
 	Delete the has_separator.
 	* properties/Makefile.am:

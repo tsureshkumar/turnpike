@@ -1,6 +1,6 @@
 AC_PREREQ(2.52)
 
-AC_INIT(NetworkManager-novellvpn, 0.8.998, libin.charles@gmail.com, NetworkManager-novellvpn)
+AC_INIT(NetworkManager-novellvpn, 0.9.0, libin.charles@gmail.com, NetworkManager-novellvpn)
 AM_INIT_AUTOMAKE([1.9 subdir-objects tar-ustar no-dist-gzip dist-bzip2])
 AM_MAINTAINER_MODE
 
