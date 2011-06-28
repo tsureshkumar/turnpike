@@ -1,3 +1,6 @@
+2011-06-28 Bin Li <bili@suse.de>
+	* properties/Makefile.am:
+	Add the libxml2's CFLAGS and LIBS.
 2011-04-11 Bin Li <bili@novell.com>
 	* configure.in:
 	* common-gnome/Makefile.am:

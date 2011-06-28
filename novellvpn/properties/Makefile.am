@@ -15,6 +15,7 @@ libnm_novellvpn_properties_la_CFLAGS =                          \
 	$(NM_CFLAGS)			\
         $(GNOMEKEYRING_CFLAGS)                            \
 	$(DISABLE_DEPRECATED)		\
+	$(LIBXML2_CFLAGS)		\
         -DICONDIR=\""$(datadir)/pixmaps"\"              \
         -DUIDIR=\""$(uidir)"\"                    \
         -DG_DISABLE_DEPRECATED                          \
@@ -26,6 +27,7 @@ libnm_novellvpn_properties_la_CFLAGS =                          \
 libnm_novellvpn_properties_la_LIBADD =       \
         $(GTK_LIBS)                     \
         $(NM_LIBS)		\
+	$(LIBXML2_LIBS)		\
 	$(top_builddir)/common-gnome/libnm-novellvpn-common-gnome.la		\
 	$(NULL)
 
