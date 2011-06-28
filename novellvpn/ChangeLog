@@ -1,4 +1,6 @@
 2011-06-28 Bin Li <bili@suse.de>
+	* properties/nm-novellvpn-dialog.ui:
+	Delete the has_separator.
 	* properties/Makefile.am:
 	Add the libxml2's CFLAGS and LIBS.
 2011-04-11 Bin Li <bili@novell.com>
