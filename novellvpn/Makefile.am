@@ -6,7 +6,7 @@ dbusservicedir = $(sysconfdir)/dbus-1/system.d
 dbusservice_DATA = nm-novellvpn-service.conf
 
 nmvpnservicedir = $(sysconfdir)/NetworkManager/VPN
-nmvpnservice_DATA = nm-novellvpn-service.name
+nmvpnservice_DATA = nm-novellvpn-service.name.in
 
 desktopdir = $(datadir)/applications
 desktop_in_files = nm-novellvpn.desktop.in
