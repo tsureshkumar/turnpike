@@ -16,7 +16,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 icondir = $(datadir)/icons/hicolor/48x48/apps
 icon_DATA = gnome-mime-application-x-novellvpn-settings.png
 
-nm-novell-service.name: $(srcdir)/nm-novellvpn-service.name.in
+nm-novellvpn-service.name: $(srcdir)/nm-novellvpn-service.name.in
 	sed -e 's|[@]LIBEXECDIR[@]|$(libexecdir)|g' $< >$@
 
 EXTRA_DIST = $(nmvpnservice_DATA) \

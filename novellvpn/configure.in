@@ -122,6 +122,5 @@ common-gnome/Makefile
 auth-dialog/Makefile
 properties/Makefile
 po/Makefile.in
-nm-novellvpn-service.name
 ])
 AC_OUTPUT
