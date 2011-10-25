@@ -17,13 +17,23 @@ else
 	# IPRGW holds output from ip r get GWADDR, lines are yanked...
 	IPRGW=$(ip route get $GWADDR)
 
-	if [ ${#IPRGW} -eq 0 ]; then
+	if [ -z ${#IPRGW} ]; then
 		MTU=1350
 	        ADVMSS=1310
 	else
-	        # reduce MTU and ADVMSS by size of ipsec header
-		MTU=$(( $(echo $IPRGW | sed 's/.*mtu[ \t]*\([0-9]*\).*/\1/') - 64))
-		ADVMSS=$(( $(echo $IPRGW | sed 's/.*advmss[ \t]*\([0-9]*\).*/\1/') - 64))
+		# reduce MTU and ADVMSS by size of ipsec header
+		MTU=$(echo $IPRGW | sed -n 's/.*mtu[ \t]*\([0-9]*\).*/\1/p')
+		if [ -z $MTU ]; then
+			MTU=1350
+		else
+			MTU=`expr $MTU - 64`
+		fi
+		ADVMSS=$(echo $IPRGW | sed -n 's/.*advmss[ \t]*\([0-9]*\).*/\1/p')
+		if [ -z $ADVMSS ]; then
+			ADVMSS=1310
+		else
+			ADVMSS=`expr $ADVMSS - 64`
+		fi
 	fi
 fi
 

@@ -1,3 +1,6 @@
+2010-10-25  Bin Li  <bili@suse.com>
+	* ipalias:
+	Fix the MTU and ADVMSS value in kernel >= 3.0.(bnc#717219)
 2010-04-21  Bin Li  <bili@novell.com>
 	* configure.in:
 	link against shared libcrypto.
