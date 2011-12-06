@@ -353,7 +353,7 @@ main(int argc, char *argv[])//, char **env )
 	// Convert the netmask to prefix.
 	tmp = getenv("route_netmask_1");
 	if (tmp) {
-		val = addr_to_gvalude (tmp);
+		val = addr_to_gvalue (tmp);
 		if (!strncmp (tmp, "255.", 4)) {
 			guint32 addr;
 
