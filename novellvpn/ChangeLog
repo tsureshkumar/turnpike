@@ -1,4 +1,6 @@
 2011-12-06 Bin Li <bili@suse.de>
+	* src/nm-novellvpn-service-novellvpn-helper.c:
+	Convert the netmask to prefix.
 	* src/nm-novellvpn-service.c:
 	Prevent the password from being logged
 	From: Gary Ching-Pang Lin <chingpang@gmail.com>

@@ -302,6 +302,7 @@ main(int argc, char *argv[])//, char **env )
 	GValue *dns_list = NULL;
 	GValue *nbns_list = NULL;
 	GValue *dns_domain = NULL;
+	char *tmp = NULL;
 
 	int i = 1;
 
@@ -349,11 +350,23 @@ main(int argc, char *argv[])//, char **env )
 				val);
 	}
 
-	val = addr_to_gvalue (getenv("route_netmask_1"));
-	if (NULL != val) {
-		g_hash_table_insert (config, 
-				NM_VPN_PLUGIN_IP4_CONFIG_PREFIX,
-				val);
+	// Convert the netmask to prefix.
+	tmp = getenv("route_netmask_1");
+	if (tmp) {
+		val = addr_to_gvalude (tmp);
+		if (!strncmp (tmp, "255.", 4)) {
+			guint32 addr;
+
+			/* probably a netmask, not a PTP address; topology == subnet */
+			addr = g_value_get_uint (val);
+			g_value_set_uint (val, nm_utils_ip4_netmask_to_prefix (addr));
+			g_hash_table_insert (config, NM_VPN_PLUGIN_IP4_CONFIG_PREFIX, val);
+
+		} else {
+			g_hash_table_insert (config, 
+					NM_VPN_PLUGIN_IP4_CONFIG_PREFIX,
+					val);
+		}
 	}
 
 	// get routes from environment var
