@@ -352,7 +352,7 @@ free_novellvpn_args (GPtrArray *args)
  * Helper that writes a formatted string to an fd
  *
  */
-static inline void write_config_option (int fd, const char *format, ...)
+static inline void write_config_option (gboolean secret, int fd, const char *format, ...)
 {
   char * 	string;
   va_list	args;
@@ -362,7 +362,12 @@ static inline void write_config_option (int fd, const char *format, ...)
   string = g_strdup_vprintf (format, args);
   x = write (fd, string, strlen (string));
 #ifdef NVPN_DEBUG
-  fprintf (stdout, string);
+  if (secret) {
+    /* FIXME Assume the format is "Whatever Option %s" */
+    fprintf (stdout, format, "<omitted>");
+  } else {
+    fprintf (stdout, string);
+  }
 #endif
   g_free (string);
   va_end (args);
@@ -378,21 +383,21 @@ void nm_novellvpn_write_gauth_config (NmNovellVPN_IOData *io_data,
 		const char * group_pwd,
 		gboolean is_grp_pwd_encrypted)
 {
-	write_config_option (io_data->child_stdin_fd, 
+	write_config_option (FALSE, io_data->child_stdin_fd,
 			"IPSec gateway %s\n", remote);
-	write_config_option (io_data->child_stdin_fd, 
+	write_config_option (FALSE, io_data->child_stdin_fd,
 			"IPSec gateway type %s\n",  gateway_type);
-	write_config_option (io_data->child_stdin_fd, 
+	write_config_option (FALSE, io_data->child_stdin_fd,
 			"Authentication type XAUTH\n");
-	write_config_option (io_data->child_stdin_fd, 
+	write_config_option (FALSE, io_data->child_stdin_fd,
 			"XAuth User %s\n",  user_name );
-	write_config_option (io_data->child_stdin_fd, 
+	write_config_option (TRUE, io_data->child_stdin_fd,
 			"XAuth Password %s\n",  user_pwd );
-	write_config_option (io_data->child_stdin_fd, 
+	write_config_option (FALSE, io_data->child_stdin_fd,
 			"IPSec ID %s\n",  group_name );
-	write_config_option (io_data->child_stdin_fd, 
+	write_config_option (TRUE, io_data->child_stdin_fd,
 			"IPSec Password %s\n",  group_pwd );
-	write_config_option (io_data->child_stdin_fd, 
+	write_config_option (FALSE, io_data->child_stdin_fd,
 			"IPSec Password EncFlag %d\n\n",
 			is_grp_pwd_encrypted ? 1 : 0 );
 }
@@ -413,11 +418,11 @@ void nm_novellvpn_write_cert_config (NmNovellVPN_IOData *io_data,
 
 
 {
-  write_config_option (io_data->child_stdin_fd, "IPSec gateway %s\n", remote);
-  write_config_option (io_data->child_stdin_fd, "IPSec gateway type %s\n",  gateway_type );
-  write_config_option (io_data->child_stdin_fd, "Authentication type X509\n");
-  write_config_option (io_data->child_stdin_fd, "Certificate Name %s\n",  certificate );
-  write_config_option (io_data->child_stdin_fd, "Certificate Password %s\n",  certificate_pwd );
+  write_config_option (FALSE, io_data->child_stdin_fd, "IPSec gateway %s\n", remote);
+  write_config_option (FALSE, io_data->child_stdin_fd, "IPSec gateway type %s\n",  gateway_type );
+  write_config_option (FALSE, io_data->child_stdin_fd, "Authentication type X509\n");
+  write_config_option (FALSE, io_data->child_stdin_fd, "Certificate Name %s\n",  certificate );
+  write_config_option (TRUE, io_data->child_stdin_fd, "Certificate Password %s\n",  certificate_pwd );
 }
 
 
@@ -870,7 +875,10 @@ validate_one_property (const char *key, const char *val, gpointer user_data)
 		if (strcmp (prop.name, key))
 			continue;	
 
-		g_debug ("found it, name=%s, val=%s", prop.name, val);
+		if (strcasestr (prop.name, "password"))
+			g_debug ("found it, name=%s, val=<omitted>", prop.name);
+		else
+			g_debug ("found it, name=%s, val=%s", prop.name, val);
 
 		switch (prop.type) {
 			case G_TYPE_STRING:
