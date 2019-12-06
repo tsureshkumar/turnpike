@@ -1,0 +1,12 @@
+novell-nortel-plugins support for Nortel VPN.
+It used by turnpike, novell-ipsec-tools and NetworkManager-novellvpn.
+
+Added by Bin Li <bili@novell.com>
+
+Assumes that you have a running Novell VPN setup installed from official
+releases of turnpike. see
+http://code.google.com/p/turnpike/
+
+Code released under the Novell Binary Restricted.
+
+Beijing, 2009/02/09

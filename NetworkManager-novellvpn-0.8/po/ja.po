@@ -1,0 +1,156 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: NetworkManager-novellvpn\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-11 02:30-0500\n"
+"PO-Revision-Date: 2009-02-04 15:11\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:134
+msgid "_Password:"
+msgstr "_パスワード:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:135
+msgid "_Secondary Password:"
+msgstr "_セカンダリパスワード:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:252
+msgid "_Username:"
+msgstr "_ユーザ名:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:254
+msgid "_Domain:"
+msgstr "_ドメイン:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:346
+msgid "Connect _anonymously"
+msgstr "_匿名で接続"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:351
+msgid "Connect as _user:"
+msgstr "接続_ユーザ:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:471
+msgid "_Remember password for this session"
+msgstr "このセッションのパスワードを_記憶"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:473
+msgid "_Save password in keyring"
+msgstr "_キーリングにパスワードを保存"
+
+#: ../auth-dialog/main.c:145
+#, c-format
+msgid "You need to authenticate to access the Novell's  Virtual Private Network '%s'."
+msgstr "Novellの仮想プライベートネットワーク「%s」へのアクセスを認証する必要があります。"
+
+#: ../auth-dialog/main.c:147
+msgid "Authenticate Novell VPN"
+msgstr "Novell VPNの認証"
+
+#: ../auth-dialog/main.c:180
+msgid "_Group Password:"
+msgstr "_グループパスワード:"
+
+#: ../auth-dialog/main.c:201
+msgid "_Cert Password:"
+msgstr "パスワードの証明書(_C):"
+
+#: ../nm-novellvpn.desktop.in.h:1
+msgid "Add, Remove, and Edit VPN Connections"
+msgstr "VPN接続の追加、削除、および編集"
+
+#: ../nm-novellvpn.desktop.in.h:2
+msgid "VPN Connection Manager (NovellVPN)"
+msgstr "VPN接続マネージャ(NovellVPN)"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:1
+msgid "768 bits (DH1)\n1024 bits (DH2)"
+msgstr "768ビット(DH1)\n1024ビット(DH2)"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:3
+msgid "<b>Authentication</b>"
+msgstr "<b>認証</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:4
+msgid "<b>General</b>"
+msgstr "<b>一般</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:5
+msgid "<b>Optional Information</b>"
+msgstr "<b>オプション情報</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:6
+msgid "Certificate file:"
+msgstr "証明書ファイル:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:7
+msgid "G_roup Password:"
+msgstr "グループパスワード(_R):"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:8
+msgid "Gate_way Type:"
+msgstr "ゲートウェイタイプ(_W):"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:9
+msgid "Nortel\nStandard Gateway"
+msgstr "Nortel\n標準ゲートウェイ"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:11
+msgid "Off\n768 bits (PFS 1)\n1024 bits (PFS 2)"
+msgstr "オフ\n768ビット(PFS 1)\n1024ビット(PFS 2)"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:14
+msgid "Show passwords"
+msgstr "パスワードの表示"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:15
+msgid "U_ser Password:"
+msgstr "ユーザパスワード(_S):"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:16
+msgid "X.509"
+msgstr "X.509"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:17
+msgid "XAUTH"
+msgstr "XAUTH"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:18
+msgid "XAUTH\nX.509 Certificate"
+msgstr "XAUTH\nX.509証明書"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:20
+msgid "_Certificate password:"
+msgstr "_パスワードの認証:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:21
+msgid "_DH Group:"
+msgstr "DHグループ(_D): "
+
+#: ../properties/nm-novellvpn-dialog.glade.h:22
+msgid "_Gateway:"
+msgstr "_ゲートウェイ(_G):"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:23
+msgid "_Group Name:"
+msgstr "グループ名(_G):"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:24
+msgid "_PFS Group:"
+msgstr "PFSグループ(_P): "
+
+#: ../properties/nm-novellvpn-dialog.glade.h:25
+msgid "_Type:"
+msgstr "種類(_T):"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:26
+msgid "_User Name:"
+msgstr "ユーザ名(_U):"
+

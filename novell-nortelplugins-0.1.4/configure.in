@@ -1,0 +1,210 @@
+dnl                                               -*- Autoconf -*-
+dnl  Process this file with autoconf to produce a configure script.
+
+AC_PREREQ(2.59)
+AC_INIT(novell-nortelplugins, 0.1.4)
+AC_CONFIG_HEADER([config.h])
+RELEASE=07
+AM_INIT_AUTOMAKE
+
+dnl  Checks for programs.
+AC_PROG_CC
+AC_PROG_LIBTOOL
+
+dnl AC_DEFINE_UNQUOTED(PACKAGE,"${PACKAGE}")
+dnl AC_SUBST(PACKAGE)
+dnl AC_DEFINE_UNQUOTED(VERSION,"${VERSION}")
+dnl AC_SUBST(VERSION)
+dnl AC_DEFINE("${PACKAGE}", "${VERSION}", "ipsec plugins for nortel gateway")
+AC_DEFINE([RELEASE], [], [release for packaging])
+AC_SUBST(RELEASE)
+
+CFLAGS_ADD="$CFLAGS_ADD -g -O2 -Wall -Werror -Wno-unused"
+
+dnl check for pluggin load directory
+AC_MSG_CHECKING(if --with-plugindir option is specified)
+AC_ARG_WITH(plugindir, 
+	[  --with-plugindir=DIR      specify where to put the plugins])
+AC_MSG_RESULT(${plugindir-default})
+
+if test "${with_plugindir+set}" = "set" && test $with_plugindir != default; then
+   	TPIKE_EXPAND_DIR(plugindir, "$with_plugindir")
+	AC_DEFINE_UNQUOTED([LIB_LOAD_PATH], "$plugindir", [pluggin destination dir])
+	AC_SUBST(LIB_LOAD_PATH)
+	AC_SUBST(plugindir)
+else
+   	TPIKE_EXPAND_DIR(plugindir, "${libdir}/turnpike/plugins")
+	AC_DEFINE_UNQUOTED([LIB_LOAD_PATH], "$plugindir", [pluggin destination dir])
+	AC_SUBST(LIB_LOAD_PATH)
+	AC_SUBST(plugindir)
+fi
+
+dnl Check if a racoonsrc directory was specified
+AC_MSG_CHECKING(if --with-racoonsrc option is specified)
+AC_ARG_WITH(racoonsrc, [  --with-racoonsrc=DIR      specify ipsec-tools src directory],
+	[racoon_dir=$withval])
+AC_MSG_RESULT(${racoon_dir-default})
+
+if test "x$racoon_dir" != "x"; then
+	LIBS="$LIBS -L${racoon_dir}/lib"
+	echo "Adding to CPPFLAGS and CFLAGS $racoon_dir"
+	CFLAGS_ADD="-I${racoon_dir}/src -I${racoon_dir}/src/include-glibc $CFLAGS_ADD"
+	CPPFLAGS_ADD="-I${racoon_dir}/src -I${racoon_dir}/src/include-glibc $CPPFLAGS_ADD"
+	
+	RACOONSRC=$racoon_dir
+	AC_DEFINE([RACOONSRC], [], [racoon src])
+	AC_SUBST(RACOONSRC)
+	
+fi
+
+dnl  Check if a turnpike directory was specified
+AC_MSG_CHECKING(if --with-turnpike option is specified)
+AC_ARG_WITH(turnpike, [  --with-turnpike=DIR      specify ipsec-tools src directory],
+        [turnpike_dir=$withval])
+AC_MSG_RESULT(${turnpike_dir-default})
+
+if test "x$turnpike_dir" != "x"; then
+        LIBS="$LIBS -L${turnpike_dir}/lib"
+        echo "Adding to CPPFLAGS and CFLAGS $turnpike_dir"
+        CFLAGS_ADD="-DHAVE_TURNPIKE_DIR -I${turnpike_dir}/VPNClient/include -I${turnpike_dir}/VPNClient/vpnlogin/include $CFLAGS_ADD"
+        CPPFLAGS_ADD="-DHAVE_TURNPIKE_DIR -I${turnpike_dir}/VPNClient/include $CPPFLAGS_ADD"
+	
+	TURNPIKEDIR=${withval}
+	AC_DEFINE([TURNPIKEDIR], [], [turnpike dir])
+	AC_SUBST(TURNPIKEDIR)
+fi
+
+# Check if a different OpenSSL directory was specified
+AC_MSG_CHECKING(if --with-openssl option is specified)
+AC_ARG_WITH(openssl, [  --with-openssl=DIR      specify OpenSSL directory],
+	[crypto_dir=$withval])
+AC_MSG_RESULT(${crypto_dir-default})
+
+# For openssl if not found
+openssl_dir=lib
+if test "x$crypto_dir" = "x"; then
+        AC_MSG_CHECKING(checking for openssl in standard locations)
+        ac_cv_openssl_path=no
+#       dir=`rpm -ql openssl-devel | grep libcrypto.a | xargs dirname | xargs dirname`
+for dir in /usr/${host_alias} /usr /usr/local /usr/local/ssl /usr/local/openssl; do
+	if test -d $dir/lib64 -a -f $dir/lib64/libcrypto.a ; then
+                        ac_cv_openssl_path=$dir
+                        openssl_dir=lib64
+        else
+		if test -d $dir/lib -a -f $dir/lib/libcrypto.a ; then
+                        ac_cv_openssl_path=$dir
+                        openssl_dir=lib
+                fi
+        fi
+        if test "$ac_cv_openssl_path" != "no" ; then
+                break;
+        else
+                ac_cv_openssl_path=no
+        fi
+done
+        AC_MSG_RESULT($ac_cv_openssl_path)
+        if test "$ac_cv_openssl_path" != no; then
+                crypto_dir=$ac_cv_openssl_path
+        fi
+fi
+
+if test "x$crypto_dir" != "x"; then
+        LIBS="$LIBS -L${crypto_dir}/$openssl_dir"
+        CPPFLAGS_ADD="-I${crypto_dir}/include $CPPFLAGS_ADD"
+        CRYPTOBJS="$CRYPTOBJS -lcrypto"
+
+        AC_DEFINE([OPENSSLDIR], [], [Enable openssl])
+
+        OPENSSLDIR=${crypto_dir}
+        AC_DEFINE([OPENSSLDIR], [], [openssl dir])
+        AC_SUBST(OPENSSLDIR)
+fi
+AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
+if test "x$PKG_CONFIG" = "xno"; then
+        AC_MSG_ERROR([You need to install pkg-config])
+fi
+
+
+MINIPSECVER="0.5.1"
+AC_MSG_CHECKING(ipsec-tools version) 
+IPSECTOOLSVER=`cat ${racoon_dir}/configure.ac | gawk "/\A\C_INIT[(]ipsec-tools, (.*)[)]/ { print $1}"`
+if test -n "${IPSECTOOLSVER} >= ${MINIPSECVER}"; then
+  AC_MSG_RESULT(ok) ;
+else
+  AC_MSG_WARN([ipsec-tools version must be  higher. Aborting]);
+fi
+
+dnl check for gtk
+AM_PATH_GTK_2_0(2.2.0,,AC_MSG_ERROR(nortelplugin 0.1 needs GTK+ 2.2.0 or greater))
+
+dnl check for libxml
+LIBXML_REQUIRED_VERSION=2.6.0
+
+PKG_CHECK_MODULES(BASE_DEPENDENCIES, libxml-2.0 >= $LIBXML_REQUIRED_VERSION)
+
+LIBXML_CFLAGS=`$PKG_CONFIG --cflags libxml-2.0`
+LIBXML_LIBS=`$PKG_CONFIG --libs libxml-2.0`
+
+AC_SUBST(LIBXML_CFLAGS)
+AC_SUBST(LIBXML_LIBS)
+
+dnl check for target
+AC_ARG_WITH(distro, AS_HELP_STRING([--with-distro=DISTRO], [Specify the Linux distribution to target: One of redhat, suse, gentoo, debian, arch, slackware, paldo or mandriva]))
+if test "z$with_distro" = "z"; then
+        AC_CHECK_FILE(/etc/redhat-release,with_distro="redhat")
+        AC_CHECK_FILE(/etc/SuSE-release,with_distro="suse")
+        AC_CHECK_FILE(/etc/fedora-release,with_distro="redhat")
+        AC_CHECK_FILE(/etc/gentoo-release,with_distro="gentoo")
+        AC_CHECK_FILE(/etc/debian_version,with_distro="debian")
+        AC_CHECK_FILE(/etc/arch-release,with_distro="arch")
+        AC_CHECK_FILE(/etc/slackware-version,with_distro="slackware")
+        AC_CHECK_FILE(/etc/frugalware-release,with_distro="frugalware")
+        AC_CHECK_FILE(/etc/mandriva-release,with_distro="mandriva")
+        if test "z$with_distro" = "z"; then
+                with_distro=`lsb_release -is`
+        fi
+fi
+with_distro=`echo ${with_distro} | tr '[[:upper:]]' '[[:lower:]]' `
+
+if test "z$with_distro" = "z"; then
+        echo "Linux distribution autodetection failed, you must specify the distribution to target using --with-distro=DISTRO"
+        exit 1
+else
+        case $with_distro in
+                redhat|suse|gentoo|debian|slackware|arch|paldo|frugalware|mandriva) ;;
+                *)
+                        echo "Your distribution (${with_distro}) is not yet supported!  (patches welcome)"
+                        exit 1
+                        ;;
+        esac
+fi
+
+AM_CONDITIONAL(TARGET_SUSE, test x"$with_distro" = xsuse)
+if test x"$with_distro" = xsuse; then
+  AC_DEFINE(TARGET_SUSE, 1, [Define if you have OpenSUSE or SLES or SLED])
+fi
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+
+dnl Checks for library functions.
+CFLAGS="$CFLAGS_ADD $CFLAGS"
+
+INCLUDE_FIX='-I${top_srcdir}/include-fix'
+AC_SUBST(INCLUDE_FIX)
+
+AC_SUBST(CRYPTOBJS)
+AC_SUBST(CFLAGS)
+AC_CHECK_HEADERS(isakmp_var.h)
+AC_CONFIG_FILES([Makefile
+		 package_version.h
+		 nortel/Makefile
+		 nortel/common/Makefile
+		 nortel/cli/Makefile
+		 nortel/gui/Makefile
+		 nortel/ike/Makefile
+		 rpm/novell-nortelplugins.spec])
+AC_OUTPUT
+
+echo
+echo Distribution targeting: ${with_distro}
+echo 'if this is not correct, please specifiy your distro with --with-distro=DISTRO'

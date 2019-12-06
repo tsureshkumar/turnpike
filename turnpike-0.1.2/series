@@ -1,0 +1,5 @@
+# Patch series file for quilt, created by quilt setup
+# Source: turnpike-0.1.2.tar.bz2
+# Patchdir: turnpike-0.1.2
+#
+turnpike-0.1.2-missing-closedir.patch -p0

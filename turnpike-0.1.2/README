@@ -1,0 +1,153 @@
+Turnpike - Plug-in Framework for IKE
+
+Overview
+=========
+
+	Turnpike is aimed at providing a pluggable framework for
+	Racoon.This lets developers to write plug-ins (including
+	closed-source plug-ins) to extend Racoon functionality to
+	communicate with third party VPN gateways.
+      
+	The project provides the following components:
+
+	-  Turnpike Framework:To support third-party gateways like
+           Nortel Contivity or Novell BorderManager, this framework
+           provides a pluggable interface to extend the standard IKE
+           implementation.
+
+	-  VPN Client Utilites:Graphical User Interface (GUI) and
+           Command Line Interface (CLI) for connecting/disconnecting
+           from the VPN. The GUI also helps you to create connection
+           profiles. NetworkManager-novellvpn: Turnpike plugin for
+           NetworkManager vpn support.
+
+	The IPsec-tools code base has been modified to make use of the
+	Turnpike framework. These changes will be merged into IPsec
+	tools project later.
+
+Homepage
+========
+
+	Source code can be found at Turnpike Framework Homepage
+	(http://forge.novell.com/modules/xfmod/project/?turnpi ke).
+
+
+Package Information
+====================
+
+	-  Turnpike sources (consist of Turnpike Framework, GUI and
+           CLI utilities)
+	
+	Other Related packages
+	
+		- Turnpike hooking framework enabled ipsec-tools. 
+		- Nortel plugins binary only to connect to nortel
+		  gateways
+		- NetworkManager-novellvpn module to utilise
+		  NetworkManager applet.
+
+	These other packages can be found at the homepage.
+
+
+Working with the VPN Client
+===========================
+
+	Starting Racoon
+	---------------
+
+	Start Racoon using the command /etc/init.d/racoon start
+
+	Otherwise, you can configure your system to automatically
+	start the racoon daemon while booting. Refer your system
+	documentation for how to enable services during booting. For
+	example, SuSE systems, you can use yast -> System -> System
+	Services, and enable racoon.
+
+	This requires root privileges.
+
+	Connecting to Standard IPsec Gateway
+	------------------------------------
+
+	When you connect to a standard IPsec gateway, ensure the
+	following:
+		-  Certificate file is in .pfx format.
+		-  Copy your user certificate to the following path:
+		   /user's home directory/.turnpike/usercerts
+	
+
+
+	Creating Profiles
+	------------------
+
+	Use the GUI to create profile. Profiles cannot be created
+	using CLI.
+
+	Launching the CLI
+	-----------------
+
+	Launch the client using CLI using the command nvpn.
+
+
+	Launching the GUI
+	-----------------
+
+	Launch the client using GUI with the command vpnlogin
+
+	Launching NetworkManager-novellvpn
+	----------------------------------
+
+	Make a Novellvpn connection using NetworkManager-novellvpn
+	properties dialog. To launch a novellvpn, Click on vpn
+	connection in the vpn connections. If the group passwd entry
+	is already filled, provide only the user password. Otherwise
+	provide user password and group password.
+
+	You will require gtk-2.4 or higher for launching the GUI.
+
+
+Access Information
+==================
+
+	Non-Root Access
+	---------------
+
+		"users" Group Users
+
+		All users belonging to the primary group users created
+		by root can use VPN client. By default, all users
+		belong to this group.
+
+		Non-users group Users
+
+		If "users" is not the primary group of those users who
+		require VPN access, non-root access can be allowed by
+		doing the following:
+
+                  1. Log in as root.
+                  2. Open the racoon.conf file
+                     (/etc/racoon/racoon.conf).
+                  3. Replace users with the name of the
+                     group that requires VPN access.
+                  4. Restart IKE by entering the following:
+                     /etc/init.d/racoon restart
+
+
+		The root cannot allow multiple groups to use VPN
+		client. So, if a new group is permitted by modifying
+		the racoon.conf, only users belonging to that group
+		can access VPN.
+
+
+Development and Maintenance
+===========================
+
+     Currently, the package is actively developed and
+     maintained by
+
+     -  Haripriya S. <sharipriya@novell.com>	
+     -  Preggna S <SPreggna@novell.com>
+     -  Sureshkumar T <tsureshkumar@novell.com>
+     -  Umashankar Mukkara <MUmasankar@novell.com>
+     -  Surendranath Mohanty <SMOHANTY@novell.com>
+     -  Vinay A R <rvinay@novell.com>
+

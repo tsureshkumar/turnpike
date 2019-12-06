@@ -1,0 +1,8 @@
+[VPN Connection]
+name=novellvpn
+service=org.freedesktop.NetworkManager.novellvpn
+program=/usr/libexec/nm-novellvpn-service
+
+[GNOME]
+auth-dialog=nm-novellvpn-auth-dialog
+properties=libnm-novellvpn-properties

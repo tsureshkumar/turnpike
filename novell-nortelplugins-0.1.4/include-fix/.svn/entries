@@ -1,0 +1,34 @@
+9
+
+dir
+1145
+https://svn.provo.novell.com/svn/turnpike/branches/TURNPIKE_0_1_0/turnpike/southpaw/include-fix
+https://svn.provo.novell.com/svn/turnpike
+
+
+
+2009-05-27T08:51:43.325562Z
+1143
+bili
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+0e90a39a-058a-11dd-aac9-13db5d444bef
+
+net
+dir
+
+netinet
+dir
+

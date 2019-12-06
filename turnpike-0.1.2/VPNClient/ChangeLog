@@ -1,0 +1,6 @@
+2005-12-14  rvinay  <rvinay@novell.com>
+
+	* cleaned up
+	* created common ui.
+	* moved code from ../vpnc, ../vpnlogin & ../include to here
+

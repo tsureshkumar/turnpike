@@ -1,0 +1,156 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: NetworkManager-novellvpn\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-11 02:30-0500\n"
+"PO-Revision-Date: 2009-02-05 07:23\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:134
+msgid "_Password:"
+msgstr "_Lösenord:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:135
+msgid "_Secondary Password:"
+msgstr "_Andrahandslösenord:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:252
+msgid "_Username:"
+msgstr "_Användarnamn:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:254
+msgid "_Domain:"
+msgstr "_Domän:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:346
+msgid "Connect _anonymously"
+msgstr "Anslut anon_ymt"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:351
+msgid "Connect as _user:"
+msgstr "Anslut som _användare:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:471
+msgid "_Remember password for this session"
+msgstr "_Kom ihåg lösenordet under den här sessionen"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:473
+msgid "_Save password in keyring"
+msgstr "_Spara lösenordet i nyckelringen"
+
+#: ../auth-dialog/main.c:145
+#, c-format
+msgid "You need to authenticate to access the Novell's  Virtual Private Network '%s'."
+msgstr "Du måsta autentisera om du vill få tillgång till Novells VPN-nätverk %s."
+
+#: ../auth-dialog/main.c:147
+msgid "Authenticate Novell VPN"
+msgstr "Autentisera Novell VPN"
+
+#: ../auth-dialog/main.c:180
+msgid "_Group Password:"
+msgstr "_Grupplösenord:"
+
+#: ../auth-dialog/main.c:201
+msgid "_Cert Password:"
+msgstr "_Certifikatlösenord:"
+
+#: ../nm-novellvpn.desktop.in.h:1
+msgid "Add, Remove, and Edit VPN Connections"
+msgstr "Lägg till, ta bort och redigera VPN-anslutningar"
+
+#: ../nm-novellvpn.desktop.in.h:2
+msgid "VPN Connection Manager (NovellVPN)"
+msgstr "VPN-anslutningshanterare (NovellVPN)"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:1
+msgid "768 bits (DH1)\n1024 bits (DH2)"
+msgstr "768 bitar (DH1)\n1024 bitar (DH2)"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:3
+msgid "<b>Authentication</b>"
+msgstr "<b>Autentisering</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:4
+msgid "<b>General</b>"
+msgstr "<b>Allmänt</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:5
+msgid "<b>Optional Information</b>"
+msgstr "<b>Valfri information</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:6
+msgid "Certificate file:"
+msgstr "Certifikatfil:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:7
+msgid "G_roup Password:"
+msgstr "Gr_upplösenord:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:8
+msgid "Gate_way Type:"
+msgstr "Typ av gate_way:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:9
+msgid "Nortel\nStandard Gateway"
+msgstr "Nortel\nStandard-gateway"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:11
+msgid "Off\n768 bits (PFS 1)\n1024 bits (PFS 2)"
+msgstr "Av\n768 bitar (PFS 1)\n1024 bitar (PFS 2)"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:14
+msgid "Show passwords"
+msgstr "Visa lösenord"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:15
+msgid "U_ser Password:"
+msgstr "A_nvändarlösenord:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:16
+msgid "X.509"
+msgstr "X.509"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:17
+msgid "XAUTH"
+msgstr "XAUTH"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:18
+msgid "XAUTH\nX.509 Certificate"
+msgstr "XAUTH\nX.509-certifikat"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:20
+msgid "_Certificate password:"
+msgstr "_Certifikatlösenord"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:21
+msgid "_DH Group:"
+msgstr "_DH-grupp:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:22
+msgid "_Gateway:"
+msgstr "_Gateway:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:23
+msgid "_Group Name:"
+msgstr "_Gruppnamn:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:24
+msgid "_PFS Group:"
+msgstr "_PFS-grupp:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:25
+msgid "_Type:"
+msgstr "_Typ:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:26
+msgid "_User Name:"
+msgstr "_Användarnamn:"
+

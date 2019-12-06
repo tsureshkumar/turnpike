@@ -1,0 +1,4 @@
+2005-12-12  Sureshkumar T  <tsureshkumar@novell.com>
+
+	* Makefile.am: clean. use libtool targets.
+

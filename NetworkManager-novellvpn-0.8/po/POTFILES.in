@@ -1,0 +1,8 @@
+# List of source files containing translatable strings.
+# Please keep this file sorted alphabetically.
+auth-dialog/gnome-two-password-dialog.c
+auth-dialog/main.c
+nm-novellvpn.desktop.in
+properties/nm-novellvpn-dialog.glade
+properties/nm-novellvpn-vpnui-impl.c
+src/nm-novellvpn-service.c

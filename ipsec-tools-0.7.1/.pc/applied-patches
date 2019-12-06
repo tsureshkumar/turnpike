@@ -1,0 +1,9 @@
+novell-ipsec-tools_plugins-support-configure.patch
+novell-ipsec-tools_plugins-support-racoon.conf.patch
+novell-ipsec-tools_plugins-support-core.patch
+novell-ipsec-tools_plugins-support-nortel.patch
+novell-ipsec-tools_plugins-cfparse.patch
+no_werror.patch
+novell-ipsec-tools_plugins-am111.patch
+nit-includes.diff
+ipsec-overflow.patch

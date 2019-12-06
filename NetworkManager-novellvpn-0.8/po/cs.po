@@ -1,0 +1,156 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: NetworkManager-novellvpn\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-11 02:30-0500\n"
+"PO-Revision-Date: 2009-02-05 14:25\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:134
+msgid "_Password:"
+msgstr "_Heslo:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:135
+msgid "_Secondary Password:"
+msgstr "Ověření _hesla:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:252
+msgid "_Username:"
+msgstr "_Uživ. jméno:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:254
+msgid "_Domain:"
+msgstr "_Doména:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:346
+msgid "Connect _anonymously"
+msgstr "Připojit _anonymně"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:351
+msgid "Connect as _user:"
+msgstr "Připojit jako _uživatel:"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:471
+msgid "_Remember password for this session"
+msgstr "_Zapamatovat heslo pro toto sezení"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:473
+msgid "_Save password in keyring"
+msgstr "_Uložit heslo do svazku klíčů"
+
+#: ../auth-dialog/main.c:145
+#, c-format
+msgid "You need to authenticate to access the Novell's  Virtual Private Network '%s'."
+msgstr "K přístupu do NovellVPN sítě '%s', musíte zadat ověřovací informace."
+
+#: ../auth-dialog/main.c:147
+msgid "Authenticate Novell VPN"
+msgstr "Ověřování Novell VPN"
+
+#: ../auth-dialog/main.c:180
+msgid "_Group Password:"
+msgstr "Heslo _skupiny:"
+
+#: ../auth-dialog/main.c:201
+msgid "_Cert Password:"
+msgstr "_Heslo certifikátu:"
+
+#: ../nm-novellvpn.desktop.in.h:1
+msgid "Add, Remove, and Edit VPN Connections"
+msgstr "Přidat, odstranit a upravit VPN připojení"
+
+#: ../nm-novellvpn.desktop.in.h:2
+msgid "VPN Connection Manager (NovellVPN)"
+msgstr "Správce VPN připojení (NovellVPN)"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:1
+msgid "768 bits (DH1)\n1024 bits (DH2)"
+msgstr "768 bitů (DH1)\n1024 bitů (DH2)"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:3
+msgid "<b>Authentication</b>"
+msgstr "<b>Ověřování</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:4
+msgid "<b>General</b>"
+msgstr "<b>Obecné</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:5
+msgid "<b>Optional Information</b>"
+msgstr "<b>Volitelné informace</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:6
+msgid "Certificate file:"
+msgstr "Soubor certifikátu:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:7
+msgid "G_roup Password:"
+msgstr "Heslo _skupiny:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:8
+msgid "Gate_way Type:"
+msgstr "Typ _brány:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:9
+msgid "Nortel\nStandard Gateway"
+msgstr "Nortel\nstandardní brána"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:11
+msgid "Off\n768 bits (PFS 1)\n1024 bits (PFS 2)"
+msgstr "Vypnuto\n768 bitů (PFS 1)\n1024 bitů (PFS 2)"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:14
+msgid "Show passwords"
+msgstr "Zobrazit hesla"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:15
+msgid "U_ser Password:"
+msgstr "Heslo _uživatele:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:16
+msgid "X.509"
+msgstr "X.509"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:17
+msgid "XAUTH"
+msgstr "XAUTH"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:18
+msgid "XAUTH\nX.509 Certificate"
+msgstr "XAUTH\nCertifikát X.509"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:20
+msgid "_Certificate password:"
+msgstr "Hes_lo certifikátu:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:21
+msgid "_DH Group:"
+msgstr "Skupina _DH: "
+
+#: ../properties/nm-novellvpn-dialog.glade.h:22
+msgid "_Gateway:"
+msgstr "_Brána:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:23
+msgid "_Group Name:"
+msgstr "_Název skupiny:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:24
+msgid "_PFS Group:"
+msgstr "Skupina _PFS:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:25
+msgid "_Type:"
+msgstr "_Typ:"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:26
+msgid "_User Name:"
+msgstr "_Uživatelské jméno:"
+

@@ -1,0 +1,156 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: NetworkManager-novellvpn\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-11 02:30-0500\n"
+"PO-Revision-Date: 2009-02-04 15:44\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:134
+msgid "_Password:"
+msgstr "密碼(P)："
+
+#: ../auth-dialog/gnome-two-password-dialog.c:135
+msgid "_Secondary Password:"
+msgstr "次要密碼(_S)："
+
+#: ../auth-dialog/gnome-two-password-dialog.c:252
+msgid "_Username:"
+msgstr "使用者名稱(_U)："
+
+#: ../auth-dialog/gnome-two-password-dialog.c:254
+msgid "_Domain:"
+msgstr "網域(_D)："
+
+#: ../auth-dialog/gnome-two-password-dialog.c:346
+msgid "Connect _anonymously"
+msgstr "匿名連線(_A)"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:351
+msgid "Connect as _user:"
+msgstr "以使用者的身分連線(_U)："
+
+#: ../auth-dialog/gnome-two-password-dialog.c:471
+msgid "_Remember password for this session"
+msgstr "記住這個會期的密碼(_R)"
+
+#: ../auth-dialog/gnome-two-password-dialog.c:473
+msgid "_Save password in keyring"
+msgstr "將密碼儲存至鑰匙環(_S)"
+
+#: ../auth-dialog/main.c:145
+#, c-format
+msgid "You need to authenticate to access the Novell's  Virtual Private Network '%s'."
+msgstr "您必須進行驗證才能存取 Novell 的虛擬私密網路 '%s'。"
+
+#: ../auth-dialog/main.c:147
+msgid "Authenticate Novell VPN"
+msgstr "驗證 Novell VPN"
+
+#: ../auth-dialog/main.c:180
+msgid "_Group Password:"
+msgstr "群組密碼(_G)："
+
+#: ../auth-dialog/main.c:201
+msgid "_Cert Password:"
+msgstr "證書密碼(_C)："
+
+#: ../nm-novellvpn.desktop.in.h:1
+msgid "Add, Remove, and Edit VPN Connections"
+msgstr "新增、移除和編輯 VPN 連線"
+
+#: ../nm-novellvpn.desktop.in.h:2
+msgid "VPN Connection Manager (NovellVPN)"
+msgstr "VPN 連線管理員 (NovellVPN)"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:1
+msgid "768 bits (DH1)\n1024 bits (DH2)"
+msgstr "768 位元 (DH1)\n1024 位元 (DH2)"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:3
+msgid "<b>Authentication</b>"
+msgstr "<b>驗證</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:4
+msgid "<b>General</b>"
+msgstr "<b>一般</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:5
+msgid "<b>Optional Information</b>"
+msgstr "<b>選擇性資訊</b>"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:6
+msgid "Certificate file:"
+msgstr "憑證檔案︰"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:7
+msgid "G_roup Password:"
+msgstr "群組密碼(_R)："
+
+#: ../properties/nm-novellvpn-dialog.glade.h:8
+msgid "Gate_way Type:"
+msgstr "閘道類型(_W)︰"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:9
+msgid "Nortel\nStandard Gateway"
+msgstr "Nortel\n標準閘道"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:11
+msgid "Off\n768 bits (PFS 1)\n1024 bits (PFS 2)"
+msgstr "關閉\n768 位元 (PFS 1)\n1024 位元 (PFS 2)"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:14
+msgid "Show passwords"
+msgstr "顯示密碼"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:15
+msgid "U_ser Password:"
+msgstr "使用者密碼(_S)："
+
+#: ../properties/nm-novellvpn-dialog.glade.h:16
+msgid "X.509"
+msgstr "X.509"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:17
+msgid "XAUTH"
+msgstr "XAUTH"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:18
+msgid "XAUTH\nX.509 Certificate"
+msgstr "XAUTH\nX.509 憑證"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:20
+msgid "_Certificate password:"
+msgstr "證書密碼(_C)："
+
+#: ../properties/nm-novellvpn-dialog.glade.h:21
+msgid "_DH Group:"
+msgstr "DH 群組(_D)："
+
+#: ../properties/nm-novellvpn-dialog.glade.h:22
+msgid "_Gateway:"
+msgstr "閘道(_G)："
+
+#: ../properties/nm-novellvpn-dialog.glade.h:23
+msgid "_Group Name:"
+msgstr "群組名稱(_G)︰"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:24
+msgid "_PFS Group:"
+msgstr "PFS 群組(_P)："
+
+#: ../properties/nm-novellvpn-dialog.glade.h:25
+msgid "_Type:"
+msgstr "類型(_T)︰"
+
+#: ../properties/nm-novellvpn-dialog.glade.h:26
+msgid "_User Name:"
+msgstr "使用者名稱(_U)："
+

@@ -1,0 +1,21 @@
+# List of source files containing translatable strings.
+# keep it sorted.
+
+ErrorGenerator/vpncErrorHandling.c
+ErrorGenerator/vpncErrorHandlingGenerator.c
+VPNClient/CommonUI/CommonUI.c
+VPNClient/CommonUI/sockInterface.c
+VPNClient/include/CommonUI.h
+VPNClient/vpnc/include/cli.h
+VPNClient/vpnc/include/support.h
+VPNClient/vpnc/src/cli.c
+VPNClient/vpnc/src/commandHandler.c
+VPNClient/vpnc/src/profile.c
+VPNClient/vpnc/src/support.c
+VPNClient/vpnc/src/utility.c
+VPNClient/vpnlogin/include/support.h
+VPNClient/vpnlogin/src/callbacks.c
+VPNClient/vpnlogin/src/interface.c
+VPNClient/vpnlogin/src/main.c
+VPNClient/vpnlogin/src/support.c
+VPNClient/vpnlogin/src/utility.c

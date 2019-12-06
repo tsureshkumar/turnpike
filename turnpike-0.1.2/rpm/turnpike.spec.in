@@ -1,0 +1,158 @@
+#
+# spec file for package @PACKAGE@ (Version @VERSION@)
+#
+# Copyright (c) 2005 SUSE LINUX AG, Nuernberg, Germany.
+# This file and all modifications and additions to the pristine
+# package are under the same license as the package itself.
+#
+# Please submit bugfixes or comments via http://www.suse.de/feedback/
+#
+
+# norootforbuild
+# neededforbuild  novell-ipsec-tools-devel libxml2 libxml2-devel openssl openssl-devel readline-devel pkgconfig cairo cairo-devel freetype2 freetype2-devel fontconfig fontconfig-devel gtk2 gtk2-devel libart_lgpl libart_lgpl-devel libbonobo libbonobo-devel libbonoboui libbonoboui-devel libgcrypt libgcrypt-devel libglade2 libglade2-devel pango pango-devel gconf2 gconf2-devel gdbm gettext glib2 glib2-devel xorg-x11-devel xorg-x11-libs libpng libpng-devel libpixman libpixman-devel glitz glitz-devel atk atk-devel expat perl-XML-Parser
+
+BuildRequires: aaa_base acl attr bash bind-utils bison bzip2 coreutils cpio cpp cracklib cvs cyrus-sasl db devs diffutils e2fsprogs file filesystem fillup findutils flex gawk gdbm-devel glibc glibc-devel glibc-locale gpm grep groff gzip info insserv less libacl libattr libgcc libselinux libstdc++ libxcrypt libzio m4 make man mktemp module-init-tools ncurses ncurses-devel net-tools netcfg openldap2-client openssl pam pam-modules patch permissions popt procinfo procps psmisc pwdutils rcs readline sed strace syslogd sysvinit tar tcpd texinfo timezone unzip util-linux vim zlib zlib-devel autoconf automake binutils gcc gdbm gettext kernel-source libtool openssl-devel perl perl-XML-Parser readline-devel rpm libxml2 novell-ipsec-tools pkgconfig cairo cairo-devel freetype2 freetype2-devel fontconfig fontconfig-devel gtk2 gtk2-devel libart_lgpl libart_lgpl-devel libbonobo libbonobo-devel libbonoboui libbonoboui-devel libgcrypt libgcrypt-devel libglade2 libglade2-devel pango pango-devel gconf2 gconf2-devel gdbm gettext glib2 glib2-devel xorg-x11-devel xorg-x11-libs libpng libpng-devel libpixman libpixman-devel glitz glitz-devel atk atk-devel expat
+
+Name:      @PACKAGE@
+%define prefix /opt/novell
+%define sysconfdir /etc/racoon
+%define libexecdir %{prefix}/lib
+%define datadir %{prefix}/turnpike
+%define gnome /opt/gnome
+Summary:   Novell VPN client for Linux
+Version:   @VERSION@
+Release:   @RELEASE@
+Copyright: Novell Inc.
+Group:     Productivity/Networking/Security
+Source:    %{name}-%{version}.tar.gz
+Source1:   vpnlogin.desktop
+Source2:   vpnlogin.gif
+URL:       http://www.novell.com/
+Vendor:    Novell Inc.
+Packager:  Novell
+Requires:  libxml2
+Requires:  novell-ipsec-tools >= 0.6.1
+Requires:  kernel >= 2.5.54
+
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+
+%description
+The Novell VPN Client for Linux allows you to communicate securely over
+the Internet. From your Linux workstation, you can connect to a network
+protected by a VPN server by using this product.
+
+Authors:
+--------
+
+%prep
+%setup -q
+
+
+%build
+#CFLAGS="$RPM_OPT_FLAGS" \
+./configure \
+    --prefix=%{prefix} \
+    --exec-prefix=%{prefix}  \
+    --mandir=%{_mandir} \
+    --infodir=%{_infodir} \
+    --sysconfdir=%{sysconfdir} \
+    --datadir=%{datadir} \
+    --sharedstatedir=/var/run \
+    --localstatedir=/var \
+    --mandir=%{prefix}/share/man \
+    --infodir=%{prefix}/share/info \
+    --libdir=%{prefix}/%_lib \
+    --libexecdir=%{libexecdir}
+make
+
+%install
+rm -rf %{buildroot}
+mkdir %{buildroot}
+make install DESTDIR=%{buildroot}
+
+mkdir -p %{buildroot}/%{sysconfdir}/turnpike
+mkdir -p %{buildroot}/etc/racoon/cert
+mkdir -p %{buildroot}/%{sysconfdir}/turnpike/usercerts
+mkdir -p %{buildroot}/%{sysconfdir}/turnpike/profiles
+mkdir -p %{buildroot}/%{sysconfdir}/turnpike/vendorprofiles
+
+# desktop icon
+install -d $RPM_BUILD_ROOT%{datadir}/pixmaps
+install -m 644 %{S:2} $RPM_BUILD_ROOT%{datadir}/pixmaps/vpnlogin.gif
+
+#install -d $RPM_BUILD_ROOT%_datadir/applications
+#install -m 0644 %{S:1} $RPM_BUILD_ROOT%{_datadir}/applications/
+
+mkdir -p %{buildroot}/etc/%{gnome}/gnome-vfs-2.0/vfolders/applications-all-users
+install -m 755 %{S:1} %{buildroot}/etc/%{gnome}/gnome-vfs-2.0/vfolders/applications-all-users
+
+#mkdir -p %{buildroot}/%{prefix}/turnpike/plugins
+#install -m 755 vpnlogin/images/vpnlogin.png %{buildroot}/%{prefix}/turnpike/pixmaps
+#install -m 755 vpnlogin/images/vpnlogin.gif %{buildroot}/%{prefix}/turnpike/pixmaps
+#cp -R vpnlogin/vpn_docbook/*
+#%{buildroot}/%{prefix}/turnpike/vpn_docbook
+#mkdir -p %{buildroot}/%{prefix}/turnpike/pixmaps
+#mkdir -p %{buildroot}/%{prefix}/turnpike/vpn_docbook
+
+install -m 755 racoon.conf %{buildroot}/etc/racoon
+
+%pre
+%post
+if [ -L /usr/bin/vpnlogin ]; then
+    rm -rf /usr/bin/vpnlogin
+fi
+if [ -L /usr/bin/vpnc ] ; then
+    rm -rf /usr/bin/vpnc
+fi
+
+ln -sf %{prefix}/bin/vpnlogin /usr/bin/vpnlogin
+ln -sf %{prefix}/bin/vpnc /usr/bin/vpnc
+
+#remove it even if it doesnt exists 
+%{libexecdir}/vpnUpdateMenu -u
+%{libexecdir}/vpnUpdateMenu -i
+%run_ldconfig
+
+%preun
+#check for GUI running
+pgrep vpnlogin > /dev/null 2>&1
+if [ $? -eq 0 ] ; then
+    pkill -INT vpnlogin > /dev/null 2>&1
+fi
+#Do the following only if it is last uninstall
+if [ "$1" = "0" ] ; then
+    %{libexecdir}/vpnUpdateMenu -u
+    rm -rf %{libexecdir}/vpnUpdateMenu
+    rm -rf /usr/bin/vpnlogin
+    rm -rf /usr/bin/vpnc
+    rm -rf %{sysconfdir}/turnpike
+fi
+
+%postun 
+%run_ldconfig
+
+%clean
+rm -rf %{buildroot}
+
+%files
+%defattr(-,root,root)
+%{prefix}/bin/vpnc
+%{prefix}/bin/vpnlogin
+%{sysconfdir}/turnpike
+/etc/racoon/cert
+/etc/racoon/racoon.conf
+/etc/%{gnome}/gnome-vfs-2.0/vfolders/applications-all-users/vpnlogin.desktop
+%{libexecdir}/vpnUpdateMenu
+%{prefix}/include/turnpike/*
+%{datadir}/pixmaps/*
+
+
+#/%{prefix}/%{_lib}/turnpike/plugins/
+#/%{prefix}/turnpike/vpn_docbook/
+#/%{prefix}/turnpike/pixmaps/
+#%doc /%{prefix}/turnpike/help/ReadMe.txt
+#%doc /%{prefix}/turnpike/help/Admin_and_User_Guide.pdf
+##Novell files
+#/%{_lib}/*
+
